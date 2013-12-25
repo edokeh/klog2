@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216081115) do
+ActiveRecord::Schema.define(version: 20131225085020) do
 
   create_table "blogs", force: true do |t|
     t.string   "title",                            null: false
@@ -29,5 +29,12 @@ ActiveRecord::Schema.define(version: 20131216081115) do
   end
 
   add_index "blogs", ["slug"], name: "index_blogs_on_slug", unique: true, using: :btree
+
+  create_table "categories", force: true do |t|
+    t.string   "name",       limit: 20,             null: false
+    t.integer  "blog_count",            default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
