@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Klog2</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <link href="/css">
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <%= render 'layouts/font_family' %>
+</head>
+<body>
+<div class="row" style="margin:0">
+  <div class="col-md-3 col-xs-12 left">
+    <div class="text-center">
+      <nav>
+        <ul>
+          <li>
+            <a href="/blogs">Blog</a>
+          </li>
+          <li>
+            <a href="">Archives</a>
+          </li>
+          <li>
+            <a href="">About</a>
+          </li>
+        </ul>
+      </nav>
+      <header>
+        <img style="border-radius: 50%" class="avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
+
+        <h1>万神劫</h1>
+
+        <p>万物天地为剑，神鬼妖邪为剑<br/>
+          劫波万渡，宇宙苍穹尽为剑, 是为万神劫</p>
+
+      </header>
+    </div>
+
+  </div>
+  <div class="col-md-9 col-xs-12 main">
+    <%= yield %>
+  </div>
+</div>
+
+
+</body>
+</html>

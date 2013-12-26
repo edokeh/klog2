@@ -1,0 +1,36 @@
+<% @blogs.each do |blog| %>
+    <article>
+      <h2><%= link_to blog.title, blog_path(blog.slug) %></h2>
+
+      <div class="misc">
+        <span>
+          <%= fa_icon "clock-o" %>
+          <%= l blog.created_at %>
+        </span>
+        <span>
+          <%= fa_icon "comments" %>
+          <%= blog.comment_count %>
+        </span>
+        <% if blog.category.present? %>
+        <span>
+          <%= fa_icon "book" %>
+          <%= blog.category.name %>
+        </span>
+        <% end %>
+        <% if blog.tags.present? %>
+        <span>
+          <%= fa_icon "tags" %>
+          <% blog.tags.each do |tag| %>
+              <a><%= tag.name %></a>
+          <% end %>
+        </span>
+        <% end %>
+      </div>
+      <div class="content">
+        <%= raw blog.html_content_summary %>
+      </div>
+      <div>
+        <%= link_to fa_icon("arrow-right") + " 阅读全文...", blog_path(blog.slug), :class => 'readmore' %>
+      </div>
+    </article>
+<% end %>

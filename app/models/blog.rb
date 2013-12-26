@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Blog < ActiveRecord::Base
   include TruncateHtmlHelper
   extend Enumerize
