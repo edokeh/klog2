@@ -6,7 +6,9 @@
 @import "compass/css3";
 @import "compass/layout";
 
-$c1: #7F724B;
+$c1: #9773B2;
+$c2: #FBFFD7;
+$c3: #FEFFF0;
 
 body {
   //background: #33332D;
@@ -60,7 +62,10 @@ header {
   left: 0;
   right: 0;
   margin: 0 auto;
-  color: #fff;
+
+  h1 {
+    color: $c3;
+  }
 }
 
 // 导航
@@ -77,7 +82,7 @@ nav {
 
   a {
     font-size: 30px;
-    color: #FFF8E3;
+    color: $c3;
     font-weight: bold;
     @include single-transition(all 100ms ease-in);
 
@@ -89,7 +94,8 @@ nav {
 
 // 主页面
 .main {
-  background: #FFF8E3;
+  //background: #FFF8E3;
+  background: $c2;
   padding: 20px 50px;
 
   @media (max-width: 768px) {
