@@ -10,12 +10,18 @@
   <%= render 'layouts/font_family' %>
 </head>
 <body>
-<div class="row" style="margin:0">
-  <div class="col-md-3 col-xs-12 left">
-    <div class="text-center">
+<div class="row" style="margin:0;">
+  <div class="col-md-3 col-sm-12 left" style="">
+      <header class="text-center">
+        <img style="border-radius: 50%" class="avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
+        <h1>万神劫</h1>
+        <p>万物天地为剑 神鬼妖邪为剑<br/>
+          劫波万渡 宇宙苍穹尽为剑 是为万神劫</p>
+      </header>
+
       <nav>
         <ul>
-          <li>
+          <li class="active">
             <a href="/blogs">Blog</a>
           </li>
           <li>
@@ -26,19 +32,8 @@
           </li>
         </ul>
       </nav>
-      <header>
-        <img style="border-radius: 50%" class="avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
-
-        <h1>万神劫</h1>
-
-        <p>万物天地为剑，神鬼妖邪为剑<br/>
-          劫波万渡，宇宙苍穹尽为剑, 是为万神劫</p>
-
-      </header>
     </div>
-
-  </div>
-  <div class="col-md-9 col-xs-12 main">
+  <div class="col-md-offset-3 col-md-9 col-sm-12 main">
     <%= yield %>
   </div>
 </div>

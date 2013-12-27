@@ -3,15 +3,20 @@
 /////////////
 @import "bootstrap";
 @import "font-awesome";
-@import "klog2/mixins";
+@import "compass/css3";
+@import "compass/layout";
+
+$c1: #7F724B;
 
 body {
-  background: #33332D;
+  //background: #33332D;
+  background: $c1;
   font-family: Helvetica, Tahoma, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
 h1, h2, h3, h4 {
   font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+  color: $c1;
 }
 
 h1, h2, h3 {
@@ -22,53 +27,67 @@ h1, h2 {
   font-size: 40px;
 }
 
+h1 a, h2 a {
+  color: $c1;
+  @include single-transition(all 100ms ease-in);
+
+  &:hover {
+    color: lighten(#f00, 10%);
+    text-decoration: none;
+  }
+}
+
+// 侧边栏
 .left {
   color: #FFF8E3;
   opacity: 0.5;
-  padding: 20px 40px;
-  -webkit-transition: all .1s ease-in;
-  -moz-transition: all .1s ease-in;
-  -o-transition: all .1s ease-in;
-  -ms-transition: all .1s ease-in;
-  transition: all .1s ease-in;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  text-align: center;
+  @include single-transition(all 100ms ease-in);
 
   &:hover {
     opacity: 1;
   }
-
-  @media (max-width: 768px) {
-    opacity: 1;
-  }
 }
 
-nav {
-  margin-bottom: 100px;
+// LOGO
+header {
+  position: absolute;
+  bottom: 40px;
+  width: 240px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: #fff;
+}
 
-  @media (max-width: 768px) {
-    display: none;
-  }
+// 导航
+nav {
+  margin: 40px 20px 0 0;
 
   ul {
-    text-align: right;
     list-style: none;
+  }
 
-    a {
-      font-size: 30px;
-      color: #FFF8E3;
-      font-weight: bold;
-      -webkit-transition: all .1s ease-in;
-      -moz-transition: all .1s ease-in;
-      -o-transition: all .1s ease-in;
-      -ms-transition: all .1s ease-in;
-      transition: all .1s ease-in;
+  li {
+    text-align: right;
+  }
 
-      &:hover {
-        text-decoration: none;
-      }
+  a {
+    font-size: 30px;
+    color: #FFF8E3;
+    font-weight: bold;
+    @include single-transition(all 100ms ease-in);
+
+    &:hover {
+      text-decoration: none;
     }
   }
 }
 
+// 主页面
 .main {
   background: #FFF8E3;
   padding: 20px 50px;
@@ -104,15 +123,27 @@ nav {
   }
 }
 
-h1 a, h2 a {
-  color: #333;
-  -webkit-transition: all .1s ease-in;
-  -moz-transition: all .1s ease-in;
-  -o-transition: all .1s ease-in;
-  -ms-transition: all .1s ease-in;
-  transition: all .1s ease-in;
-  &:hover {
-    color: lighten(#f00, 10%);
-    text-decoration: none;
+// pad & phone 响应式
+@media (max-width: $screen-sm-max) {
+  .left {
+    position: static;
+    padding: 20px;
+    opacity: 1;
+  }
+
+  header {
+    position: static;
+  }
+
+  nav {
+    ul {
+      display: table;
+      width: 100%;
+    }
+
+    li {
+      display: table-cell;
+      text-align: center;
+    }
   }
 }
