@@ -1,29 +1,25 @@
 <% @blogs.each do |blog| %>
     <article>
-      <h2><%= link_to blog.title, blog_path(blog.slug) %></h2>
-
-      <div class="misc">
-        <span>
-          <%= fa_icon "clock-o" %>
+      <div class="misc clearfix">
+        <span class="item pull-right">
+          <%= fa_icon "comments" %>
+          <%= blog.comment_count %>条评论
+        </span>
+        <span class="item pull-right">
+          <%= fa_icon "calendar-o" %>
           <%= l blog.created_at %>
         </span>
-        <span>
-          <%= fa_icon "comments" %>
-          <%= blog.comment_count %>
-        </span>
+      </div>
+      <h2><%= link_to blog.title, blog_path(blog.slug) %></h2>
+
+      <div class="misc clearfix">
         <% if blog.category.present? %>
-        <span>
-          <%= fa_icon "book" %>
-          <%= blog.category.name %>
-        </span>
+            <%= link_to fa_icon("book") + ' ' +blog.category.name, '', :class => 'pull-left item' %>
         <% end %>
-        <% if blog.tags.present? %>
-        <span>
-          <%= fa_icon "tags" %>
-          <% blog.tags.each do |tag| %>
-              <a><%= tag.name %></a>
-          <% end %>
-        </span>
+        <% if blog.tag_list.present? %>
+            <% blog.tags.each do |tag| %>
+                <%= link_to fa_icon("tag") + ' ' +tag.name, '', :class => 'pull-left item' %>
+            <% end %>
         <% end %>
       </div>
       <div class="content">

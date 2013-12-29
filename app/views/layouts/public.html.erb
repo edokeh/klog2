@@ -11,33 +11,38 @@
 </head>
 <body>
 <div class="row" style="margin:0;">
-  <div class="col-md-3 col-sm-12 left" style="">
-      <header class="text-center">
-        <img style="border-radius: 50%" class="avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
-        <h1>万神劫</h1>
-        <p>万物天地为剑 神鬼妖邪为剑<br/>
-          劫波万渡 宇宙苍穹尽为剑 是为万神劫</p>
-      </header>
+  <div class="col-md-3 col-sm-12 left">
+    <header class="text-center">
+      <img style="border-radius: 50%" class="avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
 
-      <nav>
-        <ul>
-          <li class="active">
-            <a href="/blogs">Blog</a>
-          </li>
-          <li>
-            <a href="">Archives</a>
-          </li>
-          <li>
-            <a href="">About</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+      <h1>万神劫</h1>
+
+      <p>万物天地为剑 神鬼妖邪为剑<br/>
+        劫波万渡 宇宙苍穹尽为剑 是为万神劫</p>
+
+      <div class="brand">
+        <a title="Github" target="_blank" href="https://github.com/edokeh"><%= fa_icon "github" %></a>
+        <a title="RSS" target="_blank" href=""><%= fa_icon "rss-square" %></a>
+      </div>
+    </header>
+
+    <nav>
+      <ul>
+        <li>
+          <a class="active" href="/">Blog</a>
+        </li>
+        <li>
+          <a href="">Archives</a>
+        </li>
+        <li>
+          <a href="">About</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
   <div class="col-md-offset-3 col-md-9 col-sm-12 main">
     <%= yield %>
   </div>
 </div>
-
-
 </body>
 </html>

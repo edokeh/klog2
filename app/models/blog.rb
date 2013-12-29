@@ -10,8 +10,8 @@ class Blog < ActiveRecord::Base
   validates :slug, :uniqueness => true
 
   before_validation :clean_slug
-  before_save :fill_slug
-  before_save :fill_html_content
+  #before_save :fill_slug
+  #before_save :fill_html_content
   after_save :update_blog_count
 
   belongs_to :category

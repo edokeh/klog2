@@ -187,7 +187,7 @@ zh-CN:
     am: 上午
     pm: 下午
     formats:
-      default: ! '%Y年%m月%d日'
+      default: ! '%Y-%m-%d'
       long: ! '%Y-%m-%d %H:%M:%S'
       short: ! '%H:%M'
       date: ! '%-m月%d日'

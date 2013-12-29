@@ -6,19 +6,20 @@
 @import "compass/css3";
 @import "compass/layout";
 
-$c1: #9773B2;
-$c2: #FBFFD7;
-$c3: #FEFFF0;
+$left-color: #353559;
+$left-color-light: #6C6CB8;
+$main-color: #F7F7F9;
+$main-color-gray: #7D7A6E;
+$main-color-light: #FAE37A;
 
 body {
-  //background: #33332D;
-  background: $c1;
+  background: $left-color;
   font-family: Helvetica, Tahoma, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
 h1, h2, h3, h4 {
   font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
-  color: $c1;
+  color: $left-color;
 }
 
 h1, h2, h3 {
@@ -29,25 +30,20 @@ h1, h2 {
   font-size: 40px;
 }
 
-h1 a, h2 a {
-  color: $c1;
+a, a:hover {
   @include single-transition(all 100ms ease-in);
-
-  &:hover {
-    color: lighten(#f00, 10%);
-    text-decoration: none;
-  }
+  color: $left-color-light;
 }
 
 // 侧边栏
 .left {
-  color: #FFF8E3;
+  color: $main-color;
   opacity: 0.5;
   position: fixed;
   bottom: 0;
   top: 0;
   text-align: center;
-  @include single-transition(all 100ms ease-in);
+  @include single-transition(opacity 100ms ease-in);
 
   &:hover {
     opacity: 1;
@@ -64,7 +60,20 @@ header {
   margin: 0 auto;
 
   h1 {
-    color: $c3;
+    color: $main-color;
+  }
+
+  .brand {
+    text-align: center;
+    a {
+      color: $main-color-gray;
+      margin-right: 5px;
+      font-size: 2em;
+
+      &:hover {
+        color: $main-color;
+      }
+    }
   }
 }
 
@@ -78,47 +87,74 @@ nav {
 
   li {
     text-align: right;
+    margin-bottom: 10px;
   }
 
   a {
-    font-size: 30px;
-    color: $c3;
+    font-size: 24px;
     font-weight: bold;
-    @include single-transition(all 100ms ease-in);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: $main-color;
 
-    &:hover {
+    &:hover, &.active {
       text-decoration: none;
+      background-color: $main-color;
+      color: $left-color;
     }
   }
 }
 
 // 主页面
 .main {
-  //background: #FFF8E3;
-  background: $c2;
-  padding: 20px 50px;
-
-  @media (max-width: 768px) {
-    padding: 10px 20px;
-  }
+  background: $main-color;
+  padding: 0;
 
   article {
+    max-width: 800px;
+    margin-left: 5%;
     padding: 20px 0;
-    border-bottom: 1px solid #33332D;
+    border-bottom: 1px dashed $main-color-gray;
 
+    h2 {
+      margin-top: 5px;
+
+      a {
+        color: $left-color;
+
+        &:hover {
+          color: $left-color-light;
+          text-decoration: none;
+        }
+      }
+    }
+
+    // 时间、分类、tag 等
     .misc {
-      color: $gray-light;
+      color: $main-color-gray;
       margin: 10px 0;
 
-      & > span {
+      .item {
         margin-right: 10px;
+      }
+
+      a {
+        color: $main-color-gray;
+      }
+    }
+
+    .label {
+      background: $main-color-gray;
+
+      &:hover {
+        color: $main-color;
+        background: $left-color;
       }
     }
 
     .content {
       font-size: 16px;
       line-height: 1.8;
-      max-width: 760px;
     }
 
   }
@@ -133,7 +169,7 @@ nav {
 @media (max-width: $screen-sm-max) {
   .left {
     position: static;
-    padding: 20px;
+    padding: 20px 0;
     opacity: 1;
   }
 
@@ -142,9 +178,12 @@ nav {
   }
 
   nav {
+    width: 100%;
+
     ul {
       display: table;
       width: 100%;
+      padding-left: 0;
     }
 
     li {
@@ -152,4 +191,27 @@ nav {
       text-align: center;
     }
   }
+}
+
+// phone 响应式
+@media (max-width: $screen-xs-max) {
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  nav {
+    a {
+      font-size: 20px;
+    }
+  }
+
+  article {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
 }

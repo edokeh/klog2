@@ -5,7 +5,11 @@ Klog2::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  resources :blogs
+  root 'blogs#index'
+
+  get 'blog/:id' => 'blogs#show', :as => :blog
+  resources :categories
+  resources :tags
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
