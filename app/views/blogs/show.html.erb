@@ -13,11 +13,11 @@
 
   <div class="misc clearfix">
     <% if @blog.category.present? %>
-        <%= link_to fa_icon("book") + ' ' + @blog.category.name, '', :class => 'pull-left item' %>
+        <%= link_to fa_icon("book") + ' ' + @blog.category.name, category_path(@blog.category.name), :class => 'pull-left item' %>
     <% end %>
     <% if @blog.tag_list.present? %>
         <% @blog.tags.each do |tag| %>
-            <%= link_to fa_icon("tag") + ' ' + tag.name, '', :class => 'pull-left item' %>
+            <%= link_to fa_icon("tag") + ' ' + tag.name, tag_path(tag.name), :class => 'pull-left item' %>
         <% end %>
     <% end %>
   </div>
