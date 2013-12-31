@@ -1,0 +1,17 @@
+<article class="archive">
+  <% @blogs_by_year.each do |year, blogs| %>
+      <div class="row">
+        <h2 class="col-md-3 col-sm-12"><%= year %></h2>
+        <ul class="col-md-9 col-sm-12">
+          <% blogs.each do |blog| %>
+              <li>
+                <h3><%= link_to blog.title, blog_path(blog.slug) %></h3>
+                <em><%= l blog.created_at, :format=>'%m-%d' %></em>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+</article>
+
+<% content_for :title do %>Archives<% end %>

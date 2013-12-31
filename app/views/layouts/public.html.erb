@@ -25,17 +25,17 @@
       <div class="brand">
         <a title="Github" target="_blank" href="https://github.com/edokeh"><%= fa_icon "github" %></a>
         <%= link_to fa_icon("rss-square"), feed_path(:format=>:rss), :target => '_blank', :title => 'RSS' %>
-        <%= link_to fa_icon("coffee"), '', :target => '_blank', :title => '赞助咖啡一杯' %>
+        <%= link_to fa_icon("coffee"), '', :target => '_blank', :title => '打赏咖啡一杯' %>
       </div>
     </header>
 
     <nav>
       <ul>
         <li>
-          <a class="active" href="/">Blog</a>
+          <%= link_to "Blog", '/', :class => nav_class('blog') %>
         </li>
         <li>
-          <a href="">Archives</a>
+          <%= link_to "Archives", archive_path, :class => nav_class('archive') %>
         </li>
         <li>
           <a href="">About</a>

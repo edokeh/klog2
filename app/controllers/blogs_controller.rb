@@ -3,6 +3,7 @@ class BlogsController < ApplicationController
   def index
     expires_in 2.minutes, :public=>true
     @blogs = Blog.with_status(:publish).includes([:category, :tags]).order('created_at DESC').page(params[:page])
+    @curr_nav = "blog"
   end
 
   def show

@@ -170,13 +170,41 @@ nav {
   }
 }
 
-// 分页
-.pagination {
-    a {
-      height: 20px;
-      line-height: 20px;
-      width: 100px;
+// 存档页
+.archive {
+  h2 {
+    font-size: 50px;
+    margin-top: 20px !important;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    padding: 30px 0;
+    border-bottom: 1px dashed $main-color-gray;
+
+    h3 {
+      font-size: 24px;
+      display: inline-block;
+      margin: 0;
+
+      a {
+        color: $left-color;
+
+        &:hover {
+          color: $left-color-light;
+          text-decoration: none;
+        }
+      }
     }
+
+    em {
+      float: right;
+      color: $main-color-gray;
+    }
+  }
 }
 
 // pad & phone 响应式
