@@ -28,7 +28,7 @@
         <% if blog.category.present? %>
             <%= link_to fa_icon("book") + ' ' + blog.category.name, category_path(blog.category.name), :class => 'pull-left item' %>
         <% end %>
-        <% if blog.tag_list.present? %>
+        <% if blog.tags.present? %>
             <% blog.tags.each do |tag| %>
                 <%= link_to fa_icon("tag") + ' ' +tag.name, tag_path(tag.name), :class => 'pull-left item' %>
             <% end %>
@@ -41,4 +41,10 @@
         <%= link_to fa_icon("arrow-right") + " 阅读全文...", blog_path(blog.slug), :class => 'readmore' %>
       </div>
     </article>
+<% end %>
+
+<% if @blogs.num_pages > 1 %>
+<article>
+  <%= paginate @blogs, :theme=>'tiny' %>
+</article>
 <% end %>

@@ -8,8 +8,12 @@ Klog2::Application.routes.draw do
   root 'blogs#index'
 
   get 'blog/:id' => 'blogs#show', :as => :blog
+  get 'blog/page/:page' => 'blogs#index'
+
   resources :categories
   resources :tags
+  get 'categories/:id/page/:page' => 'categories#show'
+  get 'tags/:id/page/:page' => 'tags#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

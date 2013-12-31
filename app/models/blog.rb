@@ -4,6 +4,7 @@ class Blog < ActiveRecord::Base
   enumerize :status, :in => {:draft => 0, :publish => 1}, :predicates => true, :scope => true
 
   acts_as_ordered_taggable
+  paginates_per 5
 
   validates :title, :length => {:in => 3..100}
   validates :content, :length => {:in => 10..100000}

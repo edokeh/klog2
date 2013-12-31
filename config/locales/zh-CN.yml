@@ -193,8 +193,8 @@ zh-CN:
       date: ! '%-m月%d日'
   views:
     pagination:
-      previous: "&laquo; 上一页"
-      next: "下一页 &raquo;"
+      previous: "&larr;  上一页"
+      next: "下一页 &rarr;"
       truncate: "..."
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

@@ -41,6 +41,7 @@ gem 'rest-client', '~>1.6.7'
 gem 'enumerize', '~>0.7.0'
 gem 'acts-as-taggable-on', '~> 2.4.1'
 gem 'truncate_html', '~> 0.9.2'
+gem 'kaminari', '~> 0.15.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

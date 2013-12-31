@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Klog2</title>
+  <title><%= yield :title %></title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <link href="/css">
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <%= render 'layouts/font_family' %>
 </head>
 <body>
 <div class="row" style="margin:0;">
   <div class="col-md-3 col-sm-12 left">
     <header class="text-center">
-      <img style="border-radius: 50%" class="avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
+      <img class="img-circle avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
 
       <h1>万神劫</h1>
 

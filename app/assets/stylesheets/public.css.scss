@@ -66,12 +66,13 @@ header {
   .brand {
     text-align: center;
     a {
-      color: $main-color-gray;
+      color: $main-color;
+      opacity: 0.5;
       margin-right: 5px;
       font-size: 2em;
 
       &:hover {
-        color: $main-color;
+        opacity: 1;
       }
     }
   }
@@ -113,8 +114,12 @@ nav {
   article {
     max-width: 800px;
     margin-left: 5%;
-    padding: 20px 0;
+    padding: 30px 0;
     border-bottom: 1px dashed $main-color-gray;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
 
     h2 {
       margin-top: 5px;
@@ -163,6 +168,15 @@ nav {
     font-size: 1.3em;
     font-family: "Microsoft YaHei", "微软雅黑";
   }
+}
+
+// 分页
+.pagination {
+    a {
+      height: 20px;
+      line-height: 20px;
+      width: 100px;
+    }
 }
 
 // pad & phone 响应式
