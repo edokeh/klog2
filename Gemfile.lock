@@ -32,6 +32,9 @@ GEM
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
     builder (3.1.4)
+    cells (3.9.1)
+      actionpack (>= 3.0)
+      railties (>= 3.0)
     chunky_png (1.2.9)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -143,6 +146,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 2.4.1)
   bootstrap-sass (~> 3.0.3.0)
+  cells (~> 3.9.1)
   coffee-rails (~> 4.0.0)
   compass-rails
   enumerize (~> 0.7.0)

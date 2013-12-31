@@ -22,6 +22,17 @@ class Setting < ActiveRecord::Base
     end
   end
 
+  def self.all_vars(*keys)
+    vars = Setting.all
+    vars = vars.where(:key => keys) if keys.present?
+
+    result = {}
+    vars.each do |var|
+      result[var.key] = var.value
+    end
+    result.with_indifferent_access
+  end
+
   #destroy the specified settings record
   def self.destroy(key)
     if var = Setting.find_by(:key => key)

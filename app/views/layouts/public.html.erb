@@ -14,19 +14,7 @@
 <body>
 <div class="row" style="margin:0;">
   <div class="col-md-3 col-sm-12 left">
-    <header class="text-center">
-      <img class="img-circle" src="<%= Setting.avatar %>?s=200&r=g">
-
-      <h1><%= Setting.website_title %></h1>
-
-      <p><%= simple_format Setting.website_sub_title %></p>
-
-      <div class="brand">
-        <a title="Github" target="_blank" href="https://github.com/edokeh"><%= fa_icon "github" %></a>
-        <%= link_to fa_icon("rss-square"), feed_path(:format=>:rss), :target => '_blank', :title => 'RSS' %>
-        <%= link_to fa_icon("coffee"), '', :target => '_blank', :title => '打赏咖啡一杯' %>
-      </div>
-    </header>
+    <%= render_cell :banner, :show %>
 
     <nav>
       <ul>
