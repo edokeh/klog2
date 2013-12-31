@@ -25,18 +25,26 @@
     <%= raw @blog.html_content %>
   </div>
 
-  <div>
+  <div class="blog-siblings clearfix">
+    <%= link_to '« '+@prev_blog.title, blog_path(@prev_blog.slug), :class => 'pull-left' if @prev_blog.present? %>
+    <%= link_to @next_blog.title + '  »', blog_path(@next_blog.slug), :class => 'pull-right' if @next_blog.present? %>
+  </div>
+
+  <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'chaoskeh'; // required: replace example with your forum shortname
+        var disqus_shortname = 'chaoskeh';
         var disqus_identifier = <%= @blog.id %>;
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function () {
+        (function() {
+            if (document.getElementById('dsq_script')) {
+                DISQUS.next.host.loader.loadEmbed();
+                return;
+            }
             var dsq = document.createElement('script');
             dsq.type = 'text/javascript';
             dsq.async = true;
+            dsq.id = 'dsq_script';
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
@@ -48,4 +56,5 @@
   </div>
 </article>
 
-<% content_for :title do %><%= @blog.title %> - <% end %>
+<% content_for :title do %><%= @blog.title %> -
+<% end %>

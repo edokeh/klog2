@@ -168,6 +168,15 @@ nav {
     font-size: 1.3em;
     font-family: "Microsoft YaHei", "微软雅黑";
   }
+
+  .blog-siblings {
+    border-bottom: 1px dashed $main-color-gray;
+    padding: 20px 0;
+  }
+
+  .comments {
+    padding: 20px 0;
+  }
 }
 
 // 存档页
