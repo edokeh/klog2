@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#管理后台密码
+Setting.admin_pass = 'password'
+Setting.website_title = '网站标题'
+Setting.website_author = '作者名'

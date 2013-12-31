@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= yield :title %></title>
+  <title><%= yield :title %><%= Setting.website_title %></title>
 
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-  <%= auto_discovery_link_tag(:rss, feed_path(:format=>:rss), :title=>'') %>
+  <%= auto_discovery_link_tag(:rss, feed_path(:format=>:rss), :title=>Setting.website_title) %>
 
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -15,12 +15,11 @@
 <div class="row" style="margin:0;">
   <div class="col-md-3 col-sm-12 left">
     <header class="text-center">
-      <img class="img-circle avatar" src="http://www.gravatar.com/avatar/45be77d39c4b170bab9e195594ab8c6f.jpg?s=200&r=g">
+      <img class="img-circle" src="<%= Setting.avatar %>?s=200&r=g">
 
-      <h1>万神劫</h1>
+      <h1><%= Setting.website_title %></h1>
 
-      <p>万物天地为剑 神鬼妖邪为剑<br/>
-        劫波万渡 宇宙苍穹尽为剑 是为万神劫</p>
+      <p><%= simple_format Setting.website_sub_title %></p>
 
       <div class="brand">
         <a title="Github" target="_blank" href="https://github.com/edokeh"><%= fa_icon "github" %></a>

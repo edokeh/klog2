@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131226010542) do
+ActiveRecord::Schema.define(version: 20131231034743) do
 
   create_table "blogs", force: true do |t|
     t.string   "title",                            null: false
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20131226010542) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "settings", force: true do |t|
+    t.string   "key"
+    t.string   "value",      limit: 2000
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["key"], name: "index_settings_on_key", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
