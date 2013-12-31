@@ -15,6 +15,8 @@ Klog2::Application.routes.draw do
   get 'categories/:id/page/:page' => 'categories#show'
   get 'tags/:id/page/:page' => 'tags#show'
 
+  get '/feed' => 'feed#show', :format => :rss, :as => :feed
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

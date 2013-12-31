@@ -2,7 +2,9 @@
 <html>
 <head>
   <title><%= yield :title %></title>
+
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <%= auto_discovery_link_tag(:rss, feed_path(:format=>:rss), :title=>'') %>
 
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -22,7 +24,8 @@
 
       <div class="brand">
         <a title="Github" target="_blank" href="https://github.com/edokeh"><%= fa_icon "github" %></a>
-        <a title="RSS" target="_blank" href=""><%= fa_icon "rss-square" %></a>
+        <%= link_to fa_icon("rss-square"), feed_path(:format=>:rss), :target => '_blank', :title => 'RSS' %>
+        <%= link_to fa_icon("coffee"), '', :target => '_blank', :title => '赞助咖啡一杯' %>
       </div>
     </header>
 
