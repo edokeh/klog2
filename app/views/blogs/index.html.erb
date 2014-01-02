@@ -24,13 +24,13 @@
       </div>
       <h2><%= link_to blog.title, blog_path(blog.slug) %></h2>
 
-      <div class="misc clearfix">
+      <div class="misc">
         <% if blog.category.present? %>
-            <%= link_to fa_icon("book") + ' ' + blog.category.name, category_path(blog.category.name), :class => 'pull-left item' %>
+            <%= link_to fa_icon("book") + ' ' + blog.category.name, category_path(blog.category.name), :class => 'item' %>
         <% end %>
         <% if blog.tags.present? %>
             <% blog.tags.each do |tag| %>
-                <%= link_to fa_icon("tag") + ' ' +tag.name, tag_path(tag.name), :class => 'pull-left item' %>
+                <%= link_to fa_icon("tag") + ' ' +tag.name, tag_path(tag.name), :class => 'item' %>
             <% end %>
         <% end %>
       </div>

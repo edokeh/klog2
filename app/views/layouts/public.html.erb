@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
   <title><%= yield :title %><%= Setting.website_title %></title>
 
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="renderer" content="webkit" />
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <%= csrf_meta_tags %>
   <%= auto_discovery_link_tag(:rss, feed_path(:format => :rss), :title => Setting.website_title) %>
 
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <% if os.mac? %>
+      <style>
+          body, h1, h2, h3, h4 {
+              font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", STXihei, "华文细黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+          }
+      </style>
+  <% end %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <%= render 'layouts/font_family' %>
-  <script>
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '']);
-      //_gaq.push(['_setDomainName', 'none']);
-      //_gaq.push(['_trackPageview']);
-      (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-  </script>
+
+  <!--[if lt IE 9]>
+    <%= javascript_include_tag "html5shiv" %>
+    <%= javascript_include_tag "respond" %>
+  <![endif]-->
+
+  <%= render :partial => 'layouts/ga', :object => :head %>
 </head>
 <body>
 <div class="row" style="margin:0;">
@@ -45,8 +50,6 @@
     <%= yield %>
   </div>
 </div>
-<script>
-    _gaq.push(['_trackPageview']);
-</script>
+<%= render :partial => 'layouts/ga', :object => :foot %>
 </body>
 </html>
