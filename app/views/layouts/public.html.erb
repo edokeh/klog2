@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <title><%= yield :title %><%= Setting.website_title %></title>
+  <title><%= yield :title %><%= Setting.website.title %></title>
 
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="renderer" content="webkit" />
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <%= csrf_meta_tags %>
-  <%= auto_discovery_link_tag(:rss, feed_path(:format => :rss), :title => Setting.website_title) %>
+  <%= auto_discovery_link_tag(:rss, feed_path(:format => :rss), :title => Setting.website.title) %>
 
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <% if os.mac? %>
@@ -30,21 +30,9 @@
 <body>
 <div class="row" style="margin:0;">
   <div class="col-md-3 col-sm-12 left">
-    <%= render_cell :banner, :show %>
+    <%= render "layouts/header" %>
 
-    <nav>
-      <ul>
-        <li>
-          <%= link_to "Blog", '/', :class => nav_class('blog') %>
-        </li>
-        <li>
-          <%= link_to "Archives", archive_path, :class => nav_class('archive') %>
-        </li>
-        <li>
-          <a href="">About</a>
-        </li>
-      </ul>
-    </nav>
+    <%= render_cell :nav, :show, @curr_nav %>
   </div>
   <div class="col-md-offset-3 col-md-9 col-sm-12 main">
     <%= yield %>

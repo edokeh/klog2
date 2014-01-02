@@ -60,4 +60,15 @@ class Setting < ActiveRecord::Base
     record.value = value
     record.save
   end
+
+  def value
+    # JSON.parse 无法处理 JSON 原始类型，hack it！
+    JSON.parse("[#{self[:value]}]", :object_class => OpenStruct).first
+  end
+
+  # 使用 JSON 保存值
+  def value=(new_value)
+    new_value = new_value.marshal_dump if new_value.is_a? OpenStruct
+    self[:value] = new_value.to_json
+  end
 end

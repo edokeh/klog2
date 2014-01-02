@@ -1,0 +1,13 @@
+<header class="text-center">
+  <img class="img-circle" src="<%= Setting.website.avatar %>?s=200&r=g">
+
+  <h1><%= Setting.website.title %></h1>
+
+  <p><%= simple_format Setting.website.sub_title %></p>
+
+  <div class="brand">
+    <%= link_to fa_icon("github"), "https://github.com/#{Setting.website.github}", :target => '_blank', :title => "Github" if Setting.website.github%>
+    <%= link_to fa_icon("coffee"), '', :target => '_blank', :title => '打赏咖啡一杯' %>
+    <%= link_to fa_icon("rss-square"), feed_path(:format=>:rss), :target => '_blank', :title => 'RSS' %>
+  </div>
+</header>

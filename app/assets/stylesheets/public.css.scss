@@ -45,7 +45,7 @@ a, a:hover {
   text-align: center;
 
   header, nav {
-    opacity: 0.7;
+    opacity: 0.5;
     @include single-transition(opacity 100ms ease-in);
   }
 
@@ -78,7 +78,6 @@ header {
       opacity: 0.5;
       font-size: 2em;
       display: inline-block;
-      width: 32px;
 
       &:hover {
         opacity: 1;
