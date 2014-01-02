@@ -13,7 +13,7 @@ $main-color-gray: #7D7A6E;
 $main-color-light: #FAE37A;
 
 body {
-  background: $left-color;
+  background: $main-color;
   font-family: Helvetica, Tahoma, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
@@ -37,16 +37,22 @@ a, a:hover {
 
 // 侧边栏
 .left {
+  background: $left-color;
   color: $main-color;
-  opacity: 0.5;
   position: fixed;
   bottom: 0;
   top: 0;
   text-align: center;
-  @include single-transition(opacity 100ms ease-in);
+
+  header, nav {
+    opacity: 0.7;
+    @include single-transition(opacity 100ms ease-in);
+  }
 
   &:hover {
-    opacity: 1;
+    header, nav {
+      opacity: 1;
+    }
   }
 }
 
@@ -65,11 +71,14 @@ header {
 
   .brand {
     text-align: center;
+
     a {
+      text-align: left;
       color: $main-color;
       opacity: 0.5;
-      margin-right: 5px;
       font-size: 2em;
+      display: inline-block;
+      width: 32px;
 
       &:hover {
         opacity: 1;
@@ -176,6 +185,13 @@ nav {
 
   .comments {
     padding: 20px 0;
+  }
+
+  footer {
+    margin-left: 5%;
+    padding: 10px 0;
+    max-width: 800px;
+    text-align: center;
   }
 }
 
