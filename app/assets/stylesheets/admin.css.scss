@@ -1,0 +1,413 @@
+@import "bootstrap";
+@import "font-awesome";
+
+body {
+  background: #eee;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #CCCCCC;
+  -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 5px;
+  background-color: #999999;
+  -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 5px;
+  background-color: #CCCCCC;
+  -webkit-border-radius: 6px;
+}
+
+.modal {
+  display: block;
+}
+
+.navbar-admin {
+  min-height: 40px;
+  border-radius: 0;
+  margin-bottom: 30px;
+
+  .navbar-brand {
+    padding: 10px 20px;
+    color: #8bbbf2;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .navbar-nav > li > a {
+    padding: 10px 20px;
+  }
+}
+
+// ajax 指示器
+.ajax-spinner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  border-radius: 0 0 5px 5px;
+  color: #c09853;
+  text-align: center;
+  padding: 5px 0;
+  background: #FCF6CF;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  z-index: -1;
+
+  -webkit-transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  clip: auto;
+
+  .icon-spin {
+    -webkit-animation: spin 0.7s infinite linear;
+    animation: spin 0.7s infinite linear;
+  }
+}
+
+.ajax-spinner.show {
+  top: 40px;
+}
+
+.main {
+  position: absolute;
+  top: 80px;
+  bottom: 10px;
+  left: 15px;
+  right: 15px;
+}
+
+.full-height {
+  height: 100%;
+}
+
+//.nav-dropdown-menu {
+//  min-width: 130px;
+//  > li > a {
+//    color: $gray;
+//  }
+//}
+
+// blog 列表页
+.blog-list {
+  .panel-heading {
+    background: white;
+    height: 60px;
+    padding-top: 20px;
+  }
+
+  .list-group {
+    overflow: auto;
+    height: calc(100% - 60px);
+  }
+
+  .list-group-item {
+    padding-left: 19px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: whitesmoke;
+
+      .tools {
+        opacity: 1;
+      }
+    }
+  }
+
+  .list-group-item.ng-leave {
+    -webkit-transition: all 1s ease-in all; /* Safari/Chrome */
+    -moz-transition: all 1s linear all; /* Firefox */
+    -o-transition: all 1s linear all; /* Opera */
+    height: 0;
+  }
+
+  .list-group-item.active {
+    background: whitesmoke;
+    border-color: #ddd;
+    border-left: 4px solid #aaa;
+    color: #333;
+    padding-left: 15px;
+
+    .tools {
+      opacity: 1;
+    }
+  }
+
+  .list-group-item-text {
+    color: #aaa;
+  }
+
+  .tools {
+    opacity: 0;
+    -webkit-transition: opacity 500ms;
+
+    a {
+      font-size: 16px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.blog-preview {
+  padding-left: 0;
+
+  .panel-heading {
+    height: 60px;
+    background: white;
+
+    h3 {
+      margin: 0;
+    }
+
+    .blog-misc {
+      span {
+        margin-right: 15px;
+        color: #aaa;
+      }
+    }
+
+    .actions {
+      margin-top: 3px;
+    }
+
+    //a {
+    //  font-size: 14px;
+    //  color: #999;
+    //  margin-right: 10px;
+    //
+    //  &:hover {
+    //    text-decoration: none;
+    //    color: #333;
+    //  }
+    //}
+  }
+
+  .blog-preview-content {
+    overflow: auto;
+    height: calc(100% - 60px);
+
+    > div {
+      margin: 15px;
+      max-width: 800px;
+    }
+  }
+}
+
+.confirm-dialog {
+  width: 400px;
+}
+
+// 编辑器
+.blog-editor {
+
+  @mixin no-border() {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  // 标题 + 内容
+  .panel-body {
+    padding: 0 30px;
+    height: calc(100% - 55px);
+  }
+
+  .title {
+    input {
+      @include no-border();
+
+      font-size: 34px;
+      font-weight: bolder;
+      font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+      line-height: 57px;
+      height: 70px;
+      border-bottom: 1px solid #ccc;
+      padding: 6px;
+    }
+  }
+
+  .content-wrap {
+    height: calc(100% - 70px);
+    margin: 0;
+    padding: 20px 5px 5px 20px;
+  }
+
+  // 内容多行文本框
+  .content {
+    height: 100%;
+    resize: none;
+    padding: 0;
+
+    @include no-border();
+  }
+
+  // 拖拽文件
+  .upload-drop {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    height: calc(100% - 25px);
+    width: calc(100% - 30px);
+    top: 20px;
+    border: 3px dashed $gray-light;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: $gray-light;
+
+    .tip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -10px;
+      margin-left: -70px;
+    }
+  }
+
+  .upload-drop.dragover {
+    border-color: lighten(#0000FF, 30%);
+    background: rgba($gray-lighter, 0.8);
+  }
+
+  // 上传、提示等按钮
+  .tools {
+    position: absolute;
+    right: 10px;
+    top: 3px;
+
+    & > a {
+      margin-right: 5px;
+      text-decoration: none;
+      color: #000;
+      opacity: 0.3;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      i {
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  .config-wrap {
+    input, select {
+      @include no-border();
+    }
+
+    td {
+      padding: 0;
+      &:first-child {
+        padding-left: 5px;
+      }
+    }
+
+    tr:first-of-type td {
+      border-top: none;
+    }
+
+  }
+
+  // SLUG TAG 等设置
+  .editor-config {
+    padding-top: 5px;
+
+    .col {
+      border-right: 1px solid #ccc;
+
+      &:last-of-type {
+        border: none;
+      }
+    }
+
+    .input-group-addon {
+      border: none;
+      background: none;
+      padding: 0;
+    }
+  }
+
+  // 预览
+  .preview-wrap {
+    height: calc(100% - 70px);
+    padding: 20px 2px 5px 20px;
+    background: #F7F7F9;
+    background-clip: padding-box;
+
+    .tip {
+      color: #999;
+      position: absolute;
+      top: 3px;
+      right: 10px;
+      font-size: 12px;
+      font-style: normal;
+    }
+  }
+
+  .preview {
+    height: 100%;
+    overflow: auto;
+    padding-right: 3px;
+  }
+}
+
+// 上传的显示
+.upload-attaches {
+  max-height: 170px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 5px;
+  list-style: none;
+  padding: 5px 10px;
+
+  li {
+    width: 250px;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .title {
+    display: inline-block;
+    margin-right: 10px;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .progress {
+    height: 10px;
+    width: 120px;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .action {
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 5px;
+    float: right;
+    color: #000;
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 0.8;
+      background: white;
+    }
+  }
+}

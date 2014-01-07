@@ -19,6 +19,12 @@ Klog2::Application.routes.draw do
   get '/archive.html' => 'archive#show', :as => :archive
   get '/page/:id.html' => 'pages#show', :as => :page
 
+  namespace :admin do
+    get '/' => 'home#show'
+
+    resources :blogs
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
