@@ -27,7 +27,7 @@ define(function (require, exports, module) {
                     interceptor: {
                         response: function (response) {
                             response.resource.totalPages = response.data.totalPages;
-                            response.resource.currPage = response.data.currPage;
+                            response.resource.currentPage = response.data.currentPage;
                             response.resource.isLast = response.data.isLast;
                             return response.resource;
                         }

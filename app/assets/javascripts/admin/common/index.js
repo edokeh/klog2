@@ -14,5 +14,7 @@ define(function(require, exports, module) {
 
     common.factory(require('./factory/blog'));
 
+    common.directive(require('./directive/scroll-top-percent'));
+
     module.exports = common;
 });
