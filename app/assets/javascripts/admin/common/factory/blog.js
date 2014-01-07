@@ -15,9 +15,7 @@ define(function (require, exports, module) {
                     transformResponse: $http.defaults.transformResponse.concat([function (data, header) {
                         if (data.array && angular.isArray(data.array)) {
                             var array = data.array;
-                            array.totalPages = data.total_pages;
-                            array.currentPage = data.current_page;
-                            array.isLast = data.is_last;
+                            array.$page = data.page;
                             return array;
                         }
                         else {
@@ -26,9 +24,7 @@ define(function (require, exports, module) {
                     }]),
                     interceptor: {
                         response: function (response) {
-                            response.resource.totalPages = response.data.totalPages;
-                            response.resource.currentPage = response.data.currentPage;
-                            response.resource.isLast = response.data.isLast;
+                            response.resource.$page = response.data.$page;
                             return response.resource;
                         }
                     }

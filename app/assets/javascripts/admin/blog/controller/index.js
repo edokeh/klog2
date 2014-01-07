@@ -4,34 +4,35 @@
 define(function (require, exports, module) {
     var _ = require('_');
 
-    var IndexController = ['$scope', '$routeParams', 'Blog', function ($scope, $routeParams, Blog, Confirm, Flash) {
+    var IndexController = ['$scope', '$routeParams', 'Blog', 'Flash', function ($scope, $routeParams, Blog, Flash) {
 
         $scope.STATUS = Blog.STATUS;
         //$scope.currStatus = Blog.getStatus($routeParams.status);
 
-        $scope.blogs = [];
-
+        // 根据页数获取 blog 列表
         $scope.getBlogs = function (page) {
             Blog.query({
                 status: $routeParams.status,
                 page: page
             }, function (data) {
                 $scope.blogs = $scope.blogs.concat(data);
-                $scope.isLast = data.isLast;
-                $scope.currentPage = data.currentPage;
-                if ($scope.blogs.length > 0) {
-                    //var tmpId = Flash.tmp();
-                    //var blog = tmpId ? _.findWhere($scope.blogs, {id: tmpId}) : $scope.blogs[0];
-                    //$scope.showBlog(blog);
+                $scope.page = data.$page;
+                // 自动选中一篇，可能来自新建或修改页面
+                if ($scope.blogs.length > 0 && !$scope.currBlog) {
+                    var tmpId = Flash.tmp();
+                    var blog = tmpId ? _.findWhere($scope.blogs, {id: tmpId}) : $scope.blogs[0];
+                    $scope.showBlog(blog);
                 }
             });
         };
 
+        // 显示某一篇 blog 详情
         $scope.showBlog = function (blog) {
             $scope.currBlog = blog;
             blog.$get({detail: true});
         };
 
+        // 删除 blog
         $scope.remove = function (blog) {
             Confirm.open('确定要删除“' + blog.title + '”？').then(function () {
                 blog.$remove(function () {
@@ -41,13 +42,14 @@ define(function (require, exports, module) {
             });
         };
 
-        // 到底载入更多
+        // scroll 到底部时载入下一页
         $scope.$watch('listScrollTop', function (value) {
-            if (value >= 0.9 && !$scope.isLast) {
-                $scope.getBlogs($scope.currentPage + 1);
+            if (value >= 0.95 && $scope.page.hasNext) {
+                $scope.getBlogs($scope.page.current + 1);
             }
         });
 
+        $scope.blogs = [];
         $scope.getBlogs(1);
     }];
 

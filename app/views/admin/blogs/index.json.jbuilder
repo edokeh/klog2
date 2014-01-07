@@ -1,6 +1,8 @@
-json.current_page @blogs.current_page
-json.total_pages @blogs.total_pages
-json.is_last @blogs.last_page?
+json.page do
+  json.current @blogs.current_page
+  json.total @blogs.total_pages
+  json.hasNext !@blogs.last_page?
+end
 json.array do
   json.array! @blogs do |blog|
     json.extract! blog, :id, :title, :comment_count, :created_at, :slug

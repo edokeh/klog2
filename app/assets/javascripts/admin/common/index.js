@@ -13,6 +13,7 @@ define(function(require, exports, module) {
     ]);
 
     common.factory(require('./factory/blog'));
+    common.factory(require('./factory/flash'));
 
     common.directive(require('./directive/scroll-top-percent'));
 
