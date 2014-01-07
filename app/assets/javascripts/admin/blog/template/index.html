@@ -1,0 +1,64 @@
+<div class="row full-height">
+    <div class="col-md-3 blog-list full-height">
+        <div class="panel panel-default full-height">
+            <div class="panel-heading clearfix">
+                <div class="dropdown pull-left">
+                    <a class="dropdown-toggle" href="">
+                        {{currStatus.name}} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="status in STATUS">
+                            <a ng-href="#/blogs?status={{status.value}}">{{status.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="" class="pull-right"><i class="icon-plus-sign-alt"></i></a>
+            </div>
+            <div class="list-group">
+                <div ng-if="blogs.$resolved && blogs.length == 0">
+                    empty
+                </div>
+                <div class="list-group-item clearfix" ng-repeat="blog in blogs" ng-click="showBlog(blog)"
+                     ng-class="{active: (blog.id === currBlog.id)}">
+                    <div class="pull-left">
+                        <h4 class="list-group-item-heading">
+                            {{ blog.title }}
+                        </h4>
+
+                        <p class="list-group-item-text">
+                            <span style="color:#aaa;margin-right: 10px;"><i class="icon-time"></i> {{ blog.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
+                            <span style="color:#aaa"><i class="icon-comments"></i> {{ blog.comment_count }}</span>
+                        </p>
+                    </div>
+                    <div class="pull-right tools">
+                        <a><i class="icon-edit"></i></a>
+                        <a><i class="icon-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 blog-preview full-height">
+        <div class="panel panel-default full-height">
+            <div class="panel-heading clearfix" ng-show="currBlog">
+                <div class="pull-left">
+                    <h3><a href="" target="_blank">{{currBlog.title }}</a></h3>
+
+                    <div class="blog-misc">
+                        <span><i class="icon-book"></i> {{currBlog.category ? currBlog.category.name : '未分类'}}</span>
+                        <span ng-repeat="tag in currBlog.tag_list"><i class="icon-tag"></i> {{tag}}</span>
+                    </div>
+                </div>
+
+                <div class="actions pull-right">
+                    <a href="#/blogs/{{currBlog.id}}/edit" class="btn btn-primary"><i class="icon-pencil"></i> 修改</a>
+                    <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="icon-trash"> 删除</i></a>
+                </div>
+            </div>
+            <div class="blog-preview-content">
+
+                <div ng-bind-html="currBlog.html_content"></div>
+            </div>
+        </div>
+    </div>
+</div>

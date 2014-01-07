@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="renderer" content="webkit" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title ng-bind="title"></title>
+
+  <%= stylesheet_link_tag "admin", media: "all" %>
+
+  <%= javascript_include_tag "xhr-shim.js" %>
+  <%= javascript_include_tag "sea-modules/seajs/seajs/2.1.1/sea" %>
+
+  <script>
+      seajs.config({
+          alias: {
+              'angularjs': 'angular/angularjs/1.2.7/angular',
+              'angular-animate': 'angular/angularjs/1.2.7/angular-animate',
+              'angular-resource': 'angular/angularjs/1.2.7/angular-resource',
+              'angular-route': 'angular/angularjs/1.2.7/angular-route',
+              'angular-sanitize': 'angular/angularjs/1.2.7/angular-sanitize',
+
+              '_': 'gallery/underscore/1.4.4/underscore'
+          },
+          preload: ['seajs/seajs-text/1.0.2/seajs-text']
+      });
+  </script>
+</head>
+<body ng-cloak>
+
+<nav class="navbar navbar-inverse navbar-admin">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/admin">Klog</a>
+  </div>
+  <ul class="nav navbar-nav">
+    <li ng-class="{active:item.active}" ng-repeat="item in navItems">
+      <a ng-href="#{{item.url}}">
+        <i ng-if="item.ico" class="{{item.ico}}"></i>
+        {{item.name}}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div ajax-spinner></div>
+
+<div class="main" ng-view>
+</div>
+<script>
+    seajs.on('exec', function(m) {
+        if(m.exports){
+            m.exports.__moduleUri = m.uri;
+        }
+    })
+    seajs.use('/assets/admin/app');
+</script>
+</body>
+</html>
