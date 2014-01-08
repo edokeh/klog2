@@ -10,7 +10,7 @@
   <%= csrf_meta_tags %>
   <%= auto_discovery_link_tag(:rss, feed_path(:format => :rss), :title => Setting.website.title) %>
 
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "public", media: "all", "data-turbolinks-track" => true %>
   <% if os.mac? %>
       <style>
           body, h1, h2, h3, h4 {
