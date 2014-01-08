@@ -16,6 +16,8 @@ define(function(require, exports, module) {
         ajaxSpinner.name
     ]);
 
+    common.controller(require('./controller/nav'));
+
     common.factory(require('./factory/attach'));
     common.factory(require('./factory/blog'));
     common.factory(require('./factory/category'));

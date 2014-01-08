@@ -29,14 +29,14 @@
 </head>
 <body ng-cloak>
 
-<nav class="navbar navbar-inverse navbar-admin">
+<nav class="navbar navbar-inverse navbar-admin" ng-controller="nav">
   <div class="navbar-header">
     <a class="navbar-brand" href="/admin">Klog</a>
   </div>
   <ul class="nav navbar-nav">
     <li ng-class="{active:item.active}" ng-repeat="item in navItems">
       <a ng-href="#{{item.url}}">
-        <i ng-if="item.ico" class="{{item.ico}}"></i>
+        <i ng-if="item.ico" class="fa {{item.ico}}"></i>
         {{item.name}}
       </a>
     </li>
