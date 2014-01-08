@@ -40,6 +40,8 @@ end
 gem 'rest-client', '~>1.6.7'
 gem 'enumerize', '~>0.7.0'
 gem 'acts-as-taggable-on', '~> 2.4.1'
+gem 'carrierwave', '~>0.9.0'
+gem 'mini_magick', '~>3.7.0'
 gem 'truncate_html', '~> 0.9.2'
 gem 'kaminari', '~> 0.15.0'
 gem 'cells', '~> 3.9.1'
