@@ -16,7 +16,7 @@ define(function(require, exports, module) {
                     attrs.popoverShow
 
                     var triggerGetter = $parse(attrs.popoverTrigger);
-                    var showGetter = $parse(attrs.popoverShow || '__xx');
+                    var showGetter = $parse(attrs.popoverShow || '__xx'); //TODO change name
 
                     scope.$watch(function(scope) {
                         return scope.$eval(attrs.popoverTrigger);
