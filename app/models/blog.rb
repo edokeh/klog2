@@ -16,7 +16,7 @@ class Blog < ActiveRecord::Base
   after_save :update_blog_count
 
   belongs_to :category
-  #has_many :attaches, :as=>:parent, :dependent => :destroy
+  has_many :attaches, :as=>:parent, :dependent => :destroy
 
   def publish!
     self.status = :publish

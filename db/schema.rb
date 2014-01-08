@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102062200) do
+ActiveRecord::Schema.define(version: 20140108025118) do
+
+  create_table "attaches", force: true do |t|
+    t.string   "file"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blogs", force: true do |t|
     t.string   "title",                            null: false

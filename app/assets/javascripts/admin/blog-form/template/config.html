@@ -1,0 +1,48 @@
+<div style="padding: 0px 5px;" class="config-wrap">
+    <table class="table table-condensed" style="border:none;width: 300px;margin-bottom:5px;">
+        <tr>
+            <td><i class="icon-book"></i></td>
+            <td>
+                <select class="form-control" ng-model="blog.category_id"
+                        ng-options="cc.id as cc.name for cc in categories">
+                    <option value="">选择分类...</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><i class="icon-link"></i></td>
+            <td>
+                <input class="form-control" type="text" placeholder="URL Slug" ng-model="blog.slug"/>
+            </td>
+        </tr>
+        <tr>
+            <td><i class="icon-tags"></i></td>
+            <td>
+                <input class="form-control" type="text" placeholder="标签" ng-model="blog.tag_list"/>
+            </td>
+        </tr>
+        <tr>
+            <td><i class="icon-save"></i></td>
+            <td>
+                <div style="padding: 5px 0 5px 12px;">
+                    <label class="radio-inline">
+                        <input type="radio" value="0" ng-model="blog.status"> 存为草稿
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="radio" value="1" ng-model="blog.status"> 立即发布
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div style="padding: 5px 0 5px 12px;">
+                    <label class="checkbox-inline">
+                        <input type="checkbox"/> 自动保存
+                    </label>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -26,14 +26,17 @@
                         </h4>
 
                         <p class="list-group-item-text">
-                            <span style="color:#aaa;margin-right: 10px;"><i class="icon-time"></i> {{ blog.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
-                            <span style="color:#aaa"><i class="icon-comments"></i> {{ blog.comment_count }}</span>
+                            <span style="color:#aaa;margin-right: 10px;"><i class="fa fa-clock-o"></i> {{ blog.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
+                            <span style="color:#aaa"><i class="fa fa-comments"></i> {{ blog.comment_count }}</span>
                         </p>
                     </div>
                     <div class="pull-right tools">
-                        <a><i class="icon-edit"></i></a>
-                        <a><i class="icon-trash"></i></a>
+                        <a><i class="fa fa-edit"></i></a>
+                        <a><i class="fa fa-trash-o"></i></a>
                     </div>
+                </div>
+                <div class="list-group-item">
+                    <a href="" ng-click="getBlogs(page.current + 1)">查看更多</a>
                 </div>
             </div>
         </div>

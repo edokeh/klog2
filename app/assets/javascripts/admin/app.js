@@ -11,13 +11,17 @@ define(function(require, exports, module) {
         $rootScope.title = controller.title + ' - Klog 后台管理';
     }]);
 
-    admin.config(['$routeProvider', function($routeProvider) {
+    admin.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+
+        $httpProvider.defaults.headers.common['X-CSRF-Token'] = window.CSRF_TOKEN;
 
         var blog = SeajsLazyAngular.createLazyStub('/assets/admin/blog/index');
+        var blogForm = SeajsLazyAngular.createLazyStub('/assets/admin/blog-form/index');
 
         $routeProvider
-            .when('/blogs', blog.createRoute('./controller/index'))
-            .otherwise({redirectTo: '/blogs'});
+            .when('/blog', blog.createRoute('./controller/index'))
+            .when('/blog/new', blogForm.createRoute('./controller/form'))
+            .otherwise({redirectTo: '/blog'});
     }]);
 
     angular.bootstrap(window.document, ['admin']);
