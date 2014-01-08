@@ -52,7 +52,7 @@ define(function(require, exports, module) {
 
                     // 拖动文件到 document 时显示 Drop 框
                     bindDragHover($document, function(e) {
-                        element.css('display', (e.type === 'dragenter' && hasFile(e)) ? '' : 'none');
+                        element.css('display', (e.type === 'dragenter' && hasFile(e)) ? 'block' : 'none');
                     });
 
                     // 拖动文件到 Drop 框时高亮

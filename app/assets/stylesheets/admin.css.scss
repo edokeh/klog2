@@ -210,11 +210,14 @@ body {
 
 // 编辑器
 .blog-editor {
-
-  @mixin no-border() {
+  input, textarea, select {
     border: none;
     box-shadow: none;
     border-radius: 0;
+
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   // 标题 + 内容
@@ -225,8 +228,6 @@ body {
 
   .title {
     input {
-      @include no-border();
-
       font-size: 34px;
       font-weight: bolder;
       font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
@@ -248,8 +249,6 @@ body {
     height: 100%;
     resize: none;
     padding: 0;
-
-    @include no-border();
   }
 
   // 拖拽文件
@@ -302,13 +301,13 @@ body {
     }
   }
 
+  // 选项 popover
   .config-wrap {
-    input, select {
-      @include no-border();
-    }
 
     td {
       padding: 0;
+      vertical-align: middle;
+
       &:first-child {
         padding-left: 5px;
       }

@@ -21,6 +21,7 @@ define(function(require, exports, module) {
         $routeProvider
             .when('/blog', blog.createRoute('./controller/index'))
             .when('/blog/new', blogForm.createRoute('./controller/form'))
+            .when('/blog/:id/edit', blogForm.createRoute('./controller/form'))
             .otherwise({redirectTo: '/blog'});
     }]);
 

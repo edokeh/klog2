@@ -31,8 +31,8 @@
                         </p>
                     </div>
                     <div class="pull-right tools">
-                        <a><i class="fa fa-edit"></i></a>
-                        <a><i class="fa fa-trash-o"></i></a>
+                        <a href="#/blog/{{currBlog.id}}/edit"><i class="fa fa-edit"></i></a>
+                        <a href="" ng-click="remove(currBlog)"><i class="fa fa-trash-o"></i></a>
                     </div>
                 </div>
                 <div class="list-group-item">
@@ -48,14 +48,14 @@
                     <h3><a href="" target="_blank">{{currBlog.title }}</a></h3>
 
                     <div class="blog-misc">
-                        <span><i class="icon-book"></i> {{currBlog.category ? currBlog.category.name : '未分类'}}</span>
+                        <span><i class="fa fa-book"></i> {{currBlog.category ? currBlog.category.name : '未分类'}}</span>
                         <span ng-repeat="tag in currBlog.tag_list"><i class="icon-tag"></i> {{tag}}</span>
                     </div>
                 </div>
 
                 <div class="actions pull-right">
-                    <a href="#/blogs/{{currBlog.id}}/edit" class="btn btn-primary"><i class="icon-pencil"></i> 修改</a>
-                    <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="icon-trash"> 删除</i></a>
+                    <a href="#/blog/{{currBlog.id}}/edit" class="btn btn-primary"><i class="fa fa-pencil"></i> 修改</a>
+                    <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="fa fa-trash-o"> 删除</i></a>
                 </div>
             </div>
             <div class="blog-preview-content">

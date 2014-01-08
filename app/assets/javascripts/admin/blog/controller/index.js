@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     var _ = require('_');
 
-    var IndexController = ['$scope', '$routeParams', 'Blog', 'Flash', function ($scope, $routeParams, Blog, Flash) {
+    var IndexController = ['$scope', '$routeParams', 'Blog', 'Flash', 'Confirm', function ($scope, $routeParams, Blog, Flash, Confirm) {
 
         $scope.STATUS = Blog.STATUS;
         //$scope.currStatus = Blog.getStatus($routeParams.status);
