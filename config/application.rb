@@ -22,5 +22,14 @@ module Klog2
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = "zh-CN"
+
+    config.after_initialize do
+      Setting.defaults = {
+          "website" => OpenStruct.new(
+              :title => "网站名称",
+              :sub_title => "一点点简介写在这里"
+          )
+      }
+    end
   end
 end

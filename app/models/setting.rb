@@ -2,7 +2,7 @@ class Setting < ActiveRecord::Base
   class SettingNotFound < RuntimeError;
   end
 
-  cattr_accessor :defaults
+  class_attribute :defaults
 
   #get or set a variable with the variable as the called method
   def self.method_missing(method, *args)
@@ -47,8 +47,8 @@ class Setting < ActiveRecord::Base
   def self.[](key)
     if var = Setting.find_by(:key => key)
       var.value
-    elsif @@defaults and @@defaults[key.to_s]
-      @@defaults[key.to_s]
+    elsif Setting.defaults and Setting.defaults[key.to_s]
+      defaults[key.to_s]
     else
       nil
     end

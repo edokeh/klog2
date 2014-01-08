@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20140108025118) do
 
   create_table "attaches", force: true do |t|
-    t.string   "file"
-    t.string   "file_name"
-    t.string   "content_type"
-    t.integer  "file_size"
+    t.string   "file",         null: false
+    t.string   "file_name",    null: false
+    t.string   "content_type", null: false
+    t.integer  "file_size",    null: false
     t.integer  "parent_id"
     t.string   "parent_type"
     t.datetime "created_at"
