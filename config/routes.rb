@@ -23,6 +23,7 @@ Klog2::Application.routes.draw do
     get '/' => 'home#show'
 
     resources :blogs
+    resources :categories
   end
 
   # Example of regular route:
