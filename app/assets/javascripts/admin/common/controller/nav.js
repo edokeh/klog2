@@ -28,7 +28,7 @@ define(function(require, exports, module) {
                 {
                     name: '设置',
                     ico: 'fa-cog',
-                    url: '/settings/website/edit'
+                    url: '/setting/website'
 
                 }
             ];

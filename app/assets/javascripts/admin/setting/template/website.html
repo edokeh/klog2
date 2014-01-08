@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-1">
+        <ul class="nav nav-pills nav-stacked">
+            <li>网站设置</li>
+            <li>Disqus 设置</li>
+        </ul>
+    </div>
+    <div class="col-md-11">
+        <form class="form-horizontal" name="form" ng-submit="save()">
+            <div class="form-group">
+                <label class="col-md-1 control-label">博客名称</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" ng-model="website.title" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">博客描述</label>
+                <div class="col-md-5">
+                    <textarea class="form-control" rows="4" ng-model="website.sub_title"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">作者姓名</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" ng-model="website.author" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">作者头像</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" ng-model="website.avatar" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">Github 用户名</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" ng-model="website.github" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-md-5">
+                    <button type="submit" class="btn btn-primary">保 存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
