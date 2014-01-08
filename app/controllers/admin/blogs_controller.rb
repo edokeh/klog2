@@ -31,6 +31,13 @@ class Admin::BlogsController < Admin::ApplicationController
     end
   end
 
+  def destroy
+    @blog = Blog.find(params[:id])
+    @blog.destroy
+
+    head :no_content
+  end
+
   private
   def blog_params
     params.require(:blog).permit(:title, :content, :slug, :category_id, :status, :attaches)
