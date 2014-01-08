@@ -8,6 +8,7 @@ define(function(require, exports, module) {
 
         $scope.relativeUrl = RelativeUrl(module);
         $scope.categories = Category.query();
+        $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
 
         // 编辑 or 新建
         if ($routeParams.id) {
@@ -21,8 +22,6 @@ define(function(require, exports, module) {
             });
         }
 
-        $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
-
         $scope.save = function(isPublish) {
             if ($scope.form.$valid) {
                 $scope.blog.$save(function() {
@@ -32,6 +31,7 @@ define(function(require, exports, module) {
             }
         };
 
+        // 显示选项设置，包括 分类、tag等
         $scope.toggleConfig = function(e) {
             if ($scope.configTrigger) {
                 $scope.configTrigger = null;

@@ -7,7 +7,7 @@ define(function(require, exports, module) {
 
     // 拖拽事件中是否有文件
     function hasFile(event) {
-        return _.contains(event.originalEvent.dataTransfer.types, 'Files');
+        return _.contains(event.dataTransfer.types, 'Files');
     }
 
     // 为元素绑定 draghover 事件
@@ -52,7 +52,7 @@ define(function(require, exports, module) {
 
                     // 拖动文件到 document 时显示 Drop 框
                     bindDragHover($document, function(e) {
-                        element.toggle(e.type === 'dragenter' && hasFile(e));
+                        element.css('display', (e.type === 'dragenter' && hasFile(e)) ? '' : 'none');
                     });
 
                     // 拖动文件到 Drop 框时高亮
@@ -68,9 +68,9 @@ define(function(require, exports, module) {
                     element.on('drop', function(e) {
                         e.preventDefault();
                         element.removeClass('dragover');
-                        $document.trigger('dragleave');
+                        $document.triggerHandler('dragleave');
 
-                        var files = _.filter(e.originalEvent.dataTransfer.files, function(file) {
+                        var files = _.filter(e.dataTransfer.files, function(file) {
                             return typeReg.test(file.name);
                         });
 
@@ -91,7 +91,7 @@ define(function(require, exports, module) {
                             if (hasFile(e)) {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                e.originalEvent.dataTransfer.dropEffect = type;
+                                e.dataTransfer.dropEffect = type;
                             }
                         };
                     }

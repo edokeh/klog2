@@ -50,15 +50,16 @@
         </div>
     </div>
     <div class="panel-footer">
-        <div class="btn-group1">
-            <button class="btn btn-primary" ng-click="save()" style="width: 150px;"
+        <div>
+            <button class="btn btn-primary" ng-click="save()" style="width: 150px;margin-right: 10px;"
                     ng-class="{'btn-warning': blog.status == 0}">
                 {{ blog.status == 0 ? '存为草稿' : '立即发布' }}
             </button>
-            <a href="" ng-click="toggleConfig($event)" style="margin-left: 10px;"><i class="icon-cog"
-                                                                                     style="font-size:1.5em"></i></a>
+            <a href="" popover-trigger="configTrigger" style="font-size:1.5em;vertical-align: middle">
+                <i class="fa fa-cog"></i>
+            </a>
         </div>
-        <div class="popover top fade" popover-for="configTrigger" style="max-width: none;">
+        <div class="popover top fade" popover-window="configTrigger" style="max-width: none;">
             <div class="arrow"></div>
             <div ng-include="relativeUrl('./config.html')"></div>
         </div>

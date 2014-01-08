@@ -19,6 +19,7 @@ define(function(require, exports, module) {
     common.factory(require('./factory/category'));
     common.factory(require('./factory/flash'));
 
+    common.directive(require('./directive/popover'));
     common.directive(require('./directive/scroll-top-percent'));
 
     module.exports = common;
