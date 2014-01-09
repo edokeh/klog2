@@ -27,7 +27,8 @@ module Klog2
       Setting.defaults = {
           "website" => OpenStruct.new(
               :title => "网站名称",
-              :sub_title => "一点点简介写在这里"
+              :sub_title => "一点点简介写在这里",
+              :author => "蛇精病"
           )
       }
     end
