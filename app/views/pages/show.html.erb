@@ -1,3 +1,5 @@
 <article>
   <%= raw @page.html_content %>
 </article>
+
+<% content_for :title do %><%= @page.title %><% end %>

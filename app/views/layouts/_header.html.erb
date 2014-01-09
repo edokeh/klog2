@@ -6,8 +6,9 @@
   <p><%= simple_format Setting.website.sub_title %></p>
 
   <div class="brand">
-    <%= link_to fa_icon("github"), "https://github.com/#{Setting.website.github}", :target => '_blank', :title => "Github" if Setting.website.github%>
-    <%= link_to fa_icon("coffee"), '', :target => '_blank', :title => '打赏咖啡一杯' %>
+    <%= website_link :weibo, :icon=>"weibo", :title => "新浪微博" %>
+    <%= website_link :github, :url=> "https://github.com/#{Setting.website.github}", :icon=>"github", :title => "Github" %>
+    <%= website_link :donate, :icon=>"coffee", :title => "打赏咖啡一杯" %>
     <%= link_to fa_icon("rss-square"), feed_path(:format=>:rss), :target => '_blank', :title => 'RSS' %>
   </div>
 </header>

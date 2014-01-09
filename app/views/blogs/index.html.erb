@@ -2,12 +2,14 @@
     <article>
       <h2><%= fa_icon "tag" %> <%= params[:id] %></h2>
     </article>
+    <% content_for :title do %><%= "Tag - #{params[:id]}" %><% end %>
 <% end %>
 
 <% if controller_name == 'categories' %>
     <article>
       <h2><%= fa_icon "book" %> <%= params[:id] %></h2>
     </article>
+    <% content_for :title do %><%= "分类 - #{params[:id]}" %><% end %>
 <% end %>
 
 <% @blogs.each do |blog| %>

@@ -1,47 +1,84 @@
-<div class="row">
-    <div class="col-md-1">
-        <ul class="nav nav-pills nav-stacked">
-            <li>网站设置</li>
-            <li>Disqus 设置</li>
+<div class="row full-height setting-wrap">
+    <div class="col-md-1 nav-wrap">
+        <ul class="nav nav-tabs nav-stacked">
+            <li class="active">
+                <a href="">基本信息</a>
+            </li>
+            <li>
+                <a href="">Disqus 设置</a>
+            </li>
+            <li>
+                <a href="">其他设置</a>
+            </li>
         </ul>
     </div>
-    <div class="col-md-11">
-        <form class="form-horizontal" name="form" ng-submit="save()">
-            <div class="form-group">
-                <label class="col-md-1 control-label">博客名称</label>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" ng-model="website.title" />
-                </div>
+    <div class="col-md-11 full-height panel-wrap">
+        <div class="panel panel-default full-height">
+            <div class="panel-body full-height">
+                <form class="form-horizontal" name="form" ng-submit="save()">
+                    <fieldset>
+                        <legend>Blog</legend>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">名称</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.title"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">描述</label>
+
+                            <div class="col-md-5">
+                                <textarea class="form-control" rows="4" ng-model="website.sub_title"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>作者</legend>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">姓名</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.author"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">头像</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.avatar"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Github</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.github" placeholder="Github 用户名" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">新浪微博</label>
+
+                            <div class="col-md-5">
+                                <input type="url" class="form-control" ng-model="website.weibo" placeholder="微博用户昵称" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">捐助链接</label>
+
+                            <div class="col-md-5">
+                                <input type="url" class="form-control" ng-model="website.donate"/>
+                                <span class="help-block"> 推荐使用 <a target="_blank" href="http://help.alipay.com/lab/help_detail.htm?help_id=248229">支付宝收款主页</a></span>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <div class="offset-label col-md-5">
+                            <button type="submit" class="btn btn-primary btn-lg">保 存</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">博客描述</label>
-                <div class="col-md-5">
-                    <textarea class="form-control" rows="4" ng-model="website.sub_title"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">作者姓名</label>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" ng-model="website.author" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">作者头像</label>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" ng-model="website.avatar" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">Github 用户名</label>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" ng-model="website.github" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-1 col-md-5">
-                    <button type="submit" class="btn btn-primary">保 存</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

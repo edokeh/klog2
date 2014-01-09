@@ -27,7 +27,7 @@ define(function(require, exports, module) {
                 },
                 {
                     name: '设置',
-                    ico: 'fa-cog',
+                    ico: 'fa-cogs',
                     url: '/setting/website'
 
                 }
