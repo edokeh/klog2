@@ -7,15 +7,15 @@ class Comment
 
   attr_accessor :content, :author_name, :author_email, :ip, :is_admin, :blog, :blog_id
 
-  def self.all(cursor="")
+  def self.all(cursor="", options={})
     resp = RestClient.get DSQ_API_POSTS, {
         :params => {
-            :forum => Setting.disqus.shortname,
+            :forum => options[:shortname] || Setting.disqus.shortname,
             :related => 'thread',
             :limit => 25,
             :cursor => cursor,
-            :api_secret => Setting.disqus.api_secret,
-            :access_token => Setting.disqus.access_token
+            :api_secret => options[:api_secret] || Setting.disqus.api_secret,
+            :access_token => options[:access_token] || Setting.disqus.access_token
         }
     }
     response = JSON.parse(resp.to_s)

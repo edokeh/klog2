@@ -1,23 +1,26 @@
 class Admin::DisqusController < Admin::ApplicationController
 
   def show
-    @disqus = Setting.disqus
+    @disqus = Disqus.find
 
-    render :json => @disqus.marshal_dump
+    render :json => @disqus
   end
 
   def update
-    Setting.disqus = disqus_params
+    @disqus = Disqus.find
 
-    render :json => Setting.disqus.marshal_dump
+    if @disqus.update_attributes(disqus_params)
+      render :json => @disqus
+    else
+      render :json => @disqus, :status => 422
+    end
   end
 
   def enable
-    @disqus = Setting.disqus
-    @disqus.enable = params[:enable]
-    Setting.disqus = @disqus
+    @disqus = Disqus.find
+    @disqus.update_enable(params[:enable])
 
-    render :json => @disqus.marshal_dump
+    render :json => @disqus
   end
 
   private
