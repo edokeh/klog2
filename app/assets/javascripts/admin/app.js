@@ -24,6 +24,7 @@ define(function (require, exports, module) {
             .when('/blog/new', blogForm.createRoute('./controller/form'))
             .when('/blog/:id/edit', blogForm.createRoute('./controller/form'))
             .when('/setting/website', setting.createRoute('./controller/website'))
+            .when('/setting/disqus', setting.createRoute('./controller/disqus'))
             .otherwise({redirectTo: '/blog'});
     }]);
 

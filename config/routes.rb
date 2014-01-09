@@ -26,6 +26,7 @@ Klog2::Application.routes.draw do
     resources :blogs
     resources :categories
     resource :website
+    resource :disqus
   end
 
   # Example of regular route:
