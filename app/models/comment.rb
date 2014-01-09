@@ -1,24 +1,21 @@
 class Comment
   include ActiveModel::Model
 
-  DSQ_API = "https://disqus.com/api/3.0/1"
+  DSQ_API = "https://disqus.com/api/3.0/"
   DSQ_API_POSTS = "#{DSQ_API}/forums/listPosts.json"
   DSQ_API_THREADS = "#{DSQ_API}/forums/listThreads.json"
-
-  DSQ_API_SECRET = "wewIP40PYYJnLigTWlnHAFZ0jiyA3KQjPWvPbKLEUtd7cHPJTkSCfSpeKaQQOlGB"
-  DSQ_ACCESS_TOKEN = "807e8dc2d176412fa5d94b4536482521"
 
   attr_accessor :content, :author_name, :author_email, :ip, :is_admin, :blog, :blog_id
 
   def self.all(cursor="")
     resp = RestClient.get DSQ_API_POSTS, {
         :params => {
-            :forum => 'chaoskeh',
+            :forum => Setting.disqus.shortname,
             :related => 'thread',
             :limit => 25,
             :cursor => cursor,
-            :api_secret => DSQ_API_SECRET,
-            :access_token => DSQ_ACCESS_TOKEN
+            :api_secret => Setting.disqus.api_secret,
+            :access_token => Setting.disqus.access_token
         }
     }
     response = JSON.parse(resp.to_s)
@@ -29,10 +26,10 @@ class Comment
   def self.sync_count
     resp = RestClient.get DSQ_API_THREADS, {
         :params => {
-            :forum => 'chaoskeh',
+            :forum => Setting.disqus.shortname,
             :limit => 100,
-            :api_secret => DSQ_API_SECRET,
-            :access_token => DSQ_ACCESS_TOKEN
+            :api_secret => Setting.disqus.api_secret,
+            :access_token => Setting.disqus.access_token
         }
     }
     threads = JSON.parse(resp.to_s)["response"]

@@ -5,44 +5,48 @@
     <div class="col-md-11 full-height panel-wrap">
         <div class="panel panel-default full-height">
             <div class="panel-body full-height">
+                <div class="intro">
+                    <p>
+                        Klog2 不再自己实现评论系统，而采用 <a target="_blank" href="http://disqus.com/">Disqus 评论插件</a> <br/>
+                        您需要先申请一个 Disqus 帐号，然后创建 <a href="http://help.disqus.com/customer/portal/articles/787016-how-to-create-an-api-application">API application</a> ，最后将相应的参数填写到这里
+                    </p>
+                    <p>
+                        <button class="btn btn-primary" ng-click="enableDisqus(true)" ng-if="!disqus.enable">
+                            <i class="fa fa-play"></i> 启用 Disqus
+                        </button>
+                        <button class="btn btn-primary" ng-click="enableDisqus(false)" ng-if="disqus.enable">
+                            <i class="fa fa-pause"></i> 停用 Disqus
+                        </button>
+                    </p>
+                </div>
                 <form class="form-horizontal" name="form" ng-submit="save()">
-                    <div class="form-group">
-                        <label class="col-md-1 control-label"></label>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Shortname</label>
 
-                        <div class="col-md-5">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" ng-model="disqus.enable" /> 启用 Disqus
-                                </label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="disqus.shortname" ng-disabled="!disqus.enable"/>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-1 control-label">Shortname</label>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">API Secret</label>
 
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" ng-model="disqus.shortname" ng-disabled="!disqus.enable"/>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="disqus.api_secret" ng-disabled="!disqus.enable"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-1 control-label">API Secret</label>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Access Token</label>
 
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" ng-model="disqus.api_secret" ng-disabled="!disqus.enable"/>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="disqus.access_token" ng-disabled="!disqus.enable"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-1 control-label">Access Token</label>
-
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" ng-model="disqus.access_token" ng-disabled="!disqus.enable"/>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label"></label>
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!disqus.enable">保 存</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="offset-label col-md-5">
-                            <button type="submit" class="btn btn-primary btn-lg">保 存</button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>

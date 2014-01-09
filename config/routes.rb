@@ -26,7 +26,9 @@ Klog2::Application.routes.draw do
     resources :blogs
     resources :categories
     resource :website
-    resource :disqus
+    resource :disqus do
+      put 'enable'
+    end
   end
 
   # Example of regular route:

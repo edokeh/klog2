@@ -29,7 +29,8 @@ module Klog2
               :title => "网站名称",
               :sub_title => "一点点简介写在这里",
               :author => "蛇精病"
-          )
+          ),
+          "disqus" => OpenStruct.new(:enable => false)
       }
     end
   end

@@ -30,10 +30,11 @@
     <%= link_to @next_blog.title + '  »', blog_path(@next_blog.slug), :class => 'pull-right' if @next_blog.present? %>
   </div>
 
+  <% if Setting.disqus.try(:enable) and Setting.disqus.try(:shortname).try(:present?) %>
   <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_shortname = 'chaoskeh';
+        var disqus_shortname = '<%= Setting.disqus.shortname %>';
         var disqus_identifier = <%= @blog.id %>;
 
         (function() {
@@ -53,6 +54,7 @@
     </noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
   </div>
+  <% end %>
 </article>
 
 <% content_for :title do %><%= @blog.title %><% end %>
