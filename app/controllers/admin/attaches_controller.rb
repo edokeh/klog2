@@ -10,4 +10,11 @@ class Admin::AttachesController < Admin::ApplicationController
       render :json => @attach.errors, :status => 422
     end
   end
+
+  def destroy
+    @attach = Attach.find(params[:id])
+    @attach.destroy
+
+    head :no_content
+  end
 end

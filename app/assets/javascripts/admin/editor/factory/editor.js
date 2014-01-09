@@ -58,6 +58,9 @@ define(function(require, exports, module) {
                 $scope.removeAttach = function(attach) {
                     attach.$remove(function() {
                         $scope.blog.attaches = _.without($scope.blog.attaches, attach);
+                        if ($scope.blog.attaches.length === 0) {
+                            $scope.attachShow = false;
+                        }
                     });
                 };
 

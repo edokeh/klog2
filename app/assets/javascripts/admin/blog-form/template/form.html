@@ -5,8 +5,10 @@
                    ng-model="blog.title" maxlength="25" required autofocus/>
         </div>
         <div class="col-md-6 content-wrap">
-            <textarea class="content form-control" placeholder="写点什么..." ng-model="blog.content" name="content" selection="contentSel"
+            <textarea class="content form-control" placeholder="写点什么..." ng-model="blog.content" name="content"
+                      selection="contentSel"
                       scroll-top-percent="scrollTopPercent"></textarea>
+
             <div class="upload-drop" file-drop="doUpload(files)" accept="{{UPLOAD_FILE_TYPES}}">
                 <div class="tip">将文件拖至此处</div>
             </div>
@@ -18,25 +20,33 @@
                 <a href="" popover-trigger="attachTrigger" popover-show="attachShow" ng-show="blog.attaches.length > 0">
                     <i class="fa fa-paperclip"></i>
                 </a>
+
                 <div class="popover bottom fade" popover-window="attachTrigger">
                     <div class="arrow"></div>
                     <ul class="upload-attaches">
                         <li ng-repeat="attach in blog.attaches" class="clearfix">
-                            <a title="{{attach.file_name}}" ng-href="{{attach.file.url}}" ng-if="attach.id" class="title" target="_blank">{{attach.file_name}}</a>
-                            <span class="title" style="width:100px" ng-if="!attach.id">{{attach.originalFile.name}}</span>
+                            <a title="{{attach.file_name}}" ng-href="{{attach.file.url}}" ng-if="attach.id"
+                               class="title pull-left" target="_blank">
+                                {{attach.file_name}}
+                            </a>
+                            <span class="title pull-left" style="width:100px" ng-if="!attach.id">
+                                {{attach.originalFile.name}}
+                            </span>
 
-                            <div class="progress progress-striped active" ng-if="!attach.id">
-                                <div class="progress-bar" ng-style="{width: attach.originalFile.percent+'%'}">
-                                    <span class="sr-only">{{attach.originalFile.percent}}% Complete</span>
+                            <div class="pull-right">
+                                <div class="progress progress-striped active" ng-if="!attach.id">
+                                    <div class="progress-bar" ng-style="{width: attach.originalFile.percent+'%'}">
+                                        <span class="sr-only">{{attach.originalFile.percent}}% Complete</span>
+                                    </div>
                                 </div>
+                                <a ng-if="attach.id" class="action" title="删除附件" ng-click="removeAttach(attach)"
+                                   href="">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <a ng-if="attach.id" class="action" title="插入文章" ng-click="insertCode(attach)" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
-
-                            <a ng-if="attach.id" class="action" title="删除附件" ng-click="removeAttach(attach)" href="">
-                                <i class="fa fa-trash-o"></i>
-                            </a>
-                            <a ng-if="attach.id" class="action" title="插入文章" ng-click="insertCode(attach)" href="">
-                                <i class="fa fa-link"></i>
-                            </a>
                         </li>
                     </ul>
                 </div>
