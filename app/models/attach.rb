@@ -33,6 +33,6 @@ class Attach < ActiveRecord::Base
   end
 
   def image?
-    return self.content_type.include?('image')
+    self.content_type.include?('image')
   end
 end

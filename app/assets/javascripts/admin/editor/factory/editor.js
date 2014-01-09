@@ -61,19 +61,6 @@ define(function(require, exports, module) {
                     });
                 };
 
-                // attach 对应的 Markdown code
-                $scope.codeFor = function(attach) {
-                    var code;
-                    var url = 'http://' + location.host + attach.url;
-                    if (attach.is_image) {
-                        code = '![](' + url + ')';
-                    }
-                    else {
-                        code = '[' + attach.file_name + '](' + url + ')';
-                    }
-                    return code;
-                };
-
                 $scope.showTip = function() {
                     $modal.open({
                         templateUrl: 'editor/tip',

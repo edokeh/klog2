@@ -1,18 +1,18 @@
 /**
  * Blog
  */
-define(function (require, exports, module) {
+define(function(require, exports, module) {
     var _ = require('_');
 
     module.exports = {
-        'Blog': ['$resource', '$http', function ($resource, $http) {
+        'Blog': ['$resource', '$http', 'Attach', function($resource, $http, Attach) {
             var Blog = $resource('/admin/blogs/:id.json', {id: '@id'}, {
                 create: {method: 'POST'},
                 update: {method: 'PUT'},
                 query: {
                     method: 'GET',
                     isArray: true,
-                    transformResponse: $http.defaults.transformResponse.concat([function (data, header) {
+                    transformResponse: $http.defaults.transformResponse.concat([function(data, header) {
                         if (data.array && angular.isArray(data.array)) {
                             var array = data.array;
                             array.$page = data.page;
@@ -23,15 +23,27 @@ define(function (require, exports, module) {
                         }
                     }]),
                     interceptor: {
-                        response: function (response) {
+                        response: function(response) {
                             response.resource.$page = response.data.$page;
                             return response.resource;
+                        }
+                    }
+                },
+                get: {
+                    method: 'GET',
+                    interceptor: {
+                        response: function(response) {
+                            if (response.resource.attaches) {
+                                response.resource.attaches = _.map(response.resource.attaches, function(a) {
+                                    return new Attach(a);
+                                });
+                            }
                         }
                     }
                 }
             });
 
-            Blog.prototype.$save = function () {
+            Blog.prototype.$save = function() {
                 if (this.id) {
                     this.$update.apply(this, arguments);
                 }

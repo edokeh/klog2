@@ -5,6 +5,19 @@ define(function(require, exports, module) {
 
     module.exports = ['Attach', '$rootScope', '$q', '$resource', '$http', function(Attach, $rootScope, $q, $resource, $http) {
 
+        // attach 对应的 Markdown code
+        Attach.prototype.getCode = function() {
+            var url = 'http://' + location.host + this.url;
+            var code;
+            if (this.is_image) {
+                code = '![](' + url + ')';
+            }
+            else {
+                code = '[' + this.file_name + '](' + url + ')';
+            }
+            return code;
+        }
+
         // 创建，因为要获取上传进度，只能自己重写
         Attach.create = function(data, success, error) {
             var value = new Attach(data);

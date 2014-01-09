@@ -10,7 +10,7 @@ define(function(require, exports, module) {
 
     editor.factory(require('./factory/editor'));
 
-    editor.directive(require('./directive/cursor'));
+    editor.directive(require('./directive/selection'));
     editor.directive(require('./directive/file-input'));
     editor.directive(require('./directive/file-drop'));
 

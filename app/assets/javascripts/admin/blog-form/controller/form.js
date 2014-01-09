@@ -31,18 +31,16 @@ define(function(require, exports, module) {
             }
         };
 
-        // 显示选项设置，包括 分类、tag等
-        $scope.toggleConfig = function(e) {
-            if ($scope.configTrigger) {
-                $scope.configTrigger = null;
-            }
-            else {
-                $scope.configTrigger = angular.element(e.currentTarget);
-            }
-        };
-
+        // 插入代码
         $scope.insertCode = function(attach) {
-            $scope.blog.content += $scope.codeFor(attach);
+            $scope.attachShow = false;
+
+            var text = ' ' + attach.getCode() + ' ';
+            var cursor = $scope.contentSel.cursor();
+            var content = $scope.blog.content;
+            $scope.blog.content = [content.slice(0, cursor[0]), text, content.slice(cursor[1])].join('');
+            var end = cursor[0] + text.length;
+            $scope.contentSel.cursor(end);
         };
 
         Editor.addPreviewFn($scope, {
