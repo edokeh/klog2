@@ -17,12 +17,17 @@ define(function (require, exports, module) {
 
         var blog = SeajsLazyAngular.createLazyStub('/assets/admin/blog/index');
         var blogForm = SeajsLazyAngular.createLazyStub('/assets/admin/blog-form/index');
+        var comment = SeajsLazyAngular.createLazyStub('/assets/admin/comment/index');
         var setting = SeajsLazyAngular.createLazyStub('/assets/admin/setting/index');
 
         $routeProvider
             .when('/blog', blog.createRoute('./controller/index'))
+
             .when('/blog/new', blogForm.createRoute('./controller/form'))
             .when('/blog/:id/edit', blogForm.createRoute('./controller/form'))
+
+            .when('/comment', comment.createRoute('./controller/index'))
+
             .when('/setting/website', setting.createRoute('./controller/website'))
             .when('/setting/disqus', setting.createRoute('./controller/disqus'))
             .otherwise({redirectTo: '/blog'});

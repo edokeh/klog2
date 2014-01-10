@@ -5,7 +5,7 @@ class Comment
   DSQ_API_POSTS = "#{DSQ_API}/forums/listPosts.json"
   DSQ_API_THREADS = "#{DSQ_API}/forums/listThreads.json"
 
-  attr_accessor :content, :author_name, :author_email, :ip, :is_admin, :blog, :blog_id
+  attr_accessor :id, :content, :author_name, :author_email, :author_avatar, :ip, :created_at, :is_admin, :blog, :blog_id
 
   def self.all(cursor="", options={})
     resp = RestClient.get DSQ_API_POSTS, {
@@ -47,10 +47,13 @@ class Comment
     def initialize(api_response)
       @comments = api_response["response"].map! do |cm|
         Comment.new(
+            :id => cm["id"],
             :content => cm["raw_message"],
             :author_name => cm["author"]["name"],
             :author_email => cm["author"]["email"],
+            :author_avatar => cm["author"]["avatar"]["large"]["permalink"],
             :ip => cm["ipAddress"],
+            :created_at => cm["createdAt"],
             :blog_id => cm["thread"]["identifiers"][0]
         )
       end
@@ -58,8 +61,8 @@ class Comment
       # 填充 blog 关联字段
       blog_ids = @comments.map { |cm| cm.blog_id }
       Blog.where(:id => blog_ids).each do |blog|
-        c = @comments.detect { |c| c.blog_id == blog.id.to_s }
-        c.blog = blog unless c.nil?
+        arr = @comments.select { |c| c.blog_id == blog.id.to_s }
+        arr.each {|c| c.blog = blog }
       end
 
       self.cursor = api_response["cursor"]
