@@ -14,6 +14,6 @@ class Admin::WebsitesController < Admin::ApplicationController
   private
 
   def website_params
-    params.require(:website).permit(:title, :sub_title, :author, :avatar, :github, :weibo, :donate)
+    params.require(:website).permit(:title, :sub_title, :author, :avatar, :github, :weibo, :donate, :ga)
   end
 end

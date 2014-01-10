@@ -22,6 +22,17 @@
                                 <textarea class="form-control" rows="4" ng-model="website.sub_title"></textarea>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">GA Account</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.ga"/>
+                                <span class="help-block">填写以开启
+                                    <a href="https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts" target="_blank">Google
+                                        Analytics</a> 统计（如 UA-XXXX-Y）
+                                </span>
+                            </div>
+                        </div>
                     </fieldset>
                     <fieldset>
                         <legend>作者</legend>
@@ -43,14 +54,15 @@
                             <label class="col-md-1 control-label">Github</label>
 
                             <div class="col-md-5">
-                                <input type="text" class="form-control" ng-model="website.github" placeholder="Github 用户名" />
+                                <input type="text" class="form-control" ng-model="website.github"
+                                       placeholder="Github 用户名"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label">新浪微博</label>
 
                             <div class="col-md-5">
-                                <input type="url" class="form-control" ng-model="website.weibo" placeholder="微博用户昵称" />
+                                <input type="url" class="form-control" ng-model="website.weibo" placeholder="微博用户昵称"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,12 +70,14 @@
 
                             <div class="col-md-5">
                                 <input type="url" class="form-control" ng-model="website.donate"/>
-                                <span class="help-block"> 推荐使用 <a target="_blank" href="http://help.alipay.com/lab/help_detail.htm?help_id=248229">支付宝收款主页</a></span>
+                                <span class="help-block"> 推荐使用 <a target="_blank"
+                                                                  href="http://help.alipay.com/lab/help_detail.htm?help_id=248229">支付宝收款主页</a></span>
                             </div>
                         </div>
                     </fieldset>
                     <div class="form-group">
                         <label class="col-md-1 control-label"></label>
+
                         <div class="col-md-5">
                             <button type="submit" class="btn btn-primary btn-lg">保 存</button>
                         </div>
