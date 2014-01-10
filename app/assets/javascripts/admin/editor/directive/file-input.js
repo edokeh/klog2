@@ -3,6 +3,8 @@
  * 示例 <a file-input="do(files)" accept=".jpg, .png"></a>
  */
 define(function(require, exports, module) {
+    var angular = require('angularjs');
+
     module.exports = {
         'fileInput': [function() {
             return {

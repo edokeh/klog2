@@ -2,6 +2,8 @@
  * 元素 scrollTop 的双向 bind
  */
 define(function(require, exports, module) {
+    var angular = require('angularjs');
+
     module.exports = {
         scrollTopPercent: function() {
             return {

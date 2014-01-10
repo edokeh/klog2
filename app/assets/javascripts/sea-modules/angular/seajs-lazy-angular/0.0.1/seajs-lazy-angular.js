@@ -16,12 +16,14 @@ define(function(require) {
                 cachedInternals.$controllerProvider = $controllerProvider;
 
                 cachedInternals.$provide.factory({
-                    RelativeUrl: function() {
-                        return function(module) {
-                            return function(url) {
-                                var templateUrl = getTemplateUrl(module.uri);
-                                return seajs.resolve(url + '#', templateUrl);
-                            };
+                    RelativeUrlFactory: function() {
+                        return {
+                            create: function(module) {
+                                return function(url) {
+                                    var templateUrl = getTemplateUrl(module.uri);
+                                    return seajs.resolve(url + '#', templateUrl);
+                                };
+                            }
                         };
                     }
                 });

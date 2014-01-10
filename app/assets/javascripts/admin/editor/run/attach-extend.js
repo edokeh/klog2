@@ -2,6 +2,7 @@
  * 给现有的 Attach 增加方法
  */
 define(function(require, exports, module) {
+    var angular = require('angularjs');
 
     module.exports = ['Attach', '$rootScope', '$q', '$resource', '$http', function(Attach, $rootScope, $q, $resource, $http) {
 
@@ -16,7 +17,7 @@ define(function(require, exports, module) {
                 code = '[' + this.file_name + '](' + url + ')';
             }
             return code;
-        }
+        };
 
         // 创建，因为要获取上传进度，只能自己重写
         Attach.create = function(data, success, error) {

@@ -13,7 +13,7 @@ define(function(require, exports, module) {
                     method: 'GET',
                     isArray: true,
                     transformResponse: $http.defaults.transformResponse.concat([function(data, header) {
-                        if (data.array && angular.isArray(data.array)) {
+                        if (data.array && _.isArray(data.array)) {
                             var array = data.array;
                             array.$page = data.page;
                             return array;

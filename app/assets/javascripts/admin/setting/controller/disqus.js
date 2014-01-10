@@ -4,8 +4,8 @@
 define(function (require, exports, module) {
     var angular = require('angularjs');
 
-    var Controller = ['$scope', 'Disqus', 'RelativeUrl', '$routeParams', '$location', function ($scope, Disqus, RelativeUrl, $routeParams, $location) {
-        $scope.relativeUrl = RelativeUrl(module);
+    var Controller = ['$scope', 'Disqus', 'RelativeUrlFactory', '$routeParams', '$location', function ($scope, Disqus, RelativeUrlFactory, $routeParams, $location) {
+        $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.disqus = Disqus.get();
         $scope.navClass = 'disqus';
 

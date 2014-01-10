@@ -1,10 +1,12 @@
 /**
  * popover 需要使用者提供触发器与 Popover 元素
  *
- * <a popover-trigger="myTrigger"></a>
+ * <a popover-trigger="myTrigger" popover-show="isShow"></a>
  * <div popover-window="myTrigger"></div>
  */
 define(function(require, exports, module) {
+    var angular = require('angularjs');
+
     module.exports = {
         /**
          * 触发器，也可通过 popover-show 双向绑定属性来手工触发
@@ -13,30 +15,31 @@ define(function(require, exports, module) {
             return {
                 restrict: 'CA',
                 link: function(scope, element, attrs) {
-                    attrs.popoverShow
-
+                    var isShow = false;
                     var triggerGetter = $parse(attrs.popoverTrigger);
-                    var showGetter = $parse(attrs.popoverShow || '__xx'); //TODO change name
+                    var showGetter = $parse(attrs.popoverShow);
+
 
                     scope.$watch(function(scope) {
                         return scope.$eval(attrs.popoverTrigger);
                     }, function(value) {
-                        showGetter.assign(scope, !!value);
+                        triggerGetter.assign(scope, value);
+                        isShow= !!value;
+                        if (attrs.popoverShow) {
+                            showGetter.assign(scope, isShow);
+                        }
                     });
 
+                    // popover-show 属性的双向绑定
                     scope.$watch(function(scope) {
-                        return scope.$eval(attrs.popoverShow || '__xx');
+                        return scope.$eval(attrs.popoverShow);
                     }, function(value) {
                         triggerGetter.assign(scope, !!value ? element : null);
                     });
 
+                    // toggle
                     element.on('click', function() {
-                        if (showGetter(scope)) {
-                            showGetter.assign(scope, false);
-                        }
-                        else {
-                            showGetter.assign(scope, true);
-                        }
+                        triggerGetter.assign(scope, !isShow ? element : null);
                         scope.$apply();
                     });
                 }
@@ -67,7 +70,7 @@ define(function(require, exports, module) {
                             var triggerPos = position(trigger);
                             var triggerWidth = outerOffset(trigger, 'width');
                             var triggerHeight = outerOffset(trigger, 'height');
-                            var left = triggerPos.left - width / 2 + outerOffset(trigger, 'width') / 2
+                            var left = triggerPos.left - width / 2 + outerOffset(trigger, 'width') / 2;
                             var top = triggerPos.top;
                             if (placement === 'top') {
                                 top = top - height - 5;

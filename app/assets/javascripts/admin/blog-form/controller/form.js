@@ -4,9 +4,9 @@
 define(function(require, exports, module) {
     var angular = require('angularjs');
 
-    var Controller = ['$scope', 'Blog', 'Category', '$routeParams', '$location', 'Flash', 'Editor', 'RelativeUrl', function($scope, Blog, Category, $routeParams, $location, Flash, Editor, RelativeUrl) {
+    var Controller = ['$scope', 'Blog', 'Category', '$routeParams', '$location', 'Flash', 'Editor', 'RelativeUrlFactory', function($scope, Blog, Category, $routeParams, $location, Flash, Editor, RelativeUrlFactory) {
 
-        $scope.relativeUrl = RelativeUrl(module);
+        $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.categories = Category.query();
         $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
 
