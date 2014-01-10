@@ -42,6 +42,8 @@ class Comment
 
   # Comment 数组类
   class CommentArray < Array
+    attr_accessor :cursor
+
     def initialize(api_response)
       @comments = api_response["response"].map! do |cm|
         Comment.new(
@@ -60,18 +62,18 @@ class Comment
         c.blog = blog unless c.nil?
       end
 
-      @cursor = api_response["cursor"]
+      self.cursor = api_response["cursor"]
 
       super @comments
     end
 
     # 下一页
     def next
-      Comment.all(@cursor["next"])
+      Comment.all(cursor["next"])
     end
 
     def prev
-      Comment.all(@cursor["prev"])
+      Comment.all(cursor["prev"])
     end
 
     def has_next?
@@ -79,7 +81,7 @@ class Comment
     end
 
     def has_prev?
-      @cursor["hasPrev"]
+      cursor["hasPrev"]
     end
   end
 end

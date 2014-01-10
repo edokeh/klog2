@@ -25,6 +25,7 @@ Klog2::Application.routes.draw do
     resources :attaches
     resources :blogs
     resources :categories
+    resources :comments
     resource :website
     resource :disqus do
       put 'enable'
