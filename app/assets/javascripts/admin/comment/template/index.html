@@ -1,57 +1,55 @@
 <div class="row full-height">
-    <div class="col-md-8 comment-list blog-list full-height">
+    <div class="comment-list full-height" ng-class="{'col-md-8': currComment, 'col-md-12': !currComment}">
         <div class="panel panel-default full-height">
+            <div class="panel-heading">共有 10 条评论</div>
             <div class="list-group" scroll-top-percent="listScrollTop">
                 <div ng-if="comments.$resolved && blogs.length == 0">
                     empty
                 </div>
-                <div class="list-group-item row" ng-repeat="comment in comments" ng-click="showBlog(blog)"
+                <div class="list-group-item clearfix" ng-repeat="comment in comments"
                      ng-class="{active: (comment.id === currComment.id)}">
-                    <div class="col-md-9">
-                        <div>
-                            <a href="">{{ comment.blog.title }}</a>
-                        </div>
-                        <div ng-bind-html="comment.content"></div>
-                        <p class="list-group-item-text">
-                            {{ comment.created_at }}
-                            <a href="" ng-click="remove(currBlog)"><i class="fa fa-trash-o"></i> 删除</a>
-                        </p>
+                    <div class="content">
+                        <a class="title" ng-href="/blog/{{ comment.blog.slug}}.html#comment-{{ comment.id }}"
+                           target="_blank">{{ comment.blog.title }}</a>
+                        <article ng-bind-html="comment.content"></article>
+                        <footer>
+                            <span class="date">{{ comment.created_at }}</span>
+                            <a class="action" href="" ng-click="showComment(comment)"><i class="fa fa-reply"></i> 回复</a>
+                            <a class="action" href="" ng-click="remove($event, comment)"><i class="fa fa-trash-o"></i>
+                                删除</a>
+                        </footer>
                     </div>
-                    <div class="pull-right author">
+                    <div class="author">
                         <div class="detail">
                             <h3>{{ comment.author_name }}</h3>
-                            <small>{{ comment.author_email }}</small>
+                            <small><a href="mailto: {{comment.author_email}}">{{ comment.author_email }}</a></small>
                             <small>{{ comment.ip }}</small>
                         </div>
                         <img ng-src="{{ comment.author_avatar }}"/>
                     </div>
                 </div>
                 <div class="list-group-item">
-                    <a href="" ng-click="getBlogs(page.current + 1)">查看更多</a>
+                    <a href="" ng-click="getComments(cursor)">查看更多</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 blog-preview full-height">
+    <div class="col-md-4 comment-context full-height" ng-show="currComment">
         <div class="panel panel-default full-height">
-            <div class="panel-heading clearfix" ng-show="currBlog">
-                <div class="pull-left">
-                    <h3><a href="" target="_blank">{{currBlog.title }}</a></h3>
-
-                    <div class="blog-misc">
-                        <span><i class="fa fa-book"></i> {{currBlog.category ? currBlog.category.name : '未分类'}}</span>
-                        <span ng-repeat="tag in currBlog.tag_list"><i class="icon-tag"></i> {{tag}}</span>
+            <div class="panel-heading">回复评论 <a href="" ng-click="closeCurr()" class="pull-right"><i
+                    class="fa fa-times"></i></a></div>
+            <div class="panel-body">
+                <article ng-style="{'margin-left': $index * 20 + 'px'}" ng-class="{quoted: $index > 0}"
+                         ng-repeat="comment in commentContext">
+                    <header>{{ comment.author_name }} {{comment.created_at }}</header>
+                    <section ng-bind-html="comment.content"></section>
+                </article>
+                <div class="reply input-group clearfix">
+                    <textarea class="form-control" rows="3" ng-model="newComment.content"></textarea>
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary pull-right" ng-click="create()">回复</button>
                     </div>
                 </div>
-
-                <div class="actions pull-right">
-                    <a href="#/blog/{{currBlog.id}}/edit" class="btn btn-primary"><i class="fa fa-pencil"></i> 修改</a>
-                    <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="fa fa-trash-o"> 删除</i></a>
-                </div>
-            </div>
-            <div class="blog-preview-content">
-
-                <div ng-bind-html="currBlog.html_content"></div>
             </div>
         </div>
     </div>

@@ -32,6 +32,8 @@ module Klog2
           ),
           "disqus" => OpenStruct.new(:enable => false)
       }
+
+      RestClient.log = Rails.logger
     end
   end
 end

@@ -14,6 +14,7 @@ define(function (require, exports, module) {
     admin.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = window.CSRF_TOKEN;
+        $httpProvider.defaults.headers.common['X-REQUESTED-WITH'] = 'XMLHttpRequest';
 
         var blog = SeajsLazyAngular.createLazyStub('/assets/admin/blog/index');
         var blogForm = SeajsLazyAngular.createLazyStub('/assets/admin/blog-form/index');

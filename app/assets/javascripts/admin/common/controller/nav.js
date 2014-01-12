@@ -18,7 +18,7 @@ define(function(require, exports, module) {
                 {
                     name: '评论',
                     ico: 'fa-comments',
-                    url: '/comments'
+                    url: '/comment'
                 },
                 {
                     name: '页面',

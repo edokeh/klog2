@@ -25,7 +25,9 @@ Klog2::Application.routes.draw do
     resources :attaches
     resources :blogs
     resources :categories
-    resources :comments
+    resources :comments do
+      get 'context', :on => :collection
+    end
     resource :website
     resource :disqus do
       put 'enable'
