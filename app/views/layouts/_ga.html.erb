@@ -1,4 +1,4 @@
-<% if Setting.website.ga %>
+<% if Setting.website.ga and !@preview %>
     <% if ga == :head %>
         <script>
             var _gaq = _gaq || [];

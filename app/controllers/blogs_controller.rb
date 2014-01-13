@@ -17,12 +17,13 @@ class BlogsController < ApplicationController
   # 根据 post 过来的数据提供预览页面
   def preview
     @blog = Blog.new_preview(blog_params)
+    @preview = true
     render :show
   end
 
   private
   def blog_params
-    params.permit(:title, :content, :created_at => Time.now)
+    params.permit(:title, :content, :category_id)
   end
 
 end

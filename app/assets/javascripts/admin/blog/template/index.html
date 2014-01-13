@@ -2,7 +2,7 @@
     <div class="col-md-3 blog-list full-height">
         <div class="panel panel-default full-height">
             <div class="panel-heading clearfix">
-                <h2>{{currStatus.name}} <span class="badge">{{page.totalCount}}</span></h2>
+                <h2>{{currStatus.name}} <small ng-if="blogs.length>0"> {{page.totalCount}} 篇文章</small></h2>
                 <ul>
                     <li style=""><a href="#/blog/new"><i class="fa fa-pencil"></i></a></li>
                     <li class="dropdown">

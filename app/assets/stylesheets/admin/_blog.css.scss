@@ -16,10 +16,9 @@
       padding-left: 10px;
       margin: 0;
 
-      .badge {
-        background: lighten($red, 10%);
-        position: relative;
-        top: -3px;
+      small {
+        color: $red;
+        font-size: 12px;
       }
     }
 

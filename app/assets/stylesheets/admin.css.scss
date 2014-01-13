@@ -3,7 +3,7 @@ $blue-dark:darken($blue, 10%);
 $blue-light:lighten($blue, 10%);
 $blue-lighter:lighten($blue, 40%);
 $red: #E64E5F;
-$yellow: #AEA918;
+$yellow: #D6D02D;
 
 $link-color: $blue;
 
@@ -492,60 +492,4 @@ textarea {
 
 }
 
-// 设置
-.setting-wrap {
-  .nav-wrap {
-    padding-right: 0;
-    padding-top: 25px;
-    margin-right: -3px;
-    z-index: 1000;
-  }
-
-  .panel-wrap {
-    padding-left: 0;
-  }
-
-  .panel-body {
-    padding: 30px 50px;
-    overflow: auto;
-  }
-
-  legend {
-    padding-left: 10px;
-    padding-bottom: 5px;
-    font-weight: bolder;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-
-    .form-control {
-      width: 400px;
-    }
-
-    .help-block {
-      margin-bottom: 0;
-
-      a {
-        color: lighten($link-color, 10%);
-      }
-    }
-  }
-
-  .website-form {
-    .control-label {
-      width: 120px;
-    }
-  }
-
-  .intro {
-    border-bottom: 1px solid $gray-lighter;
-    margin-bottom: 40px;
-    padding: 20px;
-
-    p {
-      margin-bottom: 20px;
-      line-height: 2;
-    }
-  }
-}
+@import './admin/setting';

@@ -9,6 +9,7 @@ define(function(require, exports, module) {
         $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.categories = Category.query();
         $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
+        $scope.CSRF_TOKEN = CSRF_TOKEN;
 
         // 编辑 or 新建
         if ($routeParams.id) {
@@ -32,11 +33,7 @@ define(function(require, exports, module) {
         };
 
         $scope.preview = function() {
-            var form = document.getElementById('previewForm');
-            form.title.value = $scope.blog.title;
-            form.content.value = $scope.blog.content;
-            form.authenticity_token.value = CSRF_TOKEN;
-            form.submit();
+            document.getElementById('blogForm').submit();
         };
 
         // 插入代码

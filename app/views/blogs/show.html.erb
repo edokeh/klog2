@@ -30,7 +30,7 @@
     <%= link_to @next_blog.title + '  »', blog_path(@next_blog.slug), :class => 'pull-right' if @next_blog.present? %>
   </div>
 
-  <% if Setting.disqus.try(:enable) and Setting.disqus.try(:shortname).try(:present?) %>
+  <% if Setting.disqus.try(:enable) and Setting.disqus.try(:shortname).try(:present?) and !@preview %>
   <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">

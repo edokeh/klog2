@@ -1,4 +1,5 @@
-<form name="form" class="panel panel-info full-height blog-editor">
+<form name="form" id="blogForm" class="panel panel-info full-height blog-editor" action="/blog/preview" method="post" target="_blank">
+    <input type="hidden" ng-value="CSRF_TOKEN" name="authenticity_token" />
     <div class="panel-body row">
         <div class="title">
             <input type="text" class="form-control" placeholder="文章标题" name="title"
@@ -53,14 +54,14 @@
             </div>
         </div>
         <div class="col-md-6 preview-wrap">
-            <em class="tip" ng-click="preview()">预览</em>
+            <a href="" class="tip" ng-click="preview()"><i class="fa fa-external-link"></i> 预览</a>
 
             <div class="preview" ng-bind-html="htmlContent" scroll-top-percent="scrollTopPercent"></div>
         </div>
     </div>
     <div class="panel-footer">
         <div>
-            <button class="btn btn-primary" ng-click="save()" style="width: 150px;margin-right: 10px;"
+            <button type="button" class="btn btn-primary" ng-click="save()" style="width: 150px;margin-right: 10px;"
                     ng-class="{'btn-warning': blog.status == 0}">
                 {{ blog.status == 0 ? '存为草稿' : '立即发布' }}
             </button>
@@ -73,9 +74,4 @@
             <div ng-include="relativeUrl('./config.html')"></div>
         </div>
     </div>
-</form>
-<form target="_blank" action="/blog/preview" method="post" id="previewForm">
-    <input type="hidden" name="authenticity_token" ng-value="{{CSRF_TOKEN}}" />
-    <input type="hidden" name="title" ng-model="blog.title" />
-    <input type="hidden" name="content" ng-model="blog.content" />
 </form>

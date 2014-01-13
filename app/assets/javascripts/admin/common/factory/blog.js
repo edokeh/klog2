@@ -54,7 +54,7 @@ define(function(require, exports, module) {
 
             Blog.STATUS = [
                 {value: '1', name: '已发布'},
-                {value: '0', name: '草稿箱'},
+                {value: '0', name: '草稿'},
             ];
 
             Blog.DEFAULT_STATUS = '1';
