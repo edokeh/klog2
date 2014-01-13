@@ -9,6 +9,7 @@ Klog2::Application.routes.draw do
 
   get 'blog/:id.html' => 'blogs#show', :as => :blog
   get 'blog/page/:page' => 'blogs#index'
+  post 'blog/preview' => 'blogs#preview'
 
   resources :categories
   resources :tags

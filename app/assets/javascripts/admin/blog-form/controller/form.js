@@ -31,6 +31,14 @@ define(function(require, exports, module) {
             }
         };
 
+        $scope.preview = function() {
+            var form = document.getElementById('previewForm');
+            form.title.value = $scope.blog.title;
+            form.content.value = $scope.blog.content;
+            form.authenticity_token.value = CSRF_TOKEN;
+            form.submit();
+        };
+
         // 插入代码
         $scope.insertCode = function(attach) {
             $scope.attachShow = false;

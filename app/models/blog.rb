@@ -18,6 +18,15 @@ class Blog < ActiveRecord::Base
   belongs_to :category
   has_many :attaches, :as=>:parent, :dependent => :destroy
 
+  # 创建一个预览对象
+  def self.new_preview(params)
+    blog = Blog.new(params)
+    blog.fill_html_content
+    blog.created_at = Time.now
+
+    blog
+  end
+
   def publish!
     self.status = :publish
     self.save

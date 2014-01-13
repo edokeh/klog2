@@ -5,6 +5,8 @@ $blue-lighter:lighten($blue, 40%);
 $red: #E64E5F;
 $yellow: #AEA918;
 
+$link-color: $blue;
+
 $navbar-border-radius: 0;
 $navbar-inverse-link-active-bg: $blue;
 
@@ -65,6 +67,11 @@ textarea {
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
+}
+
+::-webkit-scrollbar-button:vertical {
+  background-color: transparent;
+  height: 2px;
 }
 
 ::-webkit-scrollbar-track-piece {

@@ -8,11 +8,21 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.where(:slug=>params[:id]).first
-    raise ActiveRecord::RecordNotFound if @blog.nil?
-    #raise ActiveRecord::RecordNotFound if @blog.draft? and !is_admin?
+    raise ActiveRecord::RecordNotFound if @blog.nil? || @blog.draft?
 
     @prev_blog = Blog.with_status(:publish).where('id < ?', @blog.id).order('id DESC').first
     @next_blog = Blog.with_status(:publish).where('id > ?', @blog.id).order('id ASC').first
+  end
+
+  # 根据 post 过来的数据提供预览页面
+  def preview
+    @blog = Blog.new_preview(blog_params)
+    render :show
+  end
+
+  private
+  def blog_params
+    params.permit(:title, :content, :created_at => Time.now)
   end
 
 end

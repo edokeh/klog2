@@ -44,7 +44,9 @@
         <div class="panel panel-default full-height">
             <div class="panel-heading clearfix" ng-show="currBlog">
                 <div class="pull-left">
-                    <h2><a href="" target="_blank">{{currBlog.title }} <i class="fa fa-external-link"></i></a></h2>
+                    <h2>
+                        <a ng-href="/blog/{{currBlog.slug}}.html" target="_blank">{{currBlog.title }} <i class="fa fa-external-link"></i></a>
+                    </h2>
                 </div>
 
                 <div class="actions pull-right">
@@ -55,12 +57,12 @@
             </div>
             <div class="blog-preview-content">
                 <div class="misc" ng-if="currBlog.category || currBlog.tag_list">
-                                <span ng-if="currBlog.category">
-                                    <i class="fa fa-book"></i> {{ currBlog.category.name }}
-                                </span>
-                                <span ng-repeat="tag in currBlog.tag_list">
-                                    <i class="fa fa-tag"></i> {{ tag }}
-                                </span>
+                    <span ng-if="currBlog.category">
+                        <i class="fa fa-book"></i> {{ currBlog.category.name }}
+                    </span>
+                    <span ng-repeat="tag in currBlog.tag_list">
+                        <i class="fa fa-tag"></i> {{ tag }}
+                    </span>
                 </div>
                 <div ng-bind-html="currBlog.html_content"></div>
             </div>

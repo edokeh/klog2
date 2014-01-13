@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col-md-6 preview-wrap">
-            <em class="tip">预览</em>
+            <em class="tip" ng-click="preview()">预览</em>
 
             <div class="preview" ng-bind-html="htmlContent" scroll-top-percent="scrollTopPercent"></div>
         </div>
@@ -73,4 +73,9 @@
             <div ng-include="relativeUrl('./config.html')"></div>
         </div>
     </div>
+</form>
+<form target="_blank" action="/blog/preview" method="post" id="previewForm">
+    <input type="hidden" name="authenticity_token" ng-value="{{CSRF_TOKEN}}" />
+    <input type="hidden" name="title" ng-model="blog.title" />
+    <input type="hidden" name="content" ng-model="blog.content" />
 </form>
