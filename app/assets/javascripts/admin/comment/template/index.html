@@ -13,7 +13,7 @@
                            target="_blank">{{ comment.blog.title }}</a>
                         <article ng-bind-html="comment.content"></article>
                         <footer>
-                            <span class="date">{{ comment.created_at }}</span>
+                            <span class="date">{{ comment.created_at |date:'yyyy-MM-dd HH:mm'  }}</span>
                             <a class="action" href="" ng-click="showComment(comment)"><i class="fa fa-reply"></i> 回复</a>
                             <a class="action" href="" ng-click="remove($event, comment)"><i class="fa fa-trash-o"></i>
                                 删除</a>
@@ -41,7 +41,10 @@
             <div class="panel-body">
                 <article ng-style="{'margin-left': $index * 20 + 'px'}" ng-class="{quoted: $index > 0}"
                          ng-repeat="comment in commentContext">
-                    <header>{{ comment.author_name }} {{comment.created_at }}</header>
+                    <header>
+                        <strong>{{ comment.author_name }}</strong>
+                        <em>{{comment.created_at | date:'yyyy-MM-dd HH:mm' }}</em>
+                    </header>
                     <section ng-bind-html="comment.content"></section>
                 </article>
                 <div class="reply input-group clearfix">

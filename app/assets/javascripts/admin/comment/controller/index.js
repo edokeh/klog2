@@ -8,8 +8,9 @@ define(function(require, exports, module) {
 
         // 获取评论列表
         $scope.getComments = function(cursor) {
-            $scope.comments = Comment.query({cursor: cursor}, function(data) {
-                $scope.cursor = data.$cursor.next;
+            Comment.query({cursor: cursor}, function(data) {
+                $scope.comments = $scope.comments.concat(data);
+                $scope.cursor = data.$cursor;
             });
         };
 
@@ -43,12 +44,12 @@ define(function(require, exports, module) {
 
         // scroll 到底部时载入下一页
         $scope.$watch('listScrollTop', function(value) {
-            if (value >= 0.95 && $scope.page.hasNext) {
-                $scope.getBlogs($scope.page.current + 1);
+            if (value >= 0.95 && $scope.cursor.hasNext) {
+                $scope.getComments($scope.cursor.next);
             }
         });
 
-        //$scope.comments = [];
+        $scope.comments = [];
         $scope.getComments();
     }];
 

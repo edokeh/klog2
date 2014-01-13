@@ -15,7 +15,7 @@ class Comment
         :params => {
             :forum => options[:shortname] || Setting.disqus.shortname,
             :related => 'thread',
-            :limit => 100,
+            :limit => 30,
             :cursor => cursor,
             :api_secret => options[:api_secret] || Setting.disqus.api_secret,
             :access_token => options[:access_token] || Setting.disqus.access_token
@@ -92,7 +92,7 @@ class Comment
             :author_email => cm["author"]["email"],
             :author_avatar => cm["author"]["avatar"]["large"]["permalink"],
             :ip => cm["ipAddress"],
-            :created_at => cm["createdAt"]
+            :created_at => cm["createdAt"].to_datetime.in_time_zone
         )
         c.blog_id = cm["thread"]["identifiers"][0] if with_blog
         c
