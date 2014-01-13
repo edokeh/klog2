@@ -2,17 +2,16 @@
     <div class="col-md-3 blog-list full-height">
         <div class="panel panel-default full-height">
             <div class="panel-heading clearfix">
-                <div class="dropdown pull-left">
-                    <a class="dropdown-toggle" href="">
-                        {{currStatus.name}} <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li ng-repeat="status in STATUS">
-                            <a ng-href="#/blogs?status={{status.value}}">{{status.name}}</a>
-                        </li>
-                    </ul>
-                </div>
-                <a href="" class="pull-right"><i class="icon-plus-sign-alt"></i></a>
+                <h2>{{currStatus.name}} <span class="badge">{{page.totalCount}}</span></h2>
+                <ul>
+                    <li style=""><a href="#/blog/new"><i class="fa fa-pencil"></i></a></li>
+                    <li class="dropdown">
+                        <a href="#" dropdown-toggle><i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="s in STATUS"><a ng-href="#/blog?status={{s.value}}">{{ s.name }}</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <div class="list-group" scroll-top-percent="listScrollTop">
                 <div ng-if="blogs.$resolved && blogs.length == 0">
@@ -26,8 +25,8 @@
                         </h4>
 
                         <p class="list-group-item-text">
-                            <span style="color:#aaa;margin-right: 10px;"><i class="fa fa-clock-o"></i> {{ blog.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
-                            <span style="color:#aaa"><i class="fa fa-comments"></i> {{ blog.comment_count }}</span>
+                            <span><i class="fa fa-clock-o"></i> {{ blog.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
+                            <span><i class="fa fa-comments"></i> {{ blog.comment_count }}</span>
                         </p>
                     </div>
                     <div class="pull-right tools">
@@ -35,7 +34,7 @@
                         <a href="" ng-click="remove(currBlog)"><i class="fa fa-trash-o"></i></a>
                     </div>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="page.hasNext">
                     <a href="" ng-click="getBlogs(page.current + 1)">查看更多</a>
                 </div>
             </div>
@@ -45,21 +44,24 @@
         <div class="panel panel-default full-height">
             <div class="panel-heading clearfix" ng-show="currBlog">
                 <div class="pull-left">
-                    <h3><a href="" target="_blank">{{currBlog.title }}</a></h3>
-
-                    <div class="blog-misc">
-                        <span><i class="fa fa-book"></i> {{currBlog.category ? currBlog.category.name : '未分类'}}</span>
-                        <span ng-repeat="tag in currBlog.tag_list"><i class="icon-tag"></i> {{tag}}</span>
-                    </div>
+                    <h2><a href="" target="_blank">{{currBlog.title }} <i class="fa fa-external-link"></i></a></h2>
                 </div>
 
                 <div class="actions pull-right">
-                    <a href="#/blog/{{currBlog.id}}/edit" class="btn btn-primary"><i class="fa fa-pencil"></i> 修改</a>
-                    <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="fa fa-trash-o"> 删除</i></a>
+                    <a href="#/blog/{{currBlog.id}}/edit" class="btn btn-primary"><i class="fa fa-edit"></i> 修改</a>
+                    <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="fa fa-trash-o"> </i>
+                        删除</a>
                 </div>
             </div>
             <div class="blog-preview-content">
-
+                <div class="misc" ng-if="currBlog.category || currBlog.tag_list">
+                                <span ng-if="currBlog.category">
+                                    <i class="fa fa-book"></i> {{ currBlog.category.name }}
+                                </span>
+                                <span ng-repeat="tag in currBlog.tag_list">
+                                    <i class="fa fa-tag"></i> {{ tag }}
+                                </span>
+                </div>
                 <div ng-bind-html="currBlog.html_content"></div>
             </div>
         </div>

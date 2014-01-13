@@ -1,3 +1,19 @@
+$blue: #36a9e1;
+$blue-dark:darken($blue, 10%);
+$blue-light:lighten($blue, 10%);
+$blue-lighter:lighten($blue, 40%);
+$red: #E64E5F;
+$yellow: #AEA918;
+
+$navbar-border-radius: 0;
+$navbar-inverse-link-active-bg: $blue;
+
+$btn-primary-bg: $blue;
+$btn-primary-border: $blue-dark;
+$btn-danger-bg: $red;
+$btn-warning-bg: $yellow;
+$btn-warning-border: darken($yellow, 5%);
+
 @import "bootstrap";
 @import "font-awesome";
 @import "compass/css3";
@@ -73,26 +89,29 @@ textarea {
 }
 
 .navbar-admin {
-  min-height: 40px;
-  border-radius: 0;
-  margin-bottom: 30px;
+  border: 0;
 
   .navbar-brand {
-    padding: 10px 20px;
-    color: #8bbbf2;
-    font-weight: bold;
-    font-size: 20px;
+    color: $red;
+    font-weight: bolder;
+    font-size: 35px;
+    padding: 0 15px;
+    line-height: 50px;
+
+    &:hover {
+      color: $blue
+    }
   }
 
   .navbar-nav > li > a {
-    padding: 10px 20px;
+    //padding: 10px 20px;
   }
 }
 
 // ajax 指示器
 .ajax-spinner {
   position: absolute;
-  top: 0;
+  top: 18px;
   left: 50%;
   width: 300px;
   margin-left: -150px;
@@ -115,12 +134,12 @@ textarea {
 }
 
 .ajax-spinner.show {
-  top: 40px;
+  top: 48px;
 }
 
 .main {
   position: absolute;
-  top: 80px;
+  top: 90px;
   bottom: 10px;
   left: 15px;
   right: 15px;
@@ -137,113 +156,7 @@ textarea {
 //  }
 //}
 
-// blog 列表页
-.blog-list {
-  .panel-heading {
-    background: white;
-    height: 60px;
-    padding-top: 20px;
-  }
-
-  .list-group {
-    overflow: auto;
-    height: calc(100% - 60px);
-  }
-
-  .list-group-item {
-    padding-left: 19px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: whitesmoke;
-
-      .tools {
-        opacity: 1;
-      }
-    }
-  }
-
-  .list-group-item.ng-leave {
-    -webkit-transition: all 1s ease-in all; /* Safari/Chrome */
-    -moz-transition: all 1s linear all; /* Firefox */
-    -o-transition: all 1s linear all; /* Opera */
-    height: 0;
-  }
-
-  .list-group-item.active {
-    background: whitesmoke;
-    border-color: #ddd;
-    border-left: 4px solid #aaa;
-    color: #333;
-    padding-left: 15px;
-
-    .tools {
-      opacity: 1;
-    }
-  }
-
-  .list-group-item-text {
-    color: #aaa;
-  }
-
-  .tools {
-    opacity: 0;
-    -webkit-transition: opacity 500ms;
-
-    a {
-      font-size: 16px;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-}
-
-.blog-preview {
-  padding-left: 0;
-
-  .panel-heading {
-    height: 60px;
-    background: white;
-
-    h3 {
-      margin: 0;
-    }
-
-    .blog-misc {
-      span {
-        margin-right: 15px;
-        color: #aaa;
-      }
-    }
-
-    .actions {
-      margin-top: 3px;
-    }
-
-    //a {
-    //  font-size: 14px;
-    //  color: #999;
-    //  margin-right: 10px;
-    //
-    //  &:hover {
-    //    text-decoration: none;
-    //    color: #333;
-    //  }
-    //}
-  }
-
-  .blog-preview-content {
-    overflow: auto;
-    height: calc(100% - 60px);
-
-    > div {
-      margin: 15px;
-      max-width: 800px;
-    }
-  }
-}
+@import './admin/blog';
 
 .confirm-dialog {
   width: 400px;

@@ -26,7 +26,7 @@ define(function(require, exports, module) {
             if ($scope.form.$valid) {
                 $scope.blog.$save(function() {
                     Flash.tmp($scope.blog.id);
-                    $location.url('/blogs');
+                    $location.url('/blog?status=' + $scope.blog.status);
                 });
             }
         };

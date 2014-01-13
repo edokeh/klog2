@@ -6,7 +6,7 @@ define(function(require, exports, module) {
 
     module.exports = {
         'Blog': ['$resource', '$http', 'Attach', function($resource, $http, Attach) {
-            var Blog = $resource('/admin/blogs/:id.json', {id: '@id'}, {
+            var Blog = $resource('/admin/blogs/:id', {id: '@id'}, {
                 create: {method: 'POST'},
                 update: {method: 'PUT'},
                 query: {
@@ -56,6 +56,13 @@ define(function(require, exports, module) {
                 {value: '1', name: '已发布'},
                 {value: '0', name: '草稿箱'},
             ];
+
+            Blog.DEFAULT_STATUS = '1';
+
+            Blog.getStatusText = function(value) {
+                value = value || Blog.DEFAULT_STATUS;
+                return _.findWhere(Blog.STATUS, {value: value});
+            };
 
             return Blog;
         }]

@@ -1,20 +1,17 @@
 /**
  * 文章列表
  */
-define(function (require, exports, module) {
+define(function(require, exports, module) {
     var _ = require('_');
 
-    var IndexController = ['$scope', '$routeParams', 'Blog', 'Flash', 'Confirm', function ($scope, $routeParams, Blog, Flash, Confirm) {
-
-        $scope.STATUS = Blog.STATUS;
-        //$scope.currStatus = Blog.getStatus($routeParams.status);
+    var IndexController = ['$scope', '$routeParams', 'Blog', 'Flash', 'Confirm', function($scope, $routeParams, Blog, Flash, Confirm) {
 
         // 根据页数获取 blog 列表
-        $scope.getBlogs = function (page) {
+        $scope.getBlogs = function(page) {
             Blog.query({
-                status: $routeParams.status,
+                status: $scope.currStatus.value,
                 page: page
-            }, function (data) {
+            }, function(data) {
                 $scope.blogs = $scope.blogs.concat(data);
                 $scope.page = data.$page;
                 // 自动选中一篇，可能来自新建或修改页面
@@ -27,15 +24,15 @@ define(function (require, exports, module) {
         };
 
         // 显示某一篇 blog 详情
-        $scope.showBlog = function (blog) {
+        $scope.showBlog = function(blog) {
             $scope.currBlog = blog;
             blog.$get({detail: true});
         };
 
         // 删除 blog
-        $scope.remove = function (blog) {
-            Confirm.open('确定要删除“' + blog.title + '”？').then(function () {
-                blog.$remove(function () {
+        $scope.remove = function(blog) {
+            Confirm.open('确定要删除“' + blog.title + '”？').then(function() {
+                blog.$remove(function() {
                     $scope.blogs = _.without($scope.blogs, blog);
                     $scope.currBlog = $scope.blogs[0];
                 });
@@ -43,12 +40,14 @@ define(function (require, exports, module) {
         };
 
         // scroll 到底部时载入下一页
-        $scope.$watch('listScrollTop', function (value) {
+        $scope.$watch('listScrollTop', function(value) {
             if (value >= 0.95 && $scope.page.hasNext) {
                 $scope.getBlogs($scope.page.current + 1);
             }
         });
 
+        $scope.STATUS = Blog.STATUS;
+        $scope.currStatus = Blog.getStatusText($routeParams.status);
         $scope.blogs = [];
         $scope.getBlogs(1);
     }];

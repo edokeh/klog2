@@ -1,0 +1,166 @@
+// blog 列表页
+
+.blog-list {
+
+  .panel-heading {
+    background: $blue;
+    border-bottom: 0;
+    color: white;
+    padding: 0;
+
+    h2 {
+      float: left;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      padding-left: 10px;
+      margin: 0;
+
+      .badge {
+        background: lighten($red, 10%);
+        position: relative;
+        top: -3px;
+      }
+    }
+
+    > ul {
+      float: right;
+      background: $blue-dark;
+      list-style-type: none;
+      padding-left: 0;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 0;
+      border-top-right-radius: 3px;
+
+      > li {
+        float: left;
+        border-left: 1px solid $blue-light;
+        height: 100%;
+
+        > a {
+          color: white;
+          display: block;
+          padding: 0 20px;
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .dropdown-menu {
+      right: 0;
+      left: auto;
+      top: calc(100% - 2px);
+    }
+  }
+
+  .list-group {
+    overflow: auto;
+    height: calc(100% - 40px);
+  }
+
+  .list-group-item {
+    padding-left: 19px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: whitesmoke;
+
+      .tools {
+        opacity: 1;
+      }
+    }
+  }
+
+  .list-group-item.ng-leave {
+    -webkit-transition: all 1s ease-in all; /* Safari/Chrome */
+    -moz-transition: all 1s linear all; /* Firefox */
+    -o-transition: all 1s linear all; /* Opera */
+    height: 0;
+  }
+
+  .list-group-item.active {
+    background: $blue-lighter;
+    border-color: #ddd;
+    border-left: 4px solid $blue-dark;
+    color: #333;
+    padding-left: 15px;
+
+    .tools {
+      opacity: 1;
+    }
+  }
+
+  .list-group-item-text {
+    color: $gray-light;
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  .tools {
+    opacity: 0;
+    -webkit-transition: opacity 500ms;
+
+    a {
+      font-size: 16px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.blog-preview {
+  padding-left: 0;
+
+  .panel-heading {
+    background: white;
+    border-bottom: 0;
+    padding-left: 30px;
+
+    h2 {
+      margin: 0;
+      a {
+        i {
+          font-size: 15px;
+          display: none;
+        }
+      }
+
+      a:hover {
+        color: $link-color;
+        i {
+          display: inline;
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 3px;
+    }
+  }
+
+  .misc {
+    margin-bottom: 10px;
+
+    span {
+      margin-right: 3px;
+      color: $gray-light;
+    }
+  }
+
+  .blog-preview-content {
+    overflow: auto;
+    height: calc(100% - 53px);
+    padding-left: 30px;
+
+    > div {
+      max-width: 800px;
+    }
+  }
+}
