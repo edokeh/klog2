@@ -6,14 +6,14 @@ define(function(require, exports, module) {
         nav: ['$scope', '$location', 'Confirm', '$http', function($scope, $location, Confirm, $http) {
             $scope.navItems = [
                 {
+                    name: '文章',
+                    ico: 'fa-files-o',
+                    url: '/blog'
+                },
+                {
                     name: '写文章',
                     ico: 'fa-pencil',
                     url: '/blog/new'
-                },
-                {
-                    name: '文章',
-                    ico: 'fa-file-text',
-                    url: '/blog'
                 },
                 {
                     name: '评论',
