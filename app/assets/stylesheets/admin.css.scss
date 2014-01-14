@@ -95,24 +95,45 @@ textarea {
   display: block;
 }
 
+// 导航栏
 .navbar-admin {
   border: 0;
 
+  // 标题
   .navbar-brand {
     color: $red;
     font-weight: bolder;
-    font-size: 35px;
-    padding: 0 15px;
+    font-size: 32px;
     line-height: 50px;
+    margin: 0 20px;
+    padding: 0;
 
     &:hover {
       color: $blue
     }
   }
 
-  .navbar-nav > li > a {
-    //padding: 10px 20px;
+  // 最右扳手
+  .navbar-right {
+    margin-right: 15px !important;
+
+    .dropdown > a {
+      padding: 0 15px;
+      font-size: 1.5em;
+      line-height: 50px;
+    }
+
+    .dropdown-menu li {
+      height: 30px;
+      line-height: 30px;
+
+      i {
+        width: 18px;
+      }
+    }
+
   }
+
 }
 
 // ajax 指示器
