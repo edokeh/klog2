@@ -30,6 +30,7 @@ define(function (require, exports, module) {
             .when('/comment', comment.createRoute('./controller/index'))
 
             .when('/setting/website', setting.createRoute('./controller/website'))
+            .when('/setting/password', setting.createRoute('./controller/password'))
             .when('/setting/disqus', setting.createRoute('./controller/disqus'))
             .otherwise({redirectTo: '/blog'});
     }]);

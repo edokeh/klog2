@@ -30,6 +30,7 @@ Klog2::Application.routes.draw do
       get 'context', :on => :collection
     end
     resource :website
+    resource :password
     resource :disqus do
       put 'enable'
     end
