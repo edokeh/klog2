@@ -3,8 +3,9 @@
  */
 define(function(require, exports, module) {
     var angular = require('angularjs');
+    var _ = require('_');
 
-    var Controller = ['$scope', 'Blog', 'Category', '$routeParams', '$location', 'Flash', 'Editor', 'RelativeUrlFactory', function($scope, Blog, Category, $routeParams, $location, Flash, Editor, RelativeUrlFactory) {
+    var Controller = ['$scope', 'Blog', 'Category', '$routeParams', '$location', 'Flash', 'Editor', 'RelativeUrlFactory', '$timeout', function($scope, Blog, Category, $routeParams, $location, Flash, Editor, RelativeUrlFactory, $timeout) {
 
         $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.categories = Category.query();
@@ -23,12 +24,38 @@ define(function(require, exports, module) {
             });
         }
 
-        $scope.save = function(isPublish) {
+        // 校验信息
+        var ERROR_MSG = {
+            title: {
+                required: '标题不能为空',
+                minlength: '标题至少3个字'
+            },
+            content: {
+                required: '内容不能为空',
+                minlength: '内容至少10个字'
+            }
+        };
+        // 保存
+        $scope.save = function(e) {
             if ($scope.form.$valid) {
                 $scope.blog.$save(function() {
                     Flash.tmp($scope.blog.id);
                     $location.url('/blog?status=' + $scope.blog.status);
                 });
+            }
+            else {
+                // 显示报错
+                $scope.errors = [];
+                _.each($scope.form.$error, function(v, k) {
+                    if (_.isArray(v)) {
+                        _.each(v, function(error) {
+                            $scope.errors.push(ERROR_MSG[error.$name][k]);
+                        });
+                    }
+                });
+                $timeout(function() {
+                    $scope.errorTrigger = angular.element(e.target);
+                }, 0);
             }
         };
 
