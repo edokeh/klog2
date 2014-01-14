@@ -95,6 +95,18 @@ textarea {
   display: block;
 }
 
+// 登录
+.session-form {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 300px;
+
+  .btn {
+    font-weight: bold;
+    height: 46px;
+  }
+}
+
 // 导航栏
 .navbar-admin {
   border: 0;

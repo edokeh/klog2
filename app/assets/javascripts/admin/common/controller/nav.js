@@ -3,7 +3,7 @@ define(function(require, exports, module) {
     var _ = require('_');
 
     module.exports = {
-        nav: ['$scope', '$location', function($scope, $location) {
+        nav: ['$scope', '$location', 'Confirm', '$http', function($scope, $location, Confirm, $http) {
             $scope.navItems = [
                 {
                     name: '写文章',
@@ -44,6 +44,14 @@ define(function(require, exports, module) {
                     }
                 });
             });
+
+            $scope.logout = function() {
+                Confirm.open('确定要退出后台？').then(function() {
+                    $http.delete('/admin/session').success(function() {
+                        location.href = '/admin/session/new';
+                    });
+                });
+            };
         }]
     };
 

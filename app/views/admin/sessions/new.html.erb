@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Klog管理后台</title>
+  <meta charset="utf-8"/>
+  <%= stylesheet_link_tag 'admin' %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background: #222">
+<%= form_tag admin_session_path, :class => "form-inline session-form" do -%>
+    <% if flash[:error] %>
+        <div class="alert alert-danger">
+          <i class="fa fa-times-circle"></i> <%= flash[:error] %>
+        </div>
+    <% end %>
+    <div class="input-group">
+      <%= password_field_tag 'password', nil, :class => 'form-control input-lg', :autofocus => true, :required => true, :placeholder=>"Enter password..." %>
+      <span class="input-group-btn">
+            <button class="btn btn-danger btn-lg" type="submit">Login</button>
+          </span>
+    </div>
+<% end -%>
+</body>
+</html>
+

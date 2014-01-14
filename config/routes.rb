@@ -23,6 +23,8 @@ Klog2::Application.routes.draw do
   namespace :admin do
     get '/' => 'home#show'
 
+    resource :session
+
     resources :attaches
     resources :blogs
     resources :categories

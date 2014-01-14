@@ -1,9 +1,11 @@
 class Admin::ApplicationController < ApplicationController
   layout false
+  add_flash_types :error
 
-  protected
+  before_action :check_admin
 
-  #检查是否为admin
+  private
+  # 检查是否为admin
   def check_admin
     redirect_to new_admin_session_path unless is_admin?
   end

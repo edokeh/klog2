@@ -4,4 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   layout 'public'
+
+  private
+
+  # 是否是管理员
+  def is_admin?
+    return session[:admin] == true
+  end
 end
