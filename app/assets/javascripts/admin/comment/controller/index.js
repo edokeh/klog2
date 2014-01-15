@@ -54,6 +54,7 @@ define(function(require, exports, module) {
     }];
 
     IndexController.title = '评论列表';
+    IndexController.nav = 'comment';
 
     module.exports = IndexController;
 });

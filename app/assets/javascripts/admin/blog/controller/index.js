@@ -53,6 +53,7 @@ define(function(require, exports, module) {
     }];
 
     IndexController.title = '文章列表';
+    IndexController.nav = 'blog';
 
     module.exports = IndexController;
 });

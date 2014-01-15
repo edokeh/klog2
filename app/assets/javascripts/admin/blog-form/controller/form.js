@@ -85,6 +85,7 @@ define(function(require, exports, module) {
     }];
 
     Controller.title = '写文章';
+    Controller.nav = 'blog-form';
 
     module.exports = Controller;
 });

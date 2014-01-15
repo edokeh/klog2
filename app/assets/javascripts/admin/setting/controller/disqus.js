@@ -20,6 +20,7 @@ define(function (require, exports, module) {
     }];
 
     Controller.title = 'Disqus 设置';
+    Controller.nav = 'setting';
 
     module.exports = Controller;
 });

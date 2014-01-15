@@ -9,6 +9,7 @@ define(function (require, exports, module) {
     SeajsLazyAngular.patchAngular();
     SeajsLazyAngular.setResolveCallback(['$rootScope', 'controller', function ($rootScope, controller) {
         $rootScope.title = controller.title + ' - Klog 后台管理';
+        $rootScope.nav = controller.nav;
     }]);
 
     admin.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {

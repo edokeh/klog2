@@ -12,9 +12,12 @@ define(function (require, exports, module) {
         $scope.save = function () {
             $scope.password.$save();
         };
+
+        $scope.$emit('nav', 'sb');
     }];
 
     Controller.title = '密码设置';
+    Controller.nav = 'setting';
 
     module.exports = Controller;
 });

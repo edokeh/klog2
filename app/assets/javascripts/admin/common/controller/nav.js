@@ -3,45 +3,43 @@ define(function(require, exports, module) {
     var _ = require('_');
 
     module.exports = {
-        nav: ['$scope', '$location', 'Confirm', '$http', function($scope, $location, Confirm, $http) {
+        nav: ['$scope', '$location', 'Confirm', '$http', '$rootScope', function($scope, $location, Confirm, $http, $rootScope) {
             $scope.navItems = [
                 {
                     name: '文章',
                     ico: 'fa-files-o',
-                    url: '/blog'
+                    url: '/blog',
+                    nav: 'blog'
                 },
                 {
                     name: '写文章',
                     ico: 'fa-pencil',
-                    url: '/blog/new'
+                    url: '/blog/new',
+                    nav: 'blog-form'
                 },
                 {
                     name: '评论',
                     ico: 'fa-comments',
-                    url: '/comment'
+                    url: '/comment',
+                    nav: 'comment'
                 },
                 {
                     name: '页面',
                     ico: 'fa-link',
-                    url: '/pages'
+                    url: '/page',
+                    nav: 'page'
                 },
                 {
                     name: '设置',
                     ico: 'fa-cogs',
-                    url: '/setting/website'
-
+                    url: '/setting/website',
+                    nav: 'setting'
                 }
             ];
 
-            $scope.$on('$routeChangeStart', function() {
-                var url = $location.path();
+            $scope.$on('$routeChangeSuccess', function() {
                 _.each($scope.navItems, function(item) {
-                    if (item.url === url) {
-                        item.active = true;
-                    }
-                    else {
-                        item.active = false;
-                    }
+                    item.active = item.nav === $rootScope.nav;
                 });
             });
 

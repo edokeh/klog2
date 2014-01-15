@@ -15,6 +15,7 @@ define(function (require, exports, module) {
     }];
 
     Controller.title = '基本信息';
+    Controller.nav = 'setting';
 
     module.exports = Controller;
 });
