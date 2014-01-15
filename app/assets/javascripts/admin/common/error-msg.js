@@ -13,7 +13,7 @@ define(function(require, exports, module) {
                     msg = arg;
                 },
                 get: function(key) {
-                    return msg[key];
+                    return msg[key] || {};
                 }
             };
         })
@@ -29,5 +29,17 @@ define(function(require, exports, module) {
                 });
                 return error;
             };
-        }]);
+        }])
+        .directive('errorMsg', function() {
+            return {
+                restrict: 'CA',
+                scope: {
+                    field: '=errorMsg'
+                },
+                template: require('./template/error-msg.html'),
+                link: function(scope, element, attrs) {
+
+                }
+            };
+        });
 });

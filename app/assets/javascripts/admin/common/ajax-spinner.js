@@ -52,7 +52,7 @@ define(function(require, exports, module) {
                 'responseError': responseHandler
             };
         }]);
-    }])
+    }]);
 
     ajaxSpinner.directive('ajaxSpinner', function() {
         return {
