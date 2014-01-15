@@ -6,8 +6,8 @@ class Blog < ActiveRecord::Base
   acts_as_ordered_taggable
   paginates_per 5
 
-  validates :title, :length => {:in => 3..100}
-  validates :content, :length => {:in => 10..100000}
+  validates :title, :length => {:in => 2..100}
+  validates :content, :length => {:in => 3..100000}
   validates :slug, :uniqueness => true
 
   before_validation :clean_slug

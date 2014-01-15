@@ -5,12 +5,12 @@
     <div class="panel-body row">
         <div class="title">
             <input type="text" class="form-control" placeholder="文章标题" name="title"
-                   ng-model="blog.title" maxlength="25" required ng-minlength="3" autofocus/>
+                   ng-model="blog.title" maxlength="25" required ng-minlength="2" autofocus/>
         </div>
         <div class="col-md-6 content-wrap">
             <textarea class="content form-control" placeholder="写点什么..." ng-model="blog.content" name="content"
                       selection="contentSel" scroll-top-percent="scrollTopPercent" required
-                      ng-minlength="10"></textarea>
+                      ng-minlength="5"></textarea>
 
             <div class="upload-drop" file-drop="doUpload(files)" accept="{{UPLOAD_FILE_TYPES}}">
                 <div class="tip">将文件拖至此处</div>

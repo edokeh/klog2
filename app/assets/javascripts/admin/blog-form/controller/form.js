@@ -28,11 +28,11 @@ define(function(require, exports, module) {
         var ERROR_MSG = {
             title: {
                 required: '标题不能为空',
-                minlength: '标题至少3个字'
+                minlength: '标题至少2个字'
             },
             content: {
                 required: '内容不能为空',
-                minlength: '内容至少10个字'
+                minlength: '内容至少3个字'
             }
         };
         // 保存

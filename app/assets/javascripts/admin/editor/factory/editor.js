@@ -21,7 +21,7 @@ define(function(require, exports, module) {
         return _.contains(event.originalEvent.dataTransfer.types, 'Files');
     }
 
-    var Editor = ['Attach', '$modal', function(Attach, $modal) {
+    var Editor = ['Attach', '$modal', 'Confirm', function(Attach, $modal, Confirm) {
 
         return {
             /**
@@ -37,6 +37,14 @@ define(function(require, exports, module) {
                         $scope[options.dest] = data;
                     });
                 });
+
+                // 防止误操作
+                $scope.$on('$locationChangeStart', function(e) {
+                    var content = $scope.$eval(options.src);  // 如果长度小于 minlength 为 undefined
+                    if (content && !confirm('确定要离开？')) {
+                        e.preventDefault();
+                    }
+                });
             },
 
             /**
@@ -44,8 +52,6 @@ define(function(require, exports, module) {
              * @param $scope
              */
             addAttachFn: function($scope) {
-                //$scope.attaches = $scope.blog.attaches;
-
                 // 上传
                 $scope.doUpload = function(files) {
                     _.each(files, function(file) {
