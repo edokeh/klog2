@@ -10,7 +10,7 @@ class Password
   # 保存
   def save
     if valid?
-      Setting.admin_pass = new_pw
+      Password.reset(new_pw)
       return true
     else
       return false
@@ -19,6 +19,17 @@ class Password
 
   # 校验旧密码
   def valid_old
-    errors.add(:old_pw, "旧密码错误！") if Setting.admin_pass != old_pw
+    errors.add(:old_pw, "旧密码错误！") unless Password.valid? old_pw
+  end
+
+  # 判断密码是否正确
+  def self.valid?(pass)
+    Digest::SHA1.hexdigest(Setting.admin_pass_salt + pass) == Setting.admin_pass
+  end
+
+  # salt
+  def self.reset(pass)
+    Setting.admin_pass_salt = SecureRandom.hex(10)
+    Setting.admin_pass = Digest::SHA1.hexdigest(Setting.admin_pass_salt + pass)
   end
 end

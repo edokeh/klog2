@@ -3,11 +3,13 @@ class Admin::SessionsController < Admin::ApplicationController
 
   # 登录页面
   def new
+    # 如果忘记密码，请删除 admin_pass 记录，这里会初始化为 password
+    Password.reset("password") if Setting.admin_pass.nil?
     redirect_to '/admin' if is_admin?
   end
 
   def create
-    if Setting.admin_pass == params[:password]
+    if Password.valid? params[:password]
       session[:admin] = true
       redirect_to '/admin'
     else
