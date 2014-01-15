@@ -15,5 +15,7 @@ define(function(require, exports, module) {
     setting.factory(require('./factory/password'));
     setting.factory(require('./factory/disqus'));
 
+    setting.directive(require('./directive/ng-equal-to'));
+
     module.exports = setting;
 });

@@ -18,7 +18,7 @@ define(function(require, exports, module) {
                 minlength: '新密码至少需要6位'
             },
             new_pw_confirmation: {
-                required: 'x'
+                equalTo: '新密码两次输入不一致'
             }
         });
 
@@ -26,8 +26,9 @@ define(function(require, exports, module) {
             if ($scope.form.$valid) {
                 $scope.password.$save(function() {
 
-                }, function() {
-                    $scope.form.old_pw.$setValidity('validate', false);
+                }, function(resp) {
+                    ErrorMsg.extendFromServer(resp.data.errors);
+                    $scope.form.old_pw.$setValidity('server', false);
                 });
             }
             else {
