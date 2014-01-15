@@ -56,4 +56,44 @@
       line-height: 2;
     }
   }
+
+  // 分类
+  .category-wrap {
+    > table {
+      max-width: 800px;
+
+      td {
+        border-top-style: dashed;
+      }
+    }
+
+    .error {
+      display: block;
+    }
+
+    // 添加的表单
+    .form-add {
+      width: 350px;
+      margin-bottom: 30px;
+      margin-left: 8px;
+    }
+
+    // 修改的表单
+    .form-edit {
+      margin: 10px 0;
+
+      .form-group {
+        margin-bottom: 0;
+        width: 350px;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      a {
+        margin-left: 10px;
+      }
+    }
+  }
 }

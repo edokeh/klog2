@@ -7,6 +7,7 @@ define(function(require, exports, module) {
     var setting = angular.module('setting', []);
 
     setting.seajsController(require('./controller/disqus'));
+    setting.seajsController(require('./controller/category'));
     setting.seajsController(require('./controller/password'));
     setting.seajsController(require('./controller/website'));
 

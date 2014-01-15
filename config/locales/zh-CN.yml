@@ -203,6 +203,9 @@ zh-CN:
   activerecord:
     errors:
       <<: *errors
+      models:
+        category:
+          taken: "分类名称已经存在"
     models:
       blog: "文章"
       category: "分类"

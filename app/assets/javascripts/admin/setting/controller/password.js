@@ -1,5 +1,5 @@
 /**
- * 修改 Disqus 设置
+ * 密码设置
  */
 define(function (require, exports, module) {
     var angular = require('angularjs');
