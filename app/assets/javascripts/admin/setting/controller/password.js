@@ -4,35 +4,35 @@
 define(function(require, exports, module) {
     var angular = require('angularjs');
 
-    var Controller = ['$scope', 'Password', 'RelativeUrlFactory', 'ErrorMsg', function($scope, Password, RelativeUrlFactory, ErrorMsg) {
+    var Controller = ['$scope', 'Password', 'RelativeUrlFactory', 'ErrorMessage', function($scope, Password, RelativeUrlFactory, ErrorMessage) {
         $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.navClass = 'password';
         $scope.password = new Password();
-        ErrorMsg.set({
-            old_pw: {
-                required: '旧密码不能为空',
-                validate: '旧密码错误'
-            },
-            new_pw: {
-                required: '新密码至少需要6位',
-                minlength: '新密码至少需要6位'
-            },
-            new_pw_confirmation: {
-                equalTo: '新密码两次输入不一致'
+
+        ErrorMessage.extend({
+            password: {
+                old_pw: {
+                    required: '旧密码不能为空'
+                },
+                new_pw: {
+                    required: '新密码不能为空',
+                    minlength: '新密码至少需要6位'
+                },
+                new_pw_confirmation: {
+                    equalTo: '新密码两次输入不一致'
+                }
             }
         });
 
         $scope.save = function() {
             if ($scope.form.$valid) {
                 $scope.password.$save(function() {
-
+                    $scope.password = new Password();
+                    $scope.form.$setPristine();
+                    $scope.saveSuccess = true;
                 }, function(resp) {
-                    ErrorMsg.extendFromServer(resp.data.errors);
-                    $scope.form.old_pw.$setValidity('server', false);
+                    $scope.serverError = resp.data.errors;
                 });
-            }
-            else {
-                //$scope.password.$save();
             }
         };
     }];

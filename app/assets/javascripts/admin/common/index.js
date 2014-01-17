@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     var ngSanitize = require('angular-sanitize');
     var bootstrap = require('angular/bootstrap/0.0.1/index');
     var ajaxSpinner = require('./ajax-spinner');
-    var errorMsg = require('./error-msg');
+    var validation = require('./validation');
 
     var common = angular.module('common', [
         ngAnimate.name,
@@ -15,7 +15,7 @@ define(function(require, exports, module) {
         ngSanitize.name,
         bootstrap.name,
         ajaxSpinner.name,
-        errorMsg.name
+        validation.name
     ]);
 
     common.controller(require('./controller/nav'));
