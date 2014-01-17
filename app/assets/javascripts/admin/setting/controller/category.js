@@ -5,37 +5,34 @@ define(function(require, exports, module) {
     var _ = require('_');
     var angular = require('angularjs');
 
-    var Controller = ['$scope', 'Category', 'RelativeUrlFactory', 'Confirm', 'ErrorMsg', function($scope, Category, RelativeUrlFactory, Confirm, ErrorMsg) {
+    var Controller = ['$scope', 'Category', 'RelativeUrlFactory', 'Confirm', 'ErrorMessage', function($scope, Category, RelativeUrlFactory, Confirm, ErrorMessage) {
         $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.navClass = 'category';
         $scope.categories = Category.query();
         $scope.newCategory = new Category();
 
-        ErrorMsg.set({
-            name: {
-                required: '分类名称至少需要2个字符',
-                minlength: '分类名称至少需要2个字符',
-                unique: '分类名称已经存在'
+        ErrorMessage.extend({
+            category: {
+                name: {
+                    required: '请填写分类名称',
+                    minlength: '分类名称至少需要2个字符'
+                }
             }
         });
 
         $scope.add = function() {
+            $scope.newCategory.$resolved = false;
+
             if ($scope.addForm.$valid) {
                 $scope.newCategory.$save(function(data) {
                     $scope.categories.push(data);
                     $scope.newCategory = new Category();
-                    $scope.addForm.name.$setPristine();
+                    $scope.newCategory.$resolved = true;
+                    $scope.addForm.$setPristine();
                 }, function(resp) {
-                    $scope.addForm.name.$setValidity('unique', false);
+                    $scope.addServerError = resp.data.errors;
                 });
             }
-            else {
-                $scope.addForm.name.$setViewValue($scope.addForm.name.$viewValue);
-            }
-        };
-
-        $scope.clearValid = function(field) {
-            field.$setValidity('unique', true);
         };
 
         // 修改
@@ -55,8 +52,8 @@ define(function(require, exports, module) {
             if (form.$valid) {
                 category.$update(function() {
                     $scope.editingCategory = null;
-                }, function() {
-                    form.name.$setValidity('unique', false);
+                }, function(resp) {
+                    $scope.editServerError = resp.data.errors;
                 });
             }
         };

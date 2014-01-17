@@ -5,18 +5,16 @@
     <div class="col-md-11 full-height panel-wrap">
         <div class="panel panel-default full-height">
             <div class="panel-body full-height category-wrap">
-                <form class="form-inline form-add" name="addForm" ng-submit="add()" novalidate>
+                <form class="form-inline form-add" name="addForm" ng-submit="add()" validation="category">
                     <div class="input-group">
                         <input type="text" class="form-control" name="name" ng-model="newCategory.name"
-                               placeholder="分类名称" required ng-minlength="2" ng-keydown="clearValid(addForm.name)"/>
+                               placeholder="分类名称" required ng-minlength="2" server-valid="addServerError" />
 
                         <div class="input-group-btn">
-                            <button type="submit" class="btn btn-primary">添加分类</button>
+                            <button type="submit" class="btn btn-primary" loading-btn="" loading-cancel="newCategory.$resolved">添加分类</button>
                         </div>
                     </div>
-                    <div class="error" ng-if="addForm.name.$invalid && addForm.name.$dirty">
-                        <i class="fa fa-exclamation-circle"></i> {{ addForm.name | errorMsg  }}
-                    </div>
+                    <div error-for="addForm.name"></div>
                 </form>
                 <table class="table table-hover">
                     <col width="40%"/>
@@ -44,22 +42,20 @@
                     </tr>
                     <tr ng-if="category == editingCategory" ng-repeat-end>
                         <td colspan="4">
-                            <form class="form-inline form-edit" ng-submit="update(category, editForm)" name="editForm" novalidate>
+                            <form class="form-inline form-edit" ng-submit="update(category, editForm)" name="editForm" validation="category">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="name" ng-model="category.name"
-                                               placeholder="分类名称" required ng-minlength="2"/>
+                                               placeholder="分类名称" required ng-minlength="2" server-valid="serverError" />
 
                                         <div class="input-group-btn">
-                                            <button type="submit" class="btn btn-primary">保存修改</button>
+                                            <button type="submit" class="btn btn-primary" loading-btn loading-cancel="editingCategory.$resovled">保存修改</button>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="" ng-click="cancelEdit(category)">取消</a>
 
-                                <div class="error" ng-if="editForm.name.$invalid && editForm.name.$dirty">
-                                    <i class="fa fa-exclamation-circle"></i> {{ editForm.name | errorMsg  }}
-                                </div>
+                                <div error-for="editForm.name"></div>
                             </form>
                         </td>
                     </tr>

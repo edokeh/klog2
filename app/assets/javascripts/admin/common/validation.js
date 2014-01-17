@@ -64,7 +64,6 @@ define(function(require, exports, module) {
                             control.$submitted = false;
                         }
                     });
-                    scope.$apply();
                 });
             }
         };

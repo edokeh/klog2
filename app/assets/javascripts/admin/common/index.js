@@ -28,6 +28,7 @@ define(function(require, exports, module) {
 
     common.directive(require('./directive/popover'));
     common.directive(require('./directive/scroll-top-percent'));
+    common.directive(require('./directive/loading-btn'));
 
     module.exports = common;
 });

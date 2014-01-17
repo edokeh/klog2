@@ -25,6 +25,9 @@ define(function(require, exports, module) {
         });
 
         $scope.save = function() {
+            $scope.saveSuccess = false;
+            $scope.serverError = null;
+
             if ($scope.form.$valid) {
                 $scope.password.$save(function() {
                     $scope.password = new Password();
