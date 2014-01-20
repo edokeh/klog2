@@ -58,3 +58,8 @@
 </article>
 
 <% content_for :title do %><%= @blog.title %><% end %>
+
+<% content_for :seo do %>
+    <meta name="Keywords" content="<%= @blog.tag_list %>" />
+    <meta name="Description" content="<%= @blog.title %>" />
+<% end %>

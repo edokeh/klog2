@@ -35,7 +35,7 @@ module ApplicationHelper
     setting = Setting.website[setting_key]
     if setting.present?
       url = setting if url.blank?
-      link_to fa_icon(icon), url, :target => '_blank', :rel => 'nofollow', :title => title
+      link_to fa_icon(icon + ' fa-fw'), url, :target => '_blank', :rel => 'nofollow', :title => title
     end
   end
 end
