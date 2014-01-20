@@ -10,6 +10,7 @@ class Attach < ActiveRecord::Base
 
   def self.new_by_params(params)
     attach = Attach.new
+    attach.max_width = params[:max_width]
     attach.file = params[:file]
     attach.file_name = params[:file].original_filename
     attach

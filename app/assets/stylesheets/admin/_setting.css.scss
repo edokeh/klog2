@@ -44,6 +44,54 @@
     .control-label {
       width: 120px;
     }
+
+    // 头像
+    .avatar {
+      position: relative;
+      width: 200px;
+
+      img {
+        border-radius: 10px;
+      }
+
+      a {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: #333;
+        padding: 10px 0;
+        opacity: 0.9;
+        display: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        &:hover {
+          color: white;
+        }
+      }
+
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #ccc;
+        opacity: 0.9;
+        color: white;
+        text-align: center;
+        padding-top: 40%;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+
+      &:hover {
+        a {
+          display: block;
+        }
+      }
+    }
   }
 
   .intro {

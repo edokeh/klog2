@@ -17,7 +17,7 @@
             </div>
             <div class="tools">
                 <a href="" ng-click="showTip()" title="Markdown 帮助"><i class="fa fa-question-circle"></i></a>
-                <a href="" file-input="doUpload(files)" accept="{{UPLOAD_FILE_TYPES}}" title="上传图片或附件">
+                <a href="" file-input="doUpload(files)" multiple="true" accept="{{UPLOAD_FILE_TYPES}}" title="上传图片或附件">
                     <i class="fa fa-upload"></i>
                 </a>
                 <a href="" popover-trigger="attachTrigger" popover-show="attachShow" ng-show="blog.attaches.length > 0">

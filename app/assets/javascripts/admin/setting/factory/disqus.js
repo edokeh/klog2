@@ -5,8 +5,8 @@ define(function (require, exports, module) {
 
     module.exports = {
         'Disqus': ['$resource', function ($resource) {
-            var URL = '/admin/disqus.json';
-            var ENABLE_URL = '/admin/disqus/enable.json';
+            var URL = '/admin/disqus';
+            var ENABLE_URL = '/admin/disqus/enable';
 
             var Disqus = $resource(URL, null, {
                 update: {

@@ -1,19 +1,26 @@
 class Admin::WebsitesController < Admin::ApplicationController
+  helper
 
   def show
-    @website = Setting.website
-    render :json => @website.marshal_dump
+    @website = Website.find
+    @website.avatar = view_context.image_path('no_avatar.png') if @website.avatar.nil?
+    render :json => @website
   end
 
   def update
-    @website = website_params
-    Setting.website = @website
-    render :json => @website
+    @website = Website.find
+    if @website.update_attributes(website_params)
+      # 更新附件的归属
+      Attach.update_parent(website_params[:avatar_id], @website)
+      render :json => @website
+    else
+      render :json => @website, :status => 422
+    end
   end
 
   private
 
   def website_params
-    params.require(:website).permit(:title, :sub_title, :author, :avatar, :github, :weibo, :donate, :ga)
+    params.require(:website).permit(:title, :sub_title, :author, :avatar, :avatar_id, :github, :weibo, :donate, :ga)
   end
 end

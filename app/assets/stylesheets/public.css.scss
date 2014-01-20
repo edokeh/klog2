@@ -65,6 +65,11 @@ header {
   right: 0;
   margin: 0 auto;
 
+  img {
+    border: 2px solid $main-color;
+    padding: 2px;
+  }
+
   h1 {
     color: $main-color;
   }
@@ -78,7 +83,6 @@ header {
       opacity: 0.5;
       font-size: 2em;
       display: inline-block;
-      margin-right: 3px;
 
       &:hover {
         opacity: 1;

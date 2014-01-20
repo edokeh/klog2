@@ -5,7 +5,7 @@ define(function (require, exports, module) {
 
     module.exports = {
         'Website': ['$resource', function ($resource) {
-            var Website = $resource('/admin/website.json', null, {
+            var Website = $resource('/admin/website', null, {
                 update: {
                     method: 'PUT'
                 }

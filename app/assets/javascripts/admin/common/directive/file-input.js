@@ -1,6 +1,6 @@
 /**
  * 为元素提供类似 input[type=file] 的功能，点击后出现上传框
- * 示例 <a file-input="do(files)" accept=".jpg, .png"></a>
+ * 示例 <a file-input="do(files)" accept=".jpg, .png" multiple="true"></a>
  */
 define(function(require, exports, module) {
     var angular = require('angularjs');
@@ -11,9 +11,11 @@ define(function(require, exports, module) {
                 restrict: 'CA',
                 scope: {
                     fileInput: '&',
-                    accept: '@'
+                    accept: '@',
+                    multiple: '@'
                 },
                 link: function(scope, element, attrs) {
+
                     element.bind('click', function() {
                         var fileInput = createInput();
                         element.after(fileInput);
@@ -25,7 +27,10 @@ define(function(require, exports, module) {
                     // 创建 input file
                     function createInput() {
                         removeFileInput();
-                        createInput.fileInput = angular.element('<input class="ng-hide" type="file" multiple accept="' + scope.accept + '" />');
+                        createInput.fileInput = angular.element('<input class="ng-hide" type="file" accept="' + scope.accept + '" />');
+                        if (scope.multiple) {
+                            createInput.fileInput.attr('multiple', 'multiple');
+                        }
                         createInput.fileInput.bind('change', function(e) {
                             var fileList = e.target.files;
                             scope.$apply(function() {
