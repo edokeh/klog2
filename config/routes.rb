@@ -31,6 +31,12 @@ Klog2::Application.routes.draw do
     resources :comments do
       get 'context', :on => :collection
     end
+    resources :pages do
+      member do
+        post 'up'
+        post 'down'
+      end
+    end
     resource :website
     resource :password
     resource :disqus do

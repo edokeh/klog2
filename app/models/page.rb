@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   validates :content, :length => {:in => 10..100000}
   validates :slug, :presence => true, :uniqueness => true
 
-  #has_many :attaches, :as => :parent
+  has_many :attaches, :as=>:parent, :dependent => :destroy
 
   #将slug中的非法字符过滤掉
   def clean_slug
