@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 
         // 编辑 or 新建
         if ($routeParams.id) {
-            $scope.blog = Blog.get({id: $routeParams.id});
+            $scope.blog = Blog.get({id: $routeParams.id, detail: true});
         }
         else {
             $scope.blog = new Blog({

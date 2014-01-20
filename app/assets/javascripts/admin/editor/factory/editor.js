@@ -21,7 +21,8 @@ define(function(require, exports, module) {
         return _.contains(event.originalEvent.dataTransfer.types, 'Files');
     }
 
-    var Editor = ['Attach', '$modal', 'Confirm', function(Attach, $modal, Confirm) {
+    var Editor = ['Attach', '$modal', '$parse', function(Attach, $modal, $parse) {
+        var preview = true;
 
         return {
             /**
@@ -30,12 +31,15 @@ define(function(require, exports, module) {
              * @param options  {src: 'blog.content', dest: 'htmlContent'}
              */
             addPreviewFn: function($scope, options) {
+                var setter = $parse(options.dest).assign;
 
                 // 监控变化生成预览
                 $scope.$watch(options.src, function(value) {
-                    marked(value, function(err, data) {
-                        $scope[options.dest] = data;
-                    });
+                    if (preview) {
+                        marked(value, function(err, data) {
+                            setter($scope, data);
+                        });
+                    }
                 });
 
                 // 防止误操作
@@ -45,6 +49,13 @@ define(function(require, exports, module) {
                         e.preventDefault();
                     }
                 });
+            },
+
+            /**
+             * 停止监控
+             */
+            stopPreview: function() {
+                preview = false;
             },
 
             /**

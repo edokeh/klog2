@@ -33,6 +33,7 @@ define(function(require, exports, module) {
         var blog = SeajsLazyAngular.createLazyStub('/assets/admin/blog/index');
         var blogForm = SeajsLazyAngular.createLazyStub('/assets/admin/blog-form/index');
         var comment = SeajsLazyAngular.createLazyStub('/assets/admin/comment/index');
+        var page = SeajsLazyAngular.createLazyStub('/assets/admin/page/index');
         var setting = SeajsLazyAngular.createLazyStub('/assets/admin/setting/index');
 
         $routeProvider
@@ -42,6 +43,8 @@ define(function(require, exports, module) {
             .when('/blog/:id/edit', blogForm.createRoute('./controller/form'))
 
             .when('/comment', comment.createRoute('./controller/index'))
+
+            .when('/page', page.createRoute('./controller/index'))
 
             .when('/setting/website', setting.createRoute('./controller/website'))
             .when('/setting/category', setting.createRoute('./controller/category'))

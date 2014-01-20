@@ -214,13 +214,6 @@ textarea {
   height: 100%;
 }
 
-//.nav-dropdown-menu {
-//  min-width: 130px;
-//  > li > a {
-//    color: $gray;
-//  }
-//}
-
 @import './admin/blog';
 
 .confirm-dialog {
@@ -279,4 +272,5 @@ textarea {
 }
 
 @import './admin/comment';
+@import './admin/page';
 @import './admin/setting';

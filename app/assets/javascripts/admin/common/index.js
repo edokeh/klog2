@@ -23,6 +23,7 @@ define(function(require, exports, module) {
     common.factory(require('./factory/attach'));
     common.factory(require('./factory/blog'));
     common.factory(require('./factory/category'));
+    common.factory(require('./factory/page'));
     common.factory(require('./factory/confirm'));
     common.factory(require('./factory/flash'));
 
