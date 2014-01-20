@@ -19,32 +19,36 @@
                         </button>
                     </p>
                 </div>
-                <form class="form-horizontal" name="form" ng-submit="save()">
+                <form class="form-horizontal" name="form" ng-submit="save()" validation="disqus">
                         <div class="form-group">
                             <label class="col-md-1 control-label">Shortname</label>
 
                             <div class="col-md-5">
-                                <input type="text" class="form-control" ng-model="disqus.shortname" ng-disabled="!disqus.enable"/>
+                                <input type="text" class="form-control" name="shortname" ng-model="disqus.shortname" ng-disabled="!disqus.enable" required server-valid="serverError" />
+                                <div error-for="form.shortname"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label">API Secret</label>
 
                             <div class="col-md-5">
-                                <input type="text" class="form-control" ng-model="disqus.api_secret" ng-disabled="!disqus.enable"/>
+                                <input type="text" class="form-control" name="api_secret" ng-model="disqus.api_secret" ng-disabled="!disqus.enable" required/>
+                                <div error-for="form.api_secret"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label">Access Token</label>
 
                             <div class="col-md-5">
-                                <input type="text" class="form-control" ng-model="disqus.access_token" ng-disabled="!disqus.enable"/>
+                                <input type="text" class="form-control" name="access_token" ng-model="disqus.access_token" ng-disabled="!disqus.enable" required/>
+                                <div error-for="form.access_token"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label"></label>
                             <div class="col-md-5">
-                                <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!disqus.enable">保 存</button>
+                                <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!disqus.enable" loading-btn loading-cancel="disqus.$resolved">保 存</button>
+                                <span class="save-success" ng-show="saveSuccess"><i class="fa fa-check-circle"></i> 保存成功</span>
                             </div>
                         </div>
                 </form>

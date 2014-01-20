@@ -45,7 +45,7 @@ class Disqus
     begin
       Comment.all("", :shortname => shortname, :api_secret => api_secret, :access_token => access_token)
     rescue
-      errors.add(:disqus, 'Disqus 校验失败！')
+      errors.add(:shortname, 'Disqus 校验失败！')
     end
   end
 

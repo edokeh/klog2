@@ -1,21 +1,45 @@
 /**
  * 修改 Disqus 设置
  */
-define(function (require, exports, module) {
+define(function(require, exports, module) {
     var angular = require('angularjs');
 
-    var Controller = ['$scope', 'Disqus', 'RelativeUrlFactory', '$routeParams', '$location', function ($scope, Disqus, RelativeUrlFactory, $routeParams, $location) {
+    var Controller = ['$scope', 'Disqus', 'RelativeUrlFactory', 'ErrorMessage', '$timeout', function($scope, Disqus, RelativeUrlFactory, ErrorMessage, $timeout) {
         $scope.relativeUrl = RelativeUrlFactory.create(module);
-        $scope.disqus = Disqus.get();
         $scope.navClass = 'disqus';
+        $scope.disqus = Disqus.get();
 
-        $scope.enableDisqus = function (bool) {
+        ErrorMessage.extend({
+            disqus: {
+                shortname: {
+                    required: '请填写 Shortname'
+                },
+                api_secret: {
+                    required: '请填写 API Secret'
+                },
+                access_token: {
+                    required: '请填写 Access Token'
+                }
+            }
+        });
+
+        $scope.enableDisqus = function(bool) {
             $scope.disqus.enable = bool;
             $scope.disqus.$updateEnable();
         };
 
-        $scope.save = function () {
-            $scope.disqus.$update();
+        $scope.save = function() {
+            $scope.disqus.$resolved = false;
+            if ($scope.form.$valid) {
+                $scope.disqus.$update(function() {
+                    $scope.saveSuccess = true;
+                    $timeout(function() {
+                        $scope.saveSuccess = false;
+                    }, 3000);
+                }, function(resp) {
+                    $scope.serverError = resp.data.errors;
+                });
+            }
         };
     }];
 

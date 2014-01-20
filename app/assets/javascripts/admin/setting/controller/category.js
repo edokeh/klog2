@@ -47,6 +47,10 @@ define(function(require, exports, module) {
             $scope.editingCategory = null;
         };
 
+        $scope.clearEditError = function() {
+            $scope.editServerError = null;
+        };
+
         // ngif 创建了新的 scope,所以这里需要用参数传递 FormController
         $scope.update = function(category, form) {
             if (form.$valid) {

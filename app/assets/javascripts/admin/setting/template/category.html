@@ -30,7 +30,7 @@
                     </tr>
                     </thead>
                     <tr ng-repeat-start="category in categories" ng-show="category != editingCategory">
-                        <td>{{ category.name }}</td>
+                        <td ng-dblclick="edit(category)">{{ category.name }}</td>
                         <td class="text-right">{{ category.blog_count }}</td>
                         <td>{{ category.created_at |date:'yyyy-MM-dd HH:mm' }}</td>
                         <td>
@@ -42,7 +42,7 @@
                     </tr>
                     <tr ng-if="category == editingCategory" ng-repeat-end>
                         <td colspan="4">
-                            <form class="form-inline form-edit" ng-submit="update(category, editForm)" name="editForm" validation="category">
+                            <form class="form-inline form-edit" ng-submit="update(category, editForm)" name="editForm" validation="category" ng-init="clearEditError()">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="name" ng-model="category.name"

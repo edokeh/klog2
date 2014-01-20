@@ -123,6 +123,7 @@ define(function(require, exports, module) {
 
                 element.on('keyup', function() {
                     ngModel.$setValidity('server', true);
+                    scope.$apply();
                 });
             }
         };
