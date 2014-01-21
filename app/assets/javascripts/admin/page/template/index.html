@@ -1,6 +1,6 @@
 <div class="row full-height">
     <div class="col-md-3 page-list full-height">
-        <div class="panel panel-default full-height">
+        <div class="panel panel-blue">
             <div class="panel-heading clearfix">
                 <h2>{{pages.length}} 个页面</h2>
                 <ul>
@@ -20,8 +20,9 @@
                         </p>
                     </div>
                     <div class="pull-right tools">
-                        <a href="" ng-click="edit()"><i class="fa fa-edit"></i></a>
-                        <a href="" ng-click="remove(currPage)"><i class="fa fa-trash-o"></i></a>
+                        <a href="" ng-click="edit()"><i class="fa fa-arrow-up fa-fw"></i></a>
+                        <a href="" ng-click="edit()"><i class="fa fa-arrow-down fa-fw"></i></a>
+                        <a href="" ng-click="remove(currPage)"><i class="fa fa-trash-o fa-fw"></i></a>
                     </div>
                 </div>
             </div>
@@ -86,11 +87,18 @@
         </form>
     </div>
     <div class="col-md-9 page-preview" ng-class="{editing: editing}">
-        <div class="panel panel-default full-height">
-            <h2 ng-show="currPage">
-                <a ng-href="/page/{{currPage.slug}}.html" target="_blank">{{currPage.title }} <i
-                        class="fa fa-external-link"></i></a>
-            </h2>
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                <h2 class="pull-left">
+                    <a ng-href="/page/{{currPage.slug}}.html" target="_blank">{{currPage.title }} <i
+                            class="fa fa-external-link"></i></a>
+                </h2>
+
+                <div class="actions pull-right">
+                    <a href="" class="btn btn-primary btn-sm" ng-click="edit()"><i class="fa fa-edit"></i> 修改</a>
+                </div>
+            </div>
+
 
             <div class="content" ng-bind-html="currPage.html_content"
                  scroll-top-percent="scrollTopPercent"></div>

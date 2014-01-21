@@ -1,6 +1,6 @@
 <div class="row full-height">
     <div class="comment-list full-height" ng-class="{'col-md-8': currComment, 'col-md-12': !currComment}">
-        <div class="panel panel-default full-height">
+        <div class="panel panel-blue">
             <div class="panel-heading">共有 10 条评论</div>
             <div class="list-group" scroll-top-percent="listScrollTop">
                 <div ng-if="comments.$resolved && blogs.length == 0">
@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="col-md-4 comment-context full-height" ng-show="currComment">
-        <div class="panel panel-default full-height">
+        <div class="panel panel-blue">
             <div class="panel-heading">回复评论 <a href="" ng-click="closeCurr()" class="pull-right"><i
                     class="fa fa-times"></i></a></div>
             <div class="panel-body">

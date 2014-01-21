@@ -3,11 +3,6 @@
 .blog-list {
 
   .panel-heading {
-    background: $blue;
-    border-bottom: 0;
-    color: white;
-    padding: 0;
-
     h2 {
       float: left;
       height: 40px;
@@ -22,33 +17,6 @@
       }
     }
 
-    > ul {
-      float: right;
-      background: $blue-dark;
-      list-style-type: none;
-      padding-left: 0;
-      height: 40px;
-      line-height: 40px;
-      margin-bottom: 0;
-      border-top-right-radius: 3px;
-
-      > li {
-        float: left;
-        border-left: 1px solid $blue-light;
-        height: 100%;
-
-        > a {
-          color: white;
-          display: block;
-          padding: 0 20px;
-          opacity: 0.8;
-          &:hover {
-            opacity: 1;
-          }
-        }
-      }
-    }
-
     .dropdown-menu {
       right: 0;
       left: auto;
@@ -58,7 +26,7 @@
 
   .list-group {
     overflow: auto;
-    height: calc(100% - 40px);
+    height: calc(100% - 41px);
   }
 
   .list-group-item {

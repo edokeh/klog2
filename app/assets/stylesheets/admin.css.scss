@@ -168,9 +168,7 @@ textarea {
         width: 18px;
       }
     }
-
   }
-
 }
 
 // ajax 指示器
@@ -188,8 +186,8 @@ textarea {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   z-index: -1;
 
-  -webkit-transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
-  transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  //-webkit-transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  @include transition(all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s);
   clip: auto;
 
   .icon-spin {
@@ -214,12 +212,52 @@ textarea {
   height: 100%;
 }
 
-@import './admin/blog';
-
 .confirm-dialog {
   width: 400px;
 }
 
+// 通用的 panel
+.panel-blue {
+  border-color: #ccc;
+  height: 100%;
+
+  .panel-heading {
+    background: $blue;
+    border-bottom: 0;
+    color: white;
+    padding: 0;
+
+    // 右侧工具
+    > ul {
+      float: right;
+      background: $blue-dark;
+      list-style-type: none;
+      padding-left: 0;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 0;
+      border-top-right-radius: 3px;
+
+      > li {
+        float: left;
+        border-left: 1px solid $blue-light;
+        height: 100%;
+
+        > a {
+          color: white;
+          display: block;
+          padding: 0 20px;
+          opacity: 0.6;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@import './admin/blog';
 @import './admin/blog_form';
 
 // 上传的显示

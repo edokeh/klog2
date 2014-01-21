@@ -1,11 +1,6 @@
 .page-list {
 
   .panel-heading {
-    background: $blue;
-    border-bottom: 0;
-    color: white;
-    padding: 0;
-
     h2 {
       float: left;
       height: 40px;
@@ -13,33 +8,6 @@
       font-size: 20px;
       padding-left: 20px;
       margin: 0;
-    }
-
-    > ul {
-      float: right;
-      background: $blue-dark;
-      list-style-type: none;
-      padding-left: 0;
-      height: 40px;
-      line-height: 40px;
-      margin-bottom: 0;
-      border-top-right-radius: 3px;
-
-      > li {
-        float: left;
-        border-left: 1px solid $blue-light;
-        height: 100%;
-
-        > a {
-          color: white;
-          display: block;
-          padding: 0 20px;
-          opacity: 0.8;
-          &:hover {
-            opacity: 1;
-          }
-        }
-      }
     }
   }
 
@@ -108,28 +76,37 @@
     width: 37.5%;
   }
 
-  h2 {
-    margin: 10px 20px;
+  .panel-heading {
+    @include clearfix();
+    background: white;
+    padding: 10px 15px 10px 30px;
 
-    a {
-      i {
-        font-size: 15px;
-        display: none;
+    h2 {
+      margin: 0;
+      a {
+        i {
+          font-size: 15px;
+          display: none;
+        }
+      }
+
+      a:hover {
+        color: $link-color;
+        i {
+          display: inline;
+        }
       }
     }
 
-    a:hover {
-      color: $link-color;
-      i {
-        display: inline;
-      }
+    .actions {
+      margin-top: 3px;
     }
   }
 
   .content {
     height: calc(100% - 53px);
     overflow: auto;
-    margin: 0 10px 0 20px;
+    margin: 0 10px 0 30px;
     padding-right: 5px;
 
     > div {
@@ -184,7 +161,7 @@
   .panel-body {
     position: relative;
     height: calc(100% - 55px);
-    padding: 0 10px 0 20px;
+    padding: 15px 10px 0 20px;
 
     textarea {
       height: 100%;

@@ -1,13 +1,10 @@
 
 // 评论列表
 .comment-list {
-  @include single-transition(width, 0s, ease-in, 1s);
+  @include single-transition(width, 2s, ease-in, 1s);
 
   .panel-heading {
-    padding-left: 30px;
-    background: $blue;
-    border-bottom: 0;
-    color: white;
+    padding: 10px 15px 10px 30px;
   }
 
   .list-group {
@@ -80,10 +77,7 @@
 
 .comment-context {
   .panel-heading {
-    padding-left: 30px;
-    background: $blue;
-    border-bottom: 0;
-    color: white;
+    padding: 10px 15px 10px 30px;
 
     a {
       color: white;
