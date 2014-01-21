@@ -10,25 +10,27 @@ class Admin::PagesController < Admin::ApplicationController
 
   def create
     @page = Page.new(page_params)
+    params[:detail] = true
 
     if @page.save
       # 更新附件的归属
       Attach.update_parent(params[:attach_ids], @page)
-      redirect_to admin_pages_path, :notice => "<strong>#{@page.title}</strong> 创建成功！".html_safe
+      render :show
     else
-      render :new
+      render :show, :status => 422
     end
   end
 
   def update
     @page = Page.find(params[:id])
+    params[:detail] = true
 
     if @page.update_attributes(page_params)
       # 更新附件的归属
       Attach.update_parent(params[:attach_ids], @page)
-      redirect_to admin_pages_path, :notice => '修改成功！'
+      render :show
     else
-      render :action => "edit"
+      render :show, :status => 422
     end
   end
 
@@ -56,6 +58,6 @@ class Admin::PagesController < Admin::ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:title, :content, :slug, :status, :attaches)
+    params.require(:page).permit(:title, :content, :slug, :attaches)
   end
 end

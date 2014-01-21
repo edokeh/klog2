@@ -62,20 +62,20 @@ define(function(require, exports, module) {
              * 提供附件上传的功能，对于模板本身有一些要求
              * @param $scope
              */
-            addAttachFn: function($scope) {
+            addAttachFn: function($scope, parent) {
                 // 上传
                 $scope.doUpload = function(files) {
                     _.each(files, function(file) {
                         var attach = Attach.create({originalFile: file});
-                        $scope.blog.attaches.push(attach);
+                        parent.attaches.push(attach);
                     });
                     $scope.attachShow = true;
                 };
 
                 $scope.removeAttach = function(attach) {
                     attach.$remove(function() {
-                        $scope.blog.attaches = _.without($scope.blog.attaches, attach);
-                        if ($scope.blog.attaches.length === 0) {
+                        parent.attaches = _.without(parent.attaches, attach);
+                        if (parent.attaches.length === 0) {
                             $scope.attachShow = false;
                         }
                     });

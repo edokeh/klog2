@@ -80,7 +80,7 @@ define(function(require, exports, module) {
             dest: 'htmlContent'
         });
 
-        Editor.addAttachFn($scope);
+        Editor.addAttachFn($scope, $scope.blog);
 
     }];
 

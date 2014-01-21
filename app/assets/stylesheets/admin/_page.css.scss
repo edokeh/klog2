@@ -1,7 +1,115 @@
+.page-list {
+
+  .panel-heading {
+    background: $blue;
+    border-bottom: 0;
+    color: white;
+    padding: 0;
+
+    h2 {
+      float: left;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    > ul {
+      float: right;
+      background: $blue-dark;
+      list-style-type: none;
+      padding-left: 0;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 0;
+      border-top-right-radius: 3px;
+
+      > li {
+        float: left;
+        border-left: 1px solid $blue-light;
+        height: 100%;
+
+        > a {
+          color: white;
+          display: block;
+          padding: 0 20px;
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .list-group {
+    overflow: auto;
+    height: calc(100% - 40px);
+  }
+
+  .list-group-item {
+    padding-left: 19px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: whitesmoke;
+
+      .tools {
+        opacity: 1;
+      }
+    }
+  }
+
+  .list-group-item.ng-leave {
+    -webkit-transition: all 1s ease-in all; /* Safari/Chrome */
+    -moz-transition: all 1s linear all; /* Firefox */
+    -o-transition: all 1s linear all; /* Opera */
+    height: 0;
+  }
+
+  .list-group-item.active {
+    background: $blue-lighter;
+    border-color: #ddd;
+    border-left: 4px solid $blue-dark;
+    color: #333;
+    padding-left: 15px;
+
+    .tools {
+      opacity: 1;
+    }
+  }
+
+  .list-group-item-text {
+    color: $gray-light;
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  .tools {
+    opacity: 0;
+    -webkit-transition: opacity 500ms;
+
+    a {
+      font-size: 16px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
 .page-preview {
+  height: 100%;
+
+  &.editing {
+    width: 37.5%;
+  }
 
   h2 {
-    margin: 10px 30px;
+    margin: 10px 20px;
 
     a {
       i {
@@ -21,49 +129,87 @@
   .content {
     height: calc(100% - 53px);
     overflow: auto;
-    margin-left: 30px;
+    margin: 0 10px 0 20px;
+    padding-right: 5px;
 
     > div {
       max-width: 800px;
     }
   }
+}
 
-  .editor {
-    height: 100%;
-    padding-right: 30px;
+// 编辑器
+.page-editor {
+  height: 100%;
+  width: 37.5%;
 
-    input, textarea {
-      border: none;
+  input, textarea {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+
+    &:focus {
       box-shadow: none;
-      border-radius: 0;
+    }
+  }
 
-      &:focus {
-        box-shadow: none;
-      }
+  // 标题
+  .panel-heading {
+    padding: 2 20px;
+    background: white;
+
+    input, button {
+      display: inline-block;
+      vertical-align: middle;
     }
 
+    input {
+      padding: 0 12px;
+    }
+
+    // 标题
     .title {
-      border-bottom: 1px solid $gray-lighter;
-
-      input {
-        float: left;
-        width: calc(100% - 100px);
-        height: 52px;
-        font-size: 30px;
-      }
-
-      .action {
-        float: right;
-        margin-top: 9px;
-
-        button {
-          margin-right: 5px;
-        }
-      }
+      width: 60%;
+      font-size: 28px;
+      border-right: 1px solid $gray-lighter;
+      font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
     }
+
+    .slug {
+      width: calc(40% - 105px);
+      font-size: 16px;
+    }
+  }
+
+  .panel-body {
+    position: relative;
+    height: calc(100% - 55px);
+    padding: 0 10px 0 20px;
 
     textarea {
-      height: calc(100% - 53px);
+      height: 100%;
+    }
+
+    // 上传、提示等按钮
+    .tools {
+      position: absolute;
+      right: 15px;
+      top: 5px;
+
+      > a {
+        margin-right: 5px;
+        text-decoration: none;
+        color: #000;
+        opacity: 0.3;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        i {
+          font-size: 1.2em;
+        }
+      }
     }
   }
 }

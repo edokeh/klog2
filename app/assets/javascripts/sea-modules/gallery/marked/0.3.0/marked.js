@@ -844,13 +844,13 @@ Parser.prototype.tok = function() {
     }
     case 'heading': {
       return '<h'
-        + (this.token.depth + 1)  // hacked
+        + (this.token.depth + 2)  // @hacked
         + ' id="'
         + this.token.text.toLowerCase().replace(/[^\w]+/g, '-')
         + '">'
         + this.inline.output(this.token.text)
         + '</h'
-        + (this.token.depth + 1)
+        + (this.token.depth + 2)
         + '>\n';
     }
     case 'code': {

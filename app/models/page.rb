@@ -16,7 +16,7 @@ class Page < ActiveRecord::Base
 
   #将markup的content转换为html并写入字段
   def fill_html_content
-    self.html_content = Klog::Markdown.render(self.content)
+    self.html_content = Klog2::Markdown.render(self.content)
   end
 
   def set_sid

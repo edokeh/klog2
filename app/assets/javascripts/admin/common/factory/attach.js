@@ -22,7 +22,9 @@ define(function(require, exports, module) {
                     transformRequest: function(data) {
                         var formData = new FormData();
                         formData.append('file', data.originalFile, data.originalFile.name);
-                        formData.append('max_width', data.max_width);
+                        if (data.max_width) {
+                            formData.append('max_width', data.max_width);
+                        }
                         formData.setXHR = function(xhr) {
                             xhr.upload.onprogress = function(e) {
                                 value.originalFile.percent = 100.0 * e.loaded / e.total;
