@@ -68,6 +68,19 @@
     }
   }
 
+  .empty {
+    margin-top: 30%;
+    text-align: center;
+
+    i {
+      font-size: 0.9em;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
   .tools {
     opacity: 0;
     -webkit-transition: opacity 500ms;

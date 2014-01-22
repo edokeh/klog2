@@ -8,7 +8,7 @@ define(function(require, exports, module) {
 
         // 根据页数获取 blog 列表
         $scope.getBlogs = function(page) {
-            Blog.query({
+            return Blog.query({
                 status: $scope.currStatus.value,
                 page: page
             }, function(data) {
@@ -25,16 +25,32 @@ define(function(require, exports, module) {
 
         // 显示某一篇 blog 详情
         $scope.showBlog = function(blog) {
+            if (!blog) {
+                return;
+            }
             $scope.currBlog = blog;
             blog.$get({detail: true});
         };
 
         // 删除 blog
-        $scope.remove = function(blog) {
+        $scope.remove = function(blog, e) {
+            e.stopPropagation();
             Confirm.open('确定要删除“' + blog.title + '”？').then(function() {
                 blog.$remove(function() {
                     $scope.blogs = _.without($scope.blogs, blog);
-                    $scope.currBlog = $scope.blogs[0];
+                    if($scope.currBlog === blog){
+                        $scope.showBlog($scope.blogs[0]);
+                    }
+                });
+            });
+        };
+
+        // 立即发布
+        $scope.publish = function(blog) {
+            Confirm.open('确定要发布“' + blog.title + '”').then(function() {
+                blog.$publish(function() {
+                    $scope.blogs = _.without($scope.blogs, blog);
+                    $scope.showBlog($scope.blogs[0]);
                 });
             });
         };
@@ -49,7 +65,7 @@ define(function(require, exports, module) {
         $scope.STATUS = Blog.STATUS;
         $scope.currStatus = Blog.getStatusText($routeParams.status);
         $scope.blogs = [];
-        $scope.getBlogs(1);
+        $scope.$promise = $scope.getBlogs(1);
     }];
 
     IndexController.title = '文章列表';

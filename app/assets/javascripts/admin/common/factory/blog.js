@@ -40,6 +40,10 @@ define(function(require, exports, module) {
                             }
                         }
                     }
+                },
+                publish: {
+                    method: 'POST',
+                    url: '/admin/blogs/:id/publish'
                 }
             });
 

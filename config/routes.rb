@@ -26,7 +26,9 @@ Klog2::Application.routes.draw do
     resource :session
 
     resources :attaches
-    resources :blogs
+    resources :blogs do
+      post 'publish', :on => :member
+    end
     resources :categories
     resources :comments do
       get 'context', :on => :collection

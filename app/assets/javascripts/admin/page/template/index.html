@@ -91,14 +91,14 @@
         </form>
     </div>
     <div class="col-md-9 page-preview" ng-class="{editing: editing}">
-        <div class="panel panel-blue">
+        <div class="panel panel-blue" ng-show="currPage">
             <div class="panel-heading">
                 <h2 class="pull-left">
                     <a ng-href="/page/{{currPage.slug}}.html" target="_blank">{{currPage.title }} <i
                             class="fa fa-external-link"></i></a>
                 </h2>
 
-                <div class="actions pull-right" ng-show="currPage && !editing">
+                <div class="actions pull-right" ng-show="!editing">
                     <a href="" class="btn btn-primary" ng-click="startEdit()"><i class="fa fa-edit"></i> 修改</a>
                     <a href="" class="btn btn-danger" ng-click="remove(currPage)"><i class="fa fa-trash-o"></i> 删除</a>
                 </div>

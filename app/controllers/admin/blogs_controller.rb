@@ -38,6 +38,13 @@ class Admin::BlogsController < Admin::ApplicationController
     head :no_content
   end
 
+  def publish
+    @blog = Blog.find(params[:id])
+    @blog.publish!
+
+    head :no_content
+  end
+
   private
   def blog_params
     params.require(:blog).permit(:title, :content, :slug, :category_id, :status, :attaches)

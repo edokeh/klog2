@@ -2,7 +2,7 @@
     <div class="col-md-4 blog-list full-height">
         <div class="panel panel-blue">
             <div class="panel-heading clearfix">
-                <h2>{{currStatus.name}} <small ng-if="blogs.$resolved"> {{page.totalCount}} 篇文章</small></h2>
+                <h2>{{currStatus.name}} <small ng-show="blogs"> {{page.totalCount}} 篇文章</small></h2>
                 <ul>
                     <li><a href="#/blog/new"><i class="fa fa-pencil"></i></a></li>
                     <li class="dropdown">
@@ -14,8 +14,11 @@
                 </ul>
             </div>
             <div class="list-group" scroll-top-percent="listScrollTop">
-                <div ng-if="blogs.$resolved && blogs.length == 0">
-                    empty
+                <div ng-if="$promise.$resolved && blogs.length == 0" class="empty">
+                    <div>
+                        <h3>暂时没有文章</h3>
+                        <h3><a href="#/blog/new"><i class="fa fa-pencil"></i> 写文章</a></h3>
+                    </div>
                 </div>
                 <div class="list-group-item clearfix" ng-repeat="blog in blogs" ng-click="showBlog(blog)"
                      ng-class="{active: (blog.id === currBlog.id)}">
@@ -30,12 +33,12 @@
                         </p>
                     </div>
                     <div class="pull-right tools">
-                        <a href="#/blog/{{currBlog.id}}/edit"><i class="fa fa-edit"></i></a>
-                        <a href="" ng-click="remove(currBlog)"><i class="fa fa-trash-o"></i></a>
+                        <a href="#/blog/{{blog.id}}/edit"><i class="fa fa-edit"></i></a>
+                        <a href="" ng-click="remove(blog, $event)"><i class="fa fa-trash-o"></i></a>
                     </div>
                 </div>
                 <div class="list-group-item" ng-if="page.hasNext">
-                    <a href="" ng-click="getBlogs(page.current + 1)">查看更多</a>
+                    <a href="" ng-click="getBlogs(page.current + 1)">查看更多...</a>
                 </div>
             </div>
         </div>
@@ -50,6 +53,7 @@
                 </div>
 
                 <div class="actions pull-right">
+                    <a href="" ng-click="publish(currBlog)" ng-if="!currBlog.publish" class="btn btn-primary"><i class="fa fa-check"></i> 发布</a>
                     <a href="#/blog/{{currBlog.id}}/edit" class="btn btn-primary"><i class="fa fa-edit"></i> 修改</a>
                     <a href="" ng-click="remove(currBlog)" class="btn btn-danger"><i class="fa fa-trash-o"> </i>
                         删除</a>
