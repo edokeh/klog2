@@ -9,20 +9,22 @@
             </div>
             <div class="list-group" scroll-top-percent="listScrollTop">
                 <div class="list-group-item clearfix" ng-repeat="page in pages" ng-click="showPage(page)"
-                     ng-class="{active: (page.id === currPage.id)}">
+                     ng-class="{active: (page.id === currPage.id), warning: !page.id}">
                     <div class="pull-left">
                         <h4 class="list-group-item-heading">
                             {{ page.title }}
                         </h4>
 
-                        <p class="list-group-item-text">
+                        <p class="list-group-item-text" ng-show="page.id">
                             <span><i class="fa fa-clock-o"></i> {{ page.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
                         </p>
+                        <p class="list-group-item-text" ng-show="!page.id">
+                            &nbsp;
+                        </p>
                     </div>
-                    <div class="pull-right tools">
-                        <a href="" ng-click="edit()"><i class="fa fa-arrow-up fa-fw"></i></a>
-                        <a href="" ng-click="edit()"><i class="fa fa-arrow-down fa-fw"></i></a>
-                        <a href="" ng-click="remove(currPage)"><i class="fa fa-trash-o fa-fw"></i></a>
+                    <div class="pull-right tools" ng-show="page.id">
+                        <a href="" ng-click="edit()"><i class="fa fa-arrow-up"></i></a>
+                        <a href="" ng-click="edit()"><i class="fa fa-arrow-down"></i></a>
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
                 <input class="form-control title" type="text" ng-model="currPage.title" placeholder="页面标题"/>
                 <input class="form-control slug" type="text" ng-model="currPage.slug" placeholder="Slug"/>
                 <button class="btn btn-primary btn-sm">保存</button>
-                <button class="btn btn-default btn-sm" ng-click="cancelEdit()">退出</button>
+                <button class="btn btn-default btn-sm" ng-click="cancelEdit()" type="button">取消</button>
             </div>
             <div class="panel-body">
                 <textarea class="form-control" ng-model="currPage.content" selection="contentSel"
@@ -94,11 +96,11 @@
                             class="fa fa-external-link"></i></a>
                 </h2>
 
-                <div class="actions pull-right">
-                    <a href="" class="btn btn-primary btn-sm" ng-click="edit()"><i class="fa fa-edit"></i> 修改</a>
+                <div class="actions pull-right" ng-show="currPage && !editing">
+                    <a href="" class="btn btn-primary" ng-click="startEdit()"><i class="fa fa-edit"></i> 修改</a>
+                    <a href="" class="btn btn-danger" ng-click="remove(currPage)"><i class="fa fa-trash-o"></i> 删除</a>
                 </div>
             </div>
-
 
             <div class="content" ng-bind-html="currPage.html_content"
                  scroll-top-percent="scrollTopPercent"></div>

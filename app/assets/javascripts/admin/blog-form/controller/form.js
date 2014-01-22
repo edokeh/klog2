@@ -35,6 +35,7 @@ define(function(require, exports, module) {
                 minlength: '内容至少3个字'
             }
         };
+
         // 保存
         $scope.save = function(e) {
             if ($scope.form.$valid) {
@@ -59,9 +60,17 @@ define(function(require, exports, module) {
             }
         };
 
+        // 服务器渲染的预览
         $scope.preview = function() {
             document.getElementById('blogForm').submit();
         };
+
+        // 防止误操作
+        $scope.$on('$locationChangeStart', function(e) {
+            if ($scope.blog.content && !confirm('确定要离开？')) {
+                e.preventDefault();
+            }
+        });
 
         // 插入代码
         $scope.insertCode = function(attach) {

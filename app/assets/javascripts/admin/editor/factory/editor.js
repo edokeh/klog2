@@ -41,14 +41,6 @@ define(function (require, exports, module) {
                         });
                     }
                 });
-
-                // 防止误操作
-                $scope.$on('$locationChangeStart', function (e) {
-                    var content = $scope.$eval(options.src);  // 如果长度小于 minlength 为 undefined
-                    if (content && !confirm('确定要离开？')) {
-                        e.preventDefault();
-                    }
-                });
             },
 
             /**

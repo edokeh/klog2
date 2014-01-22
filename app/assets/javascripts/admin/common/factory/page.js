@@ -5,21 +5,31 @@ define(function(require, exports, module) {
     var _ = require('_');
 
     module.exports = {
-        'Page': ['$resource', '$http', 'Attach', function($resource, $http, Attach) {
+        'Page': ['$resource', '$http', 'Attach', '$sce', function($resource, $http, Attach, $sce) {
+
+            var responseInterceptor = {
+                response: function(response) {
+                    if (response.resource.attaches) {
+                        response.resource.attaches = _.map(response.resource.attaches, function(a) {
+                            return new Attach(a);
+                        });
+                    }
+                    response.resource.html_content = $sce.trustAsHtml(response.resource.html_content);
+                }
+            };
+
             var Page = $resource('/admin/pages/:id', {id: '@id'}, {
-                create: {method: 'POST'},
-                update: {method: 'PUT'},
+                create: {
+                    method: 'POST',
+                    interceptor: responseInterceptor
+                },
+                update: {
+                    method: 'PUT',
+                    interceptor: responseInterceptor
+                },
                 get: {
                     method: 'GET',
-                    interceptor: {
-                        response: function(response) {
-                            if (response.resource.attaches) {
-                                response.resource.attaches = _.map(response.resource.attaches, function(a) {
-                                    return new Attach(a);
-                                });
-                            }
-                        }
-                    }
+                    interceptor: responseInterceptor
                 }
             });
 

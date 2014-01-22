@@ -48,6 +48,10 @@
     }
   }
 
+  .list-group-item.warning {
+    background: lighten($yellow, 40%);
+  }
+
   .list-group-item-text {
     color: $gray-light;
     span {
