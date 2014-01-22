@@ -5,12 +5,12 @@ define(function(require, exports, module) {
     var angular = require('angularjs');
     var _ = require('_');
 
-    var Controller = ['$scope', 'Blog', 'Category', '$routeParams', '$location', 'Flash', 'Editor', 'RelativeUrlFactory', '$timeout', function($scope, Blog, Category, $routeParams, $location, Flash, Editor, RelativeUrlFactory, $timeout) {
+    var Controller = ['$scope', 'Blog', 'Category', '$routeParams', '$location', 'Flash', 'Editor', 'RelativeUrlFactory', '$timeout', 'ErrorMessage', function($scope, Blog, Category, $routeParams, $location, Flash, Editor, RelativeUrlFactory, $timeout, ErrorMessage) {
 
         $scope.relativeUrl = RelativeUrlFactory.create(module);
         $scope.categories = Category.query();
         $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
-        $scope.CSRF_TOKEN = CSRF_TOKEN;
+        $scope.CSRF_TOKEN = window.CSRF_TOKEN;
 
         // 编辑 or 新建
         if ($routeParams.id) {
@@ -24,39 +24,41 @@ define(function(require, exports, module) {
             });
         }
 
-        // 校验信息
-        var ERROR_MSG = {
-            title: {
-                required: '标题不能为空',
-                minlength: '标题至少2个字'
-            },
-            content: {
-                required: '内容不能为空',
-                minlength: '内容至少3个字'
+        ErrorMessage.extend({
+            blog: {
+                title: {
+                    required: '标题不能为空',
+                    minlength: '标题至少2个字'
+                },
+                content: {
+                    required: '内容不能为空',
+                    minlength: '内容至少3个字'
+                }
             }
-        };
+        });
 
         // 保存
         $scope.save = function(e) {
+            e.preventDefault();
+
+            // 显示报错
+            var showError = function() {
+                $timeout(function() {
+                    $scope.errorTrigger = angular.element(e.target.submitBtn);
+                });
+            };
+
             if ($scope.form.$valid) {
                 $scope.blog.$save(function() {
                     Flash.tmp($scope.blog.id);
                     $location.url('/blog?status=' + $scope.blog.status);
+                }, function(resp) {
+                    $scope.serverError = resp.data.errors;
+                    showError();
                 });
             }
             else {
-                // 显示报错
-                $scope.errors = [];
-                _.each($scope.form.$error, function(v, k) {
-                    if (_.isArray(v)) {
-                        _.each(v, function(error) {
-                            $scope.errors.push(ERROR_MSG[error.$name][k]);
-                        });
-                    }
-                });
-                $timeout(function() {
-                    $scope.errorTrigger = angular.element(e.target);
-                }, 0);
+                showError();
             }
         };
 

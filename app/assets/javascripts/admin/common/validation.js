@@ -13,6 +13,7 @@ define(function(require, exports, module) {
      *   1. 当元素校验时，会给 ngModelController 添加 $errorMessage 属性，信息源自 ErrorMessage 与 validation 的 key
      *   2. 表单提交时，给所有 ngModelController 添加 $submitted 属性
      *   3. 自动加上 novalidate
+     *   4. 表单 Controller 有 $errorMessages 属性，在提交时可以获取
      *   <form validation="blog" />
      */
     validation.directive('validation', ['ErrorMessage', function(ErrorMessage) {
@@ -22,8 +23,9 @@ define(function(require, exports, module) {
             link: function(scope, element, attrs, form) {
                 attrs.$set('novalidate', 'novalidate');
                 var errorMessage = ErrorMessage.get(attrs.validation || attrs.name);
+                form.$errorMessages = {};
 
-                // $submitted
+                // model.$submitted && form.$errorMessages
                 element.on('submit', function() {
                     element.addClass('ng-submitted');
                     _.each(form, function(control, name) {
@@ -53,6 +55,13 @@ define(function(require, exports, module) {
                                 control.$errorMessage = (errorMessage[control.$name] || {})[validationToken];
                             }
                         }
+                    }
+                    // 更新 form.$errorMessages
+                    if (control.$errorMessage) {
+                        form.$errorMessages[control.$name] = control.$errorMessage;
+                    }
+                    else {
+                        delete form.$errorMessages[control.$name];
                     }
                 });
 
@@ -110,14 +119,23 @@ define(function(require, exports, module) {
     validation.directive('serverValid', function() {
         return {
             restrict: 'CA',
-            require: 'ngModel',
-            link: function(scope, element, attrs, ngModel) {
+            require: ['ngModel', '?^form'],
+            link: function(scope, element, attrs, ctrls) {
+                var ngModel = ctrls[0];
+                var form = ctrls[1];
+
                 scope.$watch(function() {
                     return scope.$eval(attrs.serverValid);
                 }, function(value) {
                     if (value && value[ngModel.$name]) {
                         ngModel.$setValidity('server', false);
                         ngModel.$errorMessage = value[ngModel.$name][0];
+                        if (form && form.$errorMessages) {
+                            form.$errorMessages[ngModel.$name] = ngModel.$errorMessage;
+                        }
+                    }
+                    else {
+                        ngModel.$setValidity('server', true);
                     }
                 });
 

@@ -2,15 +2,29 @@
  * 页面列表
  */
 define(function(require, exports, module) {
+    var angular = require('angularjs');
     var _ = require('_');
 
-    var IndexController = ['$scope', 'Editor', 'Page', 'Confirm', function($scope, Editor, Page, Confirm) {
+    var IndexController = ['$scope', 'Editor', 'Page', 'Confirm', 'ErrorMessage', '$timeout', function($scope, Editor, Page, Confirm, ErrorMessage, $timeout) {
         $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
 
         Editor.stopPreview();
         Editor.addPreviewFn($scope, {
             src: 'currPage.content',
             dest: 'currPage.html_content'
+        });
+
+        ErrorMessage.extend({
+            page: {
+                title: {
+                    required: '标题不能为空',
+                    minlength: '标题至少2个字'
+                },
+                content: {
+                    required: '内容不能为空',
+                    minlength: '内容至少3个字'
+                }
+            }
         });
 
         $scope.pages = Page.query(function(data) {
@@ -37,6 +51,7 @@ define(function(require, exports, module) {
         // 修改
         $scope.startEdit = function() {
             $scope.editing = true;
+            $scope.serverError = null;
             Editor.startPreview();
             Editor.addAttachFn($scope, $scope.currPage);
         };
@@ -66,10 +81,25 @@ define(function(require, exports, module) {
             $scope.showPage(newPage);
         };
 
-        $scope.save = function() {
-            $scope.currPage.$save(function() {
-                $scope.cancelEdit();
-            });
+        $scope.save = function(e) {
+            // 显示报错
+            var showError = function() {
+                $timeout(function() {
+                    $scope.errorTrigger = angular.element(e.target.submitBtn);
+                });
+            };
+
+            if ($scope.form.$valid) {
+                $scope.currPage.$save(function() {
+                    $scope.cancelEdit();
+                }, function(resp) {
+                    $scope.serverError = resp.data.errors;
+                    showError();
+                });
+            }
+            else {
+                showError();
+            }
         };
 
         $scope.insertCode = function(attach) {

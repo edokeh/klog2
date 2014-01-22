@@ -18,31 +18,42 @@
                         <p class="list-group-item-text" ng-show="page.id">
                             <span><i class="fa fa-clock-o"></i> {{ page.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
                         </p>
+
                         <p class="list-group-item-text" ng-show="!page.id">
                             &nbsp;
                         </p>
                     </div>
                     <div class="pull-right tools" ng-show="page.id">
-                        <a href="" ng-click="up(page, $event)" ng-show="$index>0"><i class="fa fa-arrow-up"></i></a>
-                        <span class="disabled" ng-show="$index === 0"><i class="fa fa-arrow-up"></i></span>
-                        <a href="" ng-click="down(page, $event)" ng-show="$index < pages.length-1"><i class="fa fa-arrow-down"></i></a>
-                        <span class="disabled" ng-show="$index == pages.length-1"><i class="fa fa-arrow-down"></i></span>
+                        <a href="" ng-click="up(page, $event)" ng-show="!$first"><i class="fa fa-arrow-up"></i></a>
+                        <span class="disabled" ng-show="$first"><i class="fa fa-arrow-up"></i></span>
+                        <a href="" ng-click="down(page, $event)" ng-show="!$last"><i class="fa fa-arrow-down"></i></a>
+                        <span class="disabled" ng-show="$last"><i class="fa fa-arrow-down"></i></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-5 page-editor" ng-show="editing">
-        <form class="panel panel-default full-height" ng-submit="save()">
+        <form class="panel panel-default full-height" ng-submit="save($event)" name="form" validation="page">
             <div class="panel-heading">
-                <input class="form-control title" type="text" ng-model="currPage.title" placeholder="页面标题"/>
-                <input class="form-control slug" type="text" ng-model="currPage.slug" placeholder="Slug"/>
-                <button class="btn btn-primary btn-sm">保存</button>
+                <input class="form-control title" type="text" ng-model="currPage.title" placeholder="页面标题" required
+                       ng-minlength="2" maxlength="10" name="title"/>
+                <input class="form-control slug" type="text" ng-model="currPage.slug" placeholder="Slug" name="slug" server-valid="serverError" />
+                <button class="btn btn-primary btn-sm" name="submitBtn">保存</button>
                 <button class="btn btn-default btn-sm" ng-click="cancelEdit()" type="button">取消</button>
+
+                <div class="tooltip bottom fade popover-error" popover-window="errorTrigger" style="max-width: none;">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        <div ng-repeat="(name,error) in form.$errorMessages">
+                            <i class="fa fa-times-circle"></i> {{error}}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-body">
                 <textarea class="form-control" ng-model="currPage.content" selection="contentSel"
-                          scroll-top-percent="scrollTopPercent"></textarea>
+                          scroll-top-percent="scrollTopPercent" required ng-minlength="3" name="content"></textarea>
 
                 <div class="tools">
                     <a href="" file-input="doUpload(files)" multiple="true" accept="{{UPLOAD_FILE_TYPES}}"

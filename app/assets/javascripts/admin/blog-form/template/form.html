@@ -1,11 +1,11 @@
 <form name="form" id="blogForm" class="panel panel-info full-height blog-editor" action="/blog/preview" method="post"
-      target="_blank">
+      target="_blank" validation="blog" ng-submit="save($event)">
     <input type="hidden" ng-value="CSRF_TOKEN" name="authenticity_token"/>
 
     <div class="panel-body row">
         <div class="title">
             <input type="text" class="form-control" placeholder="文章标题" name="title"
-                   ng-model="blog.title" maxlength="25" required ng-minlength="2" autofocus/>
+                   ng-model="blog.title" maxlength="25" required ng-minlength="2" autofocus autocomplete="off"/>
         </div>
         <div class="col-md-6 content-wrap">
             <textarea class="content form-control" placeholder="写点什么..." ng-model="blog.content" name="content"
@@ -62,8 +62,8 @@
         </div>
     </div>
     <div class="panel-footer">
-        <button type="button" class="btn btn-primary btn-submit"
-                ng-click="save($event)" ng-class="{'btn-warning': blog.status == 0}">
+        <button type="submit" name="submitBtn" class="btn btn-primary btn-submit"
+                ng-click1="save($event)" ng-class="{'btn-warning': blog.status == 0}">
             {{ blog.status == 0 ? '存为草稿' : '立即发布' }}
         </button>
         <a href="" popover-trigger="configTrigger" class="btn-config">
@@ -77,7 +77,7 @@
         <div class="tooltip top fade popover-error" popover-window="errorTrigger" style="max-width: none;">
             <div class="tooltip-arrow"></div>
             <div class="tooltip-inner">
-                <div ng-repeat="error in errors"><i class="fa fa-times-circle"></i> {{error}}</div>
+                <div ng-repeat="(name,error) in form.$errorMessages"><i class="fa fa-times-circle"></i> {{error}}</div>
             </div>
         </div>
     </div>

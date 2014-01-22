@@ -10,6 +10,14 @@
     }
   }
 
+  // override error
+  input.ng-invalid {
+    &, &:focus {
+      border-color: transparent;
+      @include box-shadow(none);
+    }
+  }
+
   // 标题 + 内容
   .panel-body {
     padding: 0 30px;
@@ -18,13 +26,15 @@
 
   .title {
     input {
-      font-size: 34px;
-      font-weight: bolder;
-      font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
-      line-height: 57px;
-      height: 70px;
-      border-bottom: 1px solid #ccc;
-      padding: 6px;
+      &, &:focus {
+        font-size: 34px;
+        font-weight: bolder;
+        font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+        line-height: 57px;
+        height: 70px;
+        border-bottom: 1px solid #ccc;
+        padding: 6px;
+      }
     }
   }
 
@@ -123,23 +133,6 @@
   .btn-config {
     font-size: 1.5em;
     vertical-align: middle
-  }
-
-  // 出错提示
-  .popover-error {
-
-    .tooltip-arrow {
-      border-top-color: $red;
-    }
-
-    .tooltip-inner {
-      padding: 5px 15px;
-      font-size: 14px;
-      line-height: 1.8em;
-      background: $red;
-      color: $gray-lighter;
-      text-align: left;
-    }
   }
 
   // 选项 popover

@@ -140,6 +140,14 @@
     }
   }
 
+  // override error
+  input.ng-invalid {
+    &, &:focus {
+      border-color: transparent;
+      @include box-shadow(none);
+    }
+  }
+
   // 标题
   .panel-heading {
     padding: 2 20px;

@@ -33,6 +33,7 @@ textarea {
   resize: none;
 }
 
+// 校验报错
 .ng-submitted {
   input.ng-invalid {
     border-color: $red;
@@ -50,6 +51,27 @@ textarea {
 .error {
   color: darken($red, 10%);
   margin-top: 3px;
+}
+
+// 出错提示
+.popover-error {
+
+  &.top .tooltip-arrow {
+    border-top-color: $red;
+  }
+
+  &.bottom .tooltip-arrow{
+    border-bottom-color: $red;
+  }
+
+  .tooltip-inner {
+    padding: 5px 15px;
+    font-size: 14px;
+    line-height: 1.8em;
+    background: $red;
+    color: $gray-lighter;
+    text-align: left;
+  }
 }
 
 // 保存成功
