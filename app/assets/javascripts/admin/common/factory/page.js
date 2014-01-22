@@ -30,6 +30,14 @@ define(function(require, exports, module) {
                 get: {
                     method: 'GET',
                     interceptor: responseInterceptor
+                },
+                up: {
+                    method: 'POST',
+                    url: '/admin/pages/:id/up'
+                },
+                down: {
+                    method: 'POST',
+                    url: '/admin/pages/:id/down'
                 }
             });
 

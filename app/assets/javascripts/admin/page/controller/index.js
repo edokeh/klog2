@@ -7,9 +7,15 @@ define(function(require, exports, module) {
     var IndexController = ['$scope', 'Editor', 'Page', 'Confirm', function($scope, Editor, Page, Confirm) {
         $scope.UPLOAD_FILE_TYPES = '.jpg, .jpeg, .gif, .png, .pdf, .ppt, .pptx, .rar, .zip, .txt';
 
+        Editor.stopPreview();
+        Editor.addPreviewFn($scope, {
+            src: 'currPage.content',
+            dest: 'currPage.html_content'
+        });
+
         $scope.pages = Page.query(function(data) {
-            // 自动选中一篇，可能来自新建或修改页面
-            if ($scope.pages.length > 0 && !$scope.currPage) {
+            // 自动选中一篇
+            if ($scope.pages.length > 0) {
                 $scope.showPage($scope.pages[0]);
             }
         });
@@ -25,7 +31,6 @@ define(function(require, exports, module) {
                 return;
             }
             page.$get({detail: true});
-            Editor.addAttachFn($scope, $scope.currPage);
             $scope.cancelEdit();
         };
 
@@ -33,6 +38,7 @@ define(function(require, exports, module) {
         $scope.startEdit = function() {
             $scope.editing = true;
             Editor.startPreview();
+            Editor.addAttachFn($scope, $scope.currPage);
         };
 
         $scope.cancelEdit = function() {
@@ -50,11 +56,14 @@ define(function(require, exports, module) {
             // 避免重复
             var newPage = _.findWhere($scope.pages, {id: undefined});
             if (!newPage) {
-                newPage = new Page({title: '新页面'});
+                newPage = new Page({
+                    title: '新页面',
+                    content: '',
+                    attaches: []
+                });
                 $scope.pages.push(newPage);
             }
-            $scope.currPage = newPage;
-            $scope.startEdit();
+            $scope.showPage(newPage);
         };
 
         $scope.save = function() {
@@ -84,11 +93,24 @@ define(function(require, exports, module) {
             });
         };
 
-        Editor.stopPreview();
-        Editor.addPreviewFn($scope, {
-            src: 'currPage.content',
-            dest: 'currPage.html_content'
-        });
+        // 排序
+        $scope.up = function(page, e) {
+            e.stopPropagation();
+            page.$up(function() {
+                var index = _.indexOf($scope.pages, page);
+                $scope.pages[index] = $scope.pages[index - 1];
+                $scope.pages[index - 1] = page;
+            });
+        };
+
+        $scope.down = function(page, e) {
+            e.stopPropagation();
+            page.$down(function() {
+                var index = _.indexOf($scope.pages, page);
+                $scope.pages[index] = $scope.pages[index + 1];
+                $scope.pages[index + 1] = page;
+            });
+        };
     }];
 
     IndexController.title = '页面列表';

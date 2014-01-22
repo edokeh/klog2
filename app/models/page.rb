@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   validates :content, :length => {:in => 10..100000}
   validates :slug, :presence => true, :uniqueness => true
 
-  has_many :attaches, :as=>:parent, :dependent => :destroy
+  has_many :attaches, :as => :parent, :dependent => :destroy
 
   #将slug中的非法字符过滤掉
   def clean_slug
@@ -21,5 +21,23 @@ class Page < ActiveRecord::Base
 
   def set_sid
     self.update_column(:sid, id)
+  end
+
+  #向上
+  def up
+    above_record = Page.where("sid < ?", self.sid).order('sid ASC').last
+    return if above_record.nil?
+    tmp_id = self.sid
+    self.update_column(:sid, above_record.sid)
+    above_record.update_column(:sid, tmp_id)
+  end
+
+  #向下
+  def down
+    under_record = Page.where("sid > ?", self.sid).order('sid ASC').first
+    return if under_record.nil?
+    tmp_id = self.sid
+    self.update_column(:sid, under_record.sid)
+    under_record.update_column(:sid, tmp_id)
   end
 end

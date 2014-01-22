@@ -14,7 +14,7 @@ class Admin::PagesController < Admin::ApplicationController
 
     if @page.save
       # 更新附件的归属
-      Attach.update_parent(params[:attach_ids], @page)
+      Attach.update_parent((params[:attaches] || []).map { |a| a[:id] }, @page)
       render :show
     else
       render :show, :status => 422
@@ -27,7 +27,7 @@ class Admin::PagesController < Admin::ApplicationController
 
     if @page.update_attributes(page_params)
       # 更新附件的归属
-      Attach.update_parent(params[:attach_ids], @page)
+      Attach.update_parent((params[:attaches] || []).map { |a| a[:id] }, @page)
       render :show
     else
       render :show, :status => 422
@@ -45,14 +45,14 @@ class Admin::PagesController < Admin::ApplicationController
     @page = Page.find(params[:id])
     @page.up
 
-    redirect_to admin_pages_url
+    head :no_content
   end
 
   def down
     @page = Page.find(params[:id])
     @page.down
 
-    redirect_to admin_pages_url
+    head :no_content
   end
 
   private
