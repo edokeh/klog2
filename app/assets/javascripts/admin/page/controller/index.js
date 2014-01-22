@@ -48,6 +48,12 @@ define(function(require, exports, module) {
             $scope.cancelEdit();
         };
 
+        // 是否是最后一个，需要排除新建的
+        $scope.isLast = function(page) {
+            var last = _.last($scope.pages);
+            return last === page || (!last.id && _.indexOf($scope.pages, page) === $scope.pages.length - 2);
+        };
+
         // 修改
         $scope.startEdit = function() {
             $scope.editing = true;

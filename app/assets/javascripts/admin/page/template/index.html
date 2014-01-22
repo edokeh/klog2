@@ -26,8 +26,8 @@
                     <div class="pull-right tools" ng-show="page.id">
                         <a href="" ng-click="up(page, $event)" ng-show="!$first"><i class="fa fa-arrow-up"></i></a>
                         <span class="disabled" ng-show="$first"><i class="fa fa-arrow-up"></i></span>
-                        <a href="" ng-click="down(page, $event)" ng-show="!$last"><i class="fa fa-arrow-down"></i></a>
-                        <span class="disabled" ng-show="$last"><i class="fa fa-arrow-down"></i></span>
+                        <a href="" ng-click="down(page, $event)" ng-show="!isLast(page)"><i class="fa fa-arrow-down"></i></a>
+                        <span class="disabled" ng-show="isLast(page)"><i class="fa fa-arrow-down"></i></span>
                     </div>
                 </div>
             </div>
