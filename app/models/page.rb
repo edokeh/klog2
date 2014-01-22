@@ -6,7 +6,6 @@ class Page < ActiveRecord::Base
 
   validates :title, :length => {:in => 2..10}
   validates :content, :length => {:in => 3..100000}
-  validates :slug, :uniqueness => true
 
   has_many :attaches, :as => :parent, :dependent => :destroy
 

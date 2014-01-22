@@ -9,7 +9,6 @@ class Blog < ActiveRecord::Base
 
   validates :title, :length => {:in => 2..100}
   validates :content, :length => {:in => 3..100000}
-  validates :slug, :uniqueness => true
 
   before_validation :clean_slug
   before_save :fill_slug

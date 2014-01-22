@@ -5,6 +5,8 @@ module HasSlug
   included do
     before_validation :clean_slug
     before_save :fill_slug
+
+    validates :slug, :uniqueness => true
   end
 
   # 将slug中的非法字符过滤掉
