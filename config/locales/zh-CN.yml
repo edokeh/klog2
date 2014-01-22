@@ -206,6 +206,10 @@ zh-CN:
       models:
         category:
           taken: "分类名称已经存在"
+        blog:
+          taken: "Slug 已经被使用"
+        page:
+          taken: "Slug 已经被使用"
     models:
       blog: "文章"
       category: "分类"
