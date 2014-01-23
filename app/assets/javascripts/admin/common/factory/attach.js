@@ -3,10 +3,32 @@
  */
 define(function(require, exports, module) {
     var angular = require('angularjs');
+    var _ = require('_');
 
     module.exports = {
         'Attach': ['$resource', '$http', '$q', '$rootScope', function($resource, $http, $q, $rootScope) {
-            var Attach = $resource('/admin/attaches/:id', {id: '@id'}, {});
+            var Attach = $resource('/admin/attaches/:id', {id: '@id'}, {
+                query: {
+                    method: 'GET',
+                    isArray: true,
+                    transformResponse: $http.defaults.transformResponse.concat([function(data, header) {
+                        if (data.array && _.isArray(data.array)) {
+                            var array = data.array;
+                            array.$page = data.page;
+                            return array;
+                        }
+                        else {
+                            return data;
+                        }
+                    }]),
+                    interceptor: {
+                        response: function(response) {
+                            response.resource.$page = response.data.$page;
+                            return response.resource;
+                        }
+                    }
+                }
+            });
 
             // 创建，因为要获取上传进度，只能自己重写
             Attach.create = function(data, success, error) {

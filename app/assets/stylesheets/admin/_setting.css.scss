@@ -140,4 +140,19 @@
       }
     }
   }
+
+  .attach-wrap {
+    a.action {
+      margin-left: 20px;
+      color: $gray-light;
+      opacity: 0;
+      @include transition(opacity 500ms)
+    }
+
+    tr:hover {
+      a.action {
+        opacity: 1;
+      }
+    }
+  }
 }

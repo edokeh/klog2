@@ -1,5 +1,9 @@
 class Admin::AttachesController < Admin::ApplicationController
 
+  def index
+    @attaches = Attach.order('created_at DESC').includes(:parent).page(params[:page]).per(15)
+  end
+
   #上传附件
   def create
     @attach = Attach.new_by_params(params)
@@ -7,7 +11,7 @@ class Admin::AttachesController < Admin::ApplicationController
     if @attach.save
       render
     else
-      render :json => @attach.errors, :status => 422
+      render :status => 422
     end
   end
 

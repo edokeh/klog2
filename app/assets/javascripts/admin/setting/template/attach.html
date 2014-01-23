@@ -1,0 +1,39 @@
+<div class="row full-height setting-wrap">
+    <div class="col-md-1 nav-wrap">
+        <div ng-include="relativeUrl('./nav.html')"></div>
+    </div>
+    <div class="col-md-11 full-height panel-wrap">
+        <div class="panel panel-default full-height">
+            <div class="panel-body full-height attach-wrap">
+                <table class="table table-hover">
+                    <col width="30%"/>
+                    <col width="170px"/>
+                    <col width="170px"/>
+                    <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th class="text-right">大小</th>
+                        <th>创建时间</th>
+                        <th>归属</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="attach in attaches">
+                        <td>
+                            <a ng-href="{{attach.url}}" target="_blank">{{ attach.file_name }}</a>
+                            <a href="" class="action" ng-click="remove(attach)"><i class="fa fa-trash-o"></i> 删除</a>
+                        </td>
+                        <td class="text-right">{{ attach.file_size }}</td>
+                        <td>{{ attach.created_at |date:'yyyy-MM-dd HH:mm' }}</td>
+                        <td>
+                            <span class="label label-default">{{attach.parent_type}}</span>
+                            <a ng-href="{{attach.parent.url}}" target="_blank">{{ attach.parent.title }}</a>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <pagination page="attaches.$page" pager-click="jumpPage(page)"></pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

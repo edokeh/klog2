@@ -10,6 +10,7 @@ define(function(require, exports, module) {
     setting.seajsController(require('./controller/category'));
     setting.seajsController(require('./controller/password'));
     setting.seajsController(require('./controller/website'));
+    setting.seajsController(require('./controller/attach'));
 
     setting.factory(require('./factory/website'));
     setting.factory(require('./factory/password'));

@@ -50,6 +50,7 @@ define(function(require, exports, module) {
             .when('/setting/category', setting.createRoute('./controller/category'))
             .when('/setting/password', setting.createRoute('./controller/password'))
             .when('/setting/disqus', setting.createRoute('./controller/disqus'))
+            .when('/setting/attach', setting.createRoute('./controller/attach', {reloadOnSearch: false}))
             .otherwise({redirectTo: '/blog'});
     }]);
 
