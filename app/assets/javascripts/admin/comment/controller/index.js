@@ -53,17 +53,21 @@ define(function(require, exports, module) {
 
         // 新建回复
         $scope.newComment = new Comment();
-        $scope.newComment.$resolved = true;
+
+        $scope.replayComment = function(comment) {
+            $scope.showComment(comment);
+            $scope.focusReply = true;
+        };
 
         $scope.create = function() {
             if ($scope.newComment.content.trim().length === 0) {
                 return;
             }
             $scope.newComment.parent = $scope.currComment.id;
+            $scope.newComment.$requesting = true;
             $scope.newComment.$save(function() {
                 $scope.comments.unshift($scope.newComment);
                 $scope.newComment = new Comment();
-                $scope.newComment.$resolved = true;
             });
         };
 

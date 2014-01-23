@@ -20,7 +20,7 @@
                         <article ng-click="showComment(comment)" ng-bind-html="comment.content"></article>
                         <footer>
                             <span class="date">{{ comment.created_at |date:'yyyy-MM-dd HH:mm'  }}</span>
-                            <a class="action" href="" ng-click="showComment(comment)"><i class="fa fa-reply"></i> 回复</a>
+                            <a class="action" href="" ng-click="replayComment(comment)"><i class="fa fa-reply"></i> 回复</a>
                             <a class="action" href="" ng-click="remove($event, comment)"><i class="fa fa-trash-o"></i>
                                 删除</a>
                         </footer>
@@ -54,8 +54,8 @@
                 </article>
             </div>
             <div class="reply">
-                <textarea class="form-control" rows="3" ng-model="newComment.content" placeholder="果断反击..." ng-keyup="shortcutCreate($event)"></textarea>
-                <button class="btn btn-primary pull-right" ng-click="create()" ng-disabled="!commentContext.$resolved || !newComment.$resolved">回复</button>
+                <textarea class="form-control" rows="3" ng-model="newComment.content" placeholder="果断反击..." ng-keyup="shortcutCreate($event)" focus-if="focusReply"></textarea>
+                <button class="btn btn-primary pull-right" ng-click="create()" ng-disabled="!commentContext.$resolved || newComment.$requesting">回复</button>
             </div>
         </div>
     </div>

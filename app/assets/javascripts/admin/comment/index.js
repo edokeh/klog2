@@ -10,5 +10,7 @@ define(function(require, exports, module) {
 
     comment.factory(require('./factory/comment'));
 
+    comment.directive(require('./directive/focus-if'));
+
     module.exports = comment;
 });
