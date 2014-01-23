@@ -1,0 +1,7 @@
+<ul class="pagination" ng-show="isShow">
+    <li ng-class="{disabled: currPage == 1}"><a href="" ng-click="jump(currPage-1)">上一页</a></li>
+    <li ng-repeat="page in pages track by $index" ng-class="{active: (page == currPage), disabled: (page == omit)}">
+        <a href="" ng-click="jump(page)">{{page}}</a>
+    </li>
+    <li ng-class="{disabled: currPage == totalPage}"><a href="" ng-click="jump(currPage+1)">下一页</a></li>
+</ul>
