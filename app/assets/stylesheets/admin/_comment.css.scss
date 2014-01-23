@@ -1,10 +1,18 @@
-
 // 评论列表
 .comment-list {
   @include single-transition(width, 2s, ease-in, 1s);
 
   .panel-heading {
-    padding: 10px 15px 10px 30px;
+    @include clearfix();
+
+    h2 {
+      float: left;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      padding-left: 20px;
+      margin: 0;
+    }
   }
 
   .list-group {
@@ -24,6 +32,7 @@
 
     article {
       margin-bottom: 30px;
+      cursor: pointer;
     }
 
     footer {
@@ -77,7 +86,7 @@
 
 .comment-context {
   .panel-heading {
-    padding: 10px 15px 10px 30px;
+    padding: 10px 15px;
 
     a {
       color: white;
@@ -89,9 +98,10 @@
   }
 
   .panel-body {
-    height: calc(100% - 40px);
+    height: calc(100% - 40px - 101px - 30px); // header + reply + margin
     overflow: auto;
-    padding: 15px 30px;
+    padding: 0px 20px;
+    margin: 15px 0;
   }
 
   article {
@@ -113,17 +123,23 @@
     padding-left: 10px;
   }
 
+  // 回复区域
   .reply {
-    margin-top: 10px;
-    border-top: 1px solid #eee;
+    padding: 10px 8px;
+    border-top: 1px solid $gray-lighter;
+    @include clearfix();
 
     textarea {
-      height: 80px
+      height: 80px;
+      float: left;
+      width: calc(100% - 60px);
+      @include no-border-input();
     }
 
     button {
       height: 80px;
       width: 60px;
+      float: left;
     }
   }
 }

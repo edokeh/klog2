@@ -50,12 +50,6 @@
   }
 
   .list-group-item.active {
-    background: $blue-lighter;
-    border-color: #ddd;
-    border-left: 4px solid $blue-dark;
-    color: #333;
-    padding-left: 15px;
-
     .tools {
       opacity: 1;
     }

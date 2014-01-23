@@ -8,16 +8,27 @@ define(function(require, exports, module) {
 
         // 获取评论列表
         $scope.getComments = function(cursor) {
-            Comment.query({cursor: cursor}, function(data) {
+            $scope.$listPromise = Comment.query({cursor: cursor}, function(data) {
                 $scope.comments = $scope.comments.concat(data);
                 $scope.cursor = data.$cursor;
+
+                if (data.length > 0 && !$scope.currComment) {
+                    $scope.showComment($scope.comments[0]);
+                }
             });
+        };
+
+        $scope.refresh = function() {
+            $scope.comments = [];
+            $scope.getComments();
         };
 
         // 显示某一篇评论上下文
         $scope.showComment = function(comment) {
+            if (!comment || $scope.currComment === comment) {
+                return;
+            }
             $scope.currComment = comment;
-
             $scope.commentContext = Comment.getContext({comment_id: comment.id});
         };
 
@@ -26,26 +37,48 @@ define(function(require, exports, module) {
             event.stopPropagation();
             Confirm.open('确定要删除这条评论？').then(function() {
                 comment.$remove(function() {
+                    // 重新选一个
+                    if ($scope.currComment === comment) {
+                        var index = _.indexOf($scope.comments, comment);
+                        index = (index === $scope.comments.length - 1) ? index - 1 : index + 1;  // 下一个 or 上一个
+                        $scope.showComment($scope.comments[index]);
+                    }
                     $scope.comments = _.without($scope.comments, comment);
-                    //$scope.currBlog = $scope.blogs[0];
                 });
             });
         };
 
+        // 新建回复
         $scope.newComment = new Comment();
-        $scope.create = function(){
+        $scope.newComment.$resolved = true;
+
+        $scope.create = function() {
+            if ($scope.newComment.content.trim().length === 0) {
+                return;
+            }
             $scope.newComment.parent = $scope.currComment.id;
-            $scope.newComment.$save();
+            $scope.newComment.$save(function() {
+                $scope.comments.unshift($scope.newComment);
+                $scope.newComment = new Comment();
+                $scope.newComment.$resolved = true;
+            });
         };
 
-        $scope.closeCurr = function(){
-            $scope.currComment = null;
+        // ctrl + enter 快捷键回复
+        $scope.shortcutCreate = function(e) {
+            if (e.ctrlKey && e.which === 13) {
+                $scope.create();
+            }
         };
 
         // scroll 到底部时载入下一页
+        var debounceGet = _.debounce(function() {
+            $scope.getComments($scope.cursor.next);
+        }, 300);
+
         $scope.$watch('listScrollTop', function(value) {
             if (value >= 0.95 && $scope.cursor.hasNext) {
-                $scope.getComments($scope.cursor.next);
+                debounceGet();
             }
         });
 

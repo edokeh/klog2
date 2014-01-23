@@ -37,12 +37,6 @@
   }
 
   .list-group-item.active {
-    background: $blue-lighter;
-    border-color: #ddd;
-    border-left: 4px solid $blue-dark;
-    color: #333;
-    padding-left: 15px;
-
     .tools {
       opacity: 1;
     }
@@ -131,13 +125,7 @@
   width: 37.5%;
 
   input, textarea {
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-
-    &:focus {
-      box-shadow: none;
-    }
+    @include no-border-input();
   }
 
   // override error

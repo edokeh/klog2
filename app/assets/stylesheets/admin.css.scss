@@ -33,6 +33,16 @@ textarea {
   resize: none;
 }
 
+@mixin no-border-input() {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
 // 校验报错
 .ng-submitted {
   input.ng-invalid {
@@ -277,6 +287,13 @@ textarea {
         }
       }
     }
+  }
+
+  .list-group-item.active {
+    background: $blue-lighter;
+    border-color: #ddd;
+    border-left: 4px solid $blue-dark;
+    color: #333;
   }
 }
 

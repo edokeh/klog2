@@ -1,13 +1,7 @@
 // 编辑器
 .blog-editor {
   input, textarea, select {
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-
-    &:focus {
-      box-shadow: none;
-    }
+    @include no-border-input();
   }
 
   // override error

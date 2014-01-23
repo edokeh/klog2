@@ -1,7 +1,13 @@
 <div class="row full-height">
-    <div class="comment-list full-height" ng-class="{'col-md-8': currComment, 'col-md-12': !currComment}">
+    <div class="col-md-8 comment-list full-height">
         <div class="panel panel-blue">
-            <div class="panel-heading">共有 10 条评论</div>
+            <div class="panel-heading">
+                <h2>最近的 {{comments.length}} 条评论</h2>
+                <ul>
+                    <li><a href="" title="刷新" ng-click="refresh()"><i class="fa fa-refresh"></i></a></li>
+                    <li><a href="http://disqus.com/admin/" title="Disqus 管理页面" target="_blank"><i class="fa fa-external-link"></i></a></li>
+                </ul>
+            </div>
             <div class="list-group" scroll-top-percent="listScrollTop">
                 <div ng-if="comments.$resolved && blogs.length == 0">
                     empty
@@ -11,7 +17,7 @@
                     <div class="content">
                         <a class="title" ng-href="/blog/{{ comment.blog.slug}}.html#comment-{{ comment.id }}"
                            target="_blank">{{ comment.blog.title }}</a>
-                        <article ng-bind-html="comment.content"></article>
+                        <article ng-click="showComment(comment)" ng-bind-html="comment.content"></article>
                         <footer>
                             <span class="date">{{ comment.created_at |date:'yyyy-MM-dd HH:mm'  }}</span>
                             <a class="action" href="" ng-click="showComment(comment)"><i class="fa fa-reply"></i> 回复</a>
@@ -28,16 +34,15 @@
                         <img ng-src="{{ comment.author_avatar }}"/>
                     </div>
                 </div>
-                <div class="list-group-item">
-                    <a href="" ng-click="getComments(cursor)">查看更多</a>
+                <div class="list-group-item" ng-show="$listPromise.$resolved">
+                    <a href="" ng-click="getComments(cursor)">查看更多...</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 comment-context full-height" ng-show="currComment">
+    <div class="col-md-4 comment-context full-height">
         <div class="panel panel-blue">
-            <div class="panel-heading">回复评论 <a href="" ng-click="closeCurr()" class="pull-right"><i
-                    class="fa fa-times"></i></a></div>
+            <div class="panel-heading">回复评论</div>
             <div class="panel-body">
                 <article ng-style="{'margin-left': $index * 20 + 'px'}" ng-class="{quoted: $index > 0}"
                          ng-repeat="comment in commentContext">
@@ -47,12 +52,10 @@
                     </header>
                     <section ng-bind-html="comment.content"></section>
                 </article>
-                <div class="reply input-group clearfix">
-                    <textarea class="form-control" rows="3" ng-model="newComment.content"></textarea>
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary pull-right" ng-click="create()">回复</button>
-                    </div>
-                </div>
+            </div>
+            <div class="reply">
+                <textarea class="form-control" rows="3" ng-model="newComment.content" placeholder="果断反击..." ng-keyup="shortcutCreate($event)"></textarea>
+                <button class="btn btn-primary pull-right" ng-click="create()" ng-disabled="!commentContext.$resolved || !newComment.$resolved">回复</button>
             </div>
         </div>
     </div>
