@@ -7,8 +7,7 @@ class Admin::CommentsController < Admin::ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.save
-
-    head :no_content
+    render :show
   end
 
   def destroy
