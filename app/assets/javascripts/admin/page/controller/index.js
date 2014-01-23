@@ -42,22 +42,33 @@ define(function(require, exports, module) {
 
         // 显示某一篇页面详情
         $scope.showPage = function(page) {
-            $scope.stopEdit();
-            $scope.currPage = page;
-            if (page) {
-                if (page.id) {
-                    page.$get({detail: true});
+            if ($scope.editing) {
+                // 退出之前的编辑模式
+                $scope.stopEdit();
+                if ($scope.currPage === $scope.newPage) {
+                    $scope.newPage = null;
                 }
                 else {
-                    $scope.startEdit(); // 如果显示的是新建页面，立刻进入编辑模式
+                    $scope.dropUpdate();
                 }
             }
+            delete page.html_content; // copy 过来的 html_content 有问题
+            $scope.currPage = page;
+            page.$get({detail: true});
         };
 
-        // 是否是最后一个，需要排除新建的
-        $scope.isLast = function(page) {
-            var last = _.last($scope.pages);
-            return last === page || (!last.id && _.indexOf($scope.pages, page) === $scope.pages.length - 2);
+        // 新增
+        $scope.add = function() {
+            // 避免重复
+            if (!$scope.newPage) {
+                $scope.newPage = new Page({
+                    title: '新页面',
+                    content: '',
+                    attaches: []
+                });
+            }
+            $scope.currPage = $scope.newPage;
+            $scope.startEdit();
         };
 
         // 进入编辑模式
@@ -74,57 +85,24 @@ define(function(require, exports, module) {
         $scope.stopEdit = function() {
             $scope.editing = false;
             Editor.stopPreview();
-            return true;
         };
 
         // 放弃新建页面，并且删除它
         $scope.dropCreate = function() {
             $scope.stopEdit();
-            $scope.pages = _.without($scope.pages, $scope.currPage);
-            $scope.showPage($scope.pages[0]);
+            $scope.newPage = null;
+            if ($scope.pages.length > 0) {
+                $scope.showPage($scope.pages[0]);
+            }
         };
 
         // 放弃修改页面，回复数据
         $scope.dropUpdate = function() {
             $scope.stopEdit();
-            if (originalPage.id) {
-                angular.copy(originalPage, $scope.currPage);
-            }
+            angular.copy(originalPage, $scope.currPage);
         };
 
-        // 退出编辑模式，并放弃修改
-        $scope.dropEdit = function() {
-            if ($scope.stopEdit()) {
-                return;
-            }
-
-            if (!$scope.currPage.id) {
-                $scope.pages = _.without($scope.pages, $scope.currPage);
-                $scope.showPage($scope.pages[0]);
-            }
-            // 已有的页面，丢弃变动
-            else {
-                if (originalPage.id) {
-                    angular.copy(originalPage, $scope.currPage);
-                }
-            }
-        };
-
-        // 新增
-        $scope.add = function() {
-            // 避免重复
-            var newPage = _.findWhere($scope.pages, {id: undefined});
-            if (!newPage) {
-                newPage = new Page({
-                    title: '新页面',
-                    content: '',
-                    attaches: []
-                });
-                $scope.pages.push(newPage);
-            }
-            $scope.showPage(newPage);
-        };
-
+        // 保存
         $scope.save = function(e) {
             // 显示报错
             var showError = function() {
@@ -132,10 +110,16 @@ define(function(require, exports, module) {
                     $scope.errorTrigger = angular.element(e.target.submitBtn);
                 });
             };
+            var isCreate = !$scope.currPage.id;
 
             if ($scope.form.$valid) {
                 $scope.currPage.$save(function() {
+                    // 保存成功
                     $scope.stopEdit();
+                    if (isCreate) {
+                        $scope.pages.push($scope.newPage);
+                        $scope.newPage = null;
+                    }
                 }, function(resp) {
                     $scope.serverError = resp.data.errors;
                     showError();
@@ -162,7 +146,9 @@ define(function(require, exports, module) {
             Confirm.open('确定要删除“' + page.title + '”？').then(function() {
                 page.$remove(function() {
                     $scope.pages = _.without($scope.pages, page);
-                    $scope.showPage($scope.pages[0]);
+                    if ($scope.pages.length > 0) {
+                        $scope.showPage($scope.pages[0]);
+                    }
                 });
             });
         };

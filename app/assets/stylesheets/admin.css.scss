@@ -55,6 +55,7 @@ textarea {
 
 // 出错提示
 .popover-error {
+  max-width: none;
 
   &.top .tooltip-arrow {
     border-top-color: $red;

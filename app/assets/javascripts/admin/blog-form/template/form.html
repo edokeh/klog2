@@ -74,7 +74,7 @@
             <div class="arrow"></div>
             <div ng-include="relativeUrl('./config.html')"></div>
         </div>
-        <div class="tooltip top fade popover-error" popover-window="errorTrigger" style="max-width: none;">
+        <div class="tooltip top fade popover-error" popover-window="errorTrigger" style="">
             <div class="tooltip-arrow"></div>
             <div class="tooltip-inner">
                 <div ng-repeat="(name,error) in form.$errorMessages"><i class="fa fa-times-circle"></i> {{error}}</div>

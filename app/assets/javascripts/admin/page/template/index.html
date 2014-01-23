@@ -9,10 +9,10 @@
             </div>
             <div class="list-group" scroll-top-percent="listScrollTop">
                 <div class="list-group-item clearfix" ng-repeat="page in pages" ng-click="showPage(page)"
-                     ng-class="{active: (page.id === currPage.id), warning: !page.id}">
+                     ng-class="{active: (page.id === currPage.id)}">
                     <div class="pull-left">
                         <h4 class="list-group-item-heading">
-                            {{ page.title }}
+                            {{ page.title }} &nbsp;
                         </h4>
 
                         <p class="list-group-item-text" ng-show="page.id">
@@ -23,17 +23,17 @@
                             &nbsp;
                         </p>
                     </div>
-                    <div class="pull-right tools" ng-show="page.id">
+                    <div class="pull-right tools">
                         <a href="" ng-click="up(page, $event)" ng-show="!$first"><i class="fa fa-arrow-up"></i></a>
                         <span class="disabled" ng-show="$first"><i class="fa fa-arrow-up"></i></span>
-                        <a href="" ng-click="down(page, $event)" ng-show="!isLast(page)"><i
+                        <a href="" ng-click="down(page, $event)" ng-show="!$last"><i
                                 class="fa fa-arrow-down"></i></a>
-                        <span class="disabled" ng-show="isLast(page)"><i class="fa fa-arrow-down"></i></span>
+                        <span class="disabled" ng-show="$last"><i class="fa fa-arrow-down"></i></span>
                     </div>
                 </div>
-                <div class="list-group-item warning clearfix" ng-if="newPage">
+                <div class="list-group-item warning clearfix" ng-if="newPage" ng-click="startAdd()" ng-class="{active: (page.id === currPage.id)}">
                     <h4 class="list-group-item-heading">
-                        {{ newPage.title }}
+                        {{ newPage.title }} &nbsp;
                     </h4>
                 </div>
             </div>
@@ -47,9 +47,9 @@
                 <input class="form-control slug" type="text" ng-model="currPage.slug" placeholder="Slug" name="slug"
                        server-valid="serverError"/>
                 <button class="btn btn-primary btn-sm" name="submitBtn">保存</button>
-                <button class="btn btn-default btn-sm" ng-click="cancelEdit()" type="button">取消</button>
+                <button class="btn btn-default btn-sm" ng-click="currPage.id ? dropUpdate() : dropCreate()" type="button">取消</button>
 
-                <div class="tooltip bottom fade popover-error" popover-window="errorTrigger" style="max-width: none;">
+                <div class="tooltip bottom fade popover-error" popover-window="errorTrigger">
                     <div class="tooltip-arrow"></div>
                     <div class="tooltip-inner">
                         <div ng-repeat="(name,error) in form.$errorMessages">
