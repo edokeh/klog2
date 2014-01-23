@@ -76,6 +76,7 @@ define(function(require, exports, module) {
         $scope.startEdit = function() {
             $scope.editing = true;
             $scope.serverError = null;
+            $scope.scrollTopPercent = 0;
             angular.copy($scope.currPage, originalPage);  // 保存备份
             Editor.startPreview();
             Editor.addAttachFn($scope, $scope.currPage);
