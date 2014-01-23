@@ -1,5 +1,5 @@
-<div style="padding: 0px 5px;" class="config-wrap">
-    <table class="table table-condensed" style="width: 300px;margin-bottom:5px;">
+<div class="config-wrap">
+    <table class="table table-condensed">
         <tr>
             <td><i class="fa fa-book"></i></td>
             <td>
@@ -12,7 +12,8 @@
         <tr>
             <td><i class="fa fa-link"></i></td>
             <td>
-                <input class="form-control" type="text" placeholder="URL Slug" ng-model="blog.slug" name="slug" server-valid="serverError"/>
+                <input class="form-control" type="text" placeholder="URL Slug" ng-model="blog.slug" name="slug"
+                       server-valid="serverError"/>
             </td>
         </tr>
         <tr>
@@ -23,25 +24,21 @@
         </tr>
         <tr>
             <td><i class="fa fa-save"></i></td>
-            <td>
-                <div style="padding: 5px 0 5px 12px;">
-                    <label class="radio-inline">
-                        <input type="radio" value="0" ng-model="blog.status"> 存为草稿
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="radio" value="1" ng-model="blog.status"> 立即发布
-                    </label>
-                </div>
+            <td class="input-wrap">
+                <label class="radio-inline">
+                    <input type="radio" value="0" ng-model="blog.status"> 存为草稿
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" value="1" ng-model="blog.status"> 立即发布
+                </label>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td>
-                <div style="padding: 5px 0 5px 12px;">
-                    <label class="checkbox-inline">
-                        <input type="checkbox"/> 自动保存
-                    </label>
-                </div>
+            <td class="input-wrap">
+                <label class="checkbox-inline">
+                    <input type="checkbox"/> 自动保存
+                </label>
             </td>
         </tr>
     </table>

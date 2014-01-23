@@ -61,7 +61,7 @@ textarea {
     border-top-color: $red;
   }
 
-  &.bottom .tooltip-arrow{
+  &.bottom .tooltip-arrow {
     border-bottom-color: $red;
   }
 
@@ -280,10 +280,7 @@ textarea {
   }
 }
 
-@import './admin/blog';
-@import './admin/blog_form';
-
-// 上传的显示
+// 上传的附件列表显示
 .upload-attaches {
   max-height: 170px;
   overflow-y: auto;
@@ -332,6 +329,8 @@ textarea {
   }
 }
 
+@import './admin/blog';
+@import './admin/blog_form';
 @import './admin/comment';
 @import './admin/page';
 @import './admin/setting';
