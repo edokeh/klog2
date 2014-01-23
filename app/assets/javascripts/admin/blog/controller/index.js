@@ -6,6 +6,8 @@ define(function(require, exports, module) {
 
     var IndexController = ['$scope', '$routeParams', 'Blog', 'Flash', 'Confirm', function($scope, $routeParams, Blog, Flash, Confirm) {
 
+        var getOnce;
+
         // 根据页数获取 blog 列表
         $scope.getBlogs = function(page) {
             return Blog.query({
@@ -20,6 +22,7 @@ define(function(require, exports, module) {
                     var blog = tmpId ? _.findWhere($scope.blogs, {id: tmpId}) : $scope.blogs[0];
                     $scope.showBlog(blog);
                 }
+                getOnce = _.once($scope.getBlogs); // 防止滚动条到底事件重复执行
             });
         };
 
@@ -38,7 +41,7 @@ define(function(require, exports, module) {
             Confirm.open('确定要删除“' + blog.title + '”？').then(function() {
                 blog.$remove(function() {
                     $scope.blogs = _.without($scope.blogs, blog);
-                    if($scope.currBlog === blog){
+                    if ($scope.currBlog === blog) {
                         $scope.showBlog($scope.blogs[0]);
                     }
                 });
@@ -58,7 +61,7 @@ define(function(require, exports, module) {
         // scroll 到底部时载入下一页
         $scope.$watch('listScrollTop', function(value) {
             if (value >= 0.95 && $scope.page.hasNext) {
-                $scope.getBlogs($scope.page.current + 1);
+                getOnce($scope.page.current + 1);
             }
         });
 

@@ -6,6 +6,8 @@ define(function(require, exports, module) {
 
     var IndexController = ['$scope', 'Comment', 'Confirm', function($scope, Comment, Confirm) {
 
+        var getOnce;
+
         // 获取评论列表
         $scope.getComments = function(cursor) {
             $scope.$listPromise = Comment.query({cursor: cursor}, function(data) {
@@ -15,6 +17,7 @@ define(function(require, exports, module) {
                 if (data.length > 0 && !$scope.currComment) {
                     $scope.showComment($scope.comments[0]);
                 }
+                getOnce = _.once($scope.getComments);
             });
         };
 
@@ -72,13 +75,9 @@ define(function(require, exports, module) {
         };
 
         // scroll 到底部时载入下一页
-        var debounceGet = _.debounce(function() {
-            $scope.getComments($scope.cursor.next);
-        }, 300);
-
         $scope.$watch('listScrollTop', function(value) {
             if (value >= 0.95 && $scope.cursor.hasNext) {
-                debounceGet();
+                getOnce($scope.cursor.next);
             }
         });
 
