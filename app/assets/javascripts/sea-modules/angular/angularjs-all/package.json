@@ -1,0 +1,16 @@
+{
+    "family": "angular",
+    "name": "angularjs-all",
+    "version": "1.2.7",
+    "spm": {
+        "output": ["index.js"],
+        "include": "all",
+        "alias": {
+            "angularjs": "angular/angularjs/1.2.7/angular",
+            "angular-animate": "angular/angularjs/1.2.7/angular-animate",
+            "angular-resource": "angular/angularjs/1.2.7/angular-resource",
+            "angular-route": "angular/angularjs/1.2.7/angular-route",
+            "angular-sanitize": "angular/angularjs/1.2.7/angular-sanitize"
+        }
+    }
+}
