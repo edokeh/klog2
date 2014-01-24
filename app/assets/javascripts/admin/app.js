@@ -1,9 +1,9 @@
 define(function(require, exports, module) {
-    var angular = require('angularjs');
+    var angular = require('angular-all');
     var SeajsLazyAngular = require('angular/seajs-lazy-angular/0.0.1/seajs-lazy-angular');
     var common = require('./common/index');
 
-    var admin = angular.module('admin', [common.name]);
+    var admin = angular.module('admin', ['angularjs-all', common.name]);
 
     admin.config(SeajsLazyAngular.cacheInternals);
     SeajsLazyAngular.patchAngular();

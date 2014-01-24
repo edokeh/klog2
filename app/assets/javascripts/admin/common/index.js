@@ -1,18 +1,10 @@
 define(function(require, exports, module) {
     var angular = require('angularjs');
-    var ngAnimate = require('angular-animate');
-    var ngResource = require('angular-resource');
-    var ngRoute = require('angular-route');
-    var ngSanitize = require('angular-sanitize');
     var bootstrap = require('angular/bootstrap/0.0.1/index');
     var ajaxSpinner = require('./ajax-spinner');
     var validation = require('./validation');
 
     var common = angular.module('common', [
-        ngAnimate.name,
-        ngRoute.name,
-        ngResource.name,
-        ngSanitize.name,
         bootstrap.name,
         ajaxSpinner.name,
         validation.name
