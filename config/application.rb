@@ -23,7 +23,9 @@ module Klog2
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = "zh-CN"
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %w(#{config.root}/lib)
+
+    config.assets.precompile += %w(admin.css public.css)
 
     config.after_initialize do
       Setting.defaults = {
