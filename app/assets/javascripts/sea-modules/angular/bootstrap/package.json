@@ -1,0 +1,12 @@
+{
+    "family": "angular",
+    "name": "bootstrap",
+    "version": "0.0.1",
+    "spm": {
+        "output": ["index.js"],
+        "alias": {
+            "angularjs": "angularjs",
+            "_": "_"
+        }
+    }
+}

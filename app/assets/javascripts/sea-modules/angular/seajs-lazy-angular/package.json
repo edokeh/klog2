@@ -1,0 +1,11 @@
+{
+    "family": "angular",
+    "name": "seajs-lazy-angular",
+    "version": "0.0.1",
+    "spm": {
+        "output": ["seajs-lazy-angular.js"],
+        "alias": {
+            "angularjs": "angularjs"
+        }
+    }
+}
