@@ -5,7 +5,7 @@ define(function(require) {
     var ngRoute = require('angular-route');
     var ngSanitize = require('angular-sanitize');
 
-    var angularjsAll = angular.module('angularjs-all', [
+    var angularjsAll = angular.module('ngAll', [
         ngAnimate.name,
         ngRoute.name,
         ngResource.name,

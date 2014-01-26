@@ -1,10 +1,10 @@
-define("angular/angularjs-all/1.2.7/index-debug", [ "angular/angularjs/1.2.7/angular-debug", "angular/angularjs/1.2.7/angular-animate-debug", "angularjs-debug", "angular/angularjs/1.2.7/angular-resource-debug", "angular/angularjs/1.2.7/angular-route-debug", "angular/angularjs/1.2.7/angular-sanitize-debug" ], function(require) {
+define("angular/angularjs-all/1.2.7/index-debug", [ "angular/angularjs/1.2.7/angular-debug", "angular/angularjs/1.2.7/angular-animate-debug", "angular/angularjs/1.2.7/angular-resource-debug", "angular/angularjs/1.2.7/angular-route-debug", "angular/angularjs/1.2.7/angular-sanitize-debug" ], function(require) {
     var angular = require("angular/angularjs/1.2.7/angular-debug");
     var ngAnimate = require("angular/angularjs/1.2.7/angular-animate-debug");
     var ngResource = require("angular/angularjs/1.2.7/angular-resource-debug");
     var ngRoute = require("angular/angularjs/1.2.7/angular-route-debug");
     var ngSanitize = require("angular/angularjs/1.2.7/angular-sanitize-debug");
-    var angularjsAll = angular.module("angularjs-all", [ ngAnimate.name, ngRoute.name, ngResource.name, ngSanitize.name ]);
+    var angularjsAll = angular.module("ngAll", [ ngAnimate.name, ngRoute.name, ngResource.name, ngSanitize.name ]);
     return angular;
 });
 
@@ -18505,8 +18505,8 @@ define("angular/angularjs-all/1.2.7/index-debug", [ "angular/angularjs/1.2.7/ang
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
-define("angular/angularjs/1.2.7/angular-animate-debug", [ "angularjs" ], function(require) {
-    var angular = require("angularjs");
+define("angular/angularjs/1.2.7/angular-animate-debug", [ "angular/angularjs/1.2.7/angular-debug" ], function(require) {
+    var angular = require("angular/angularjs/1.2.7/angular-debug");
     (function(window, angular, undefined) {
         "use strict";
         /* jshint maxlen: false */
@@ -19723,8 +19723,8 @@ define("angular/angularjs/1.2.7/angular-animate-debug", [ "angularjs" ], functio
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
-define("angular/angularjs/1.2.7/angular-resource-debug", [ "angularjs" ], function(require) {
-    var angular = require("angularjs");
+define("angular/angularjs/1.2.7/angular-resource-debug", [ "angular/angularjs/1.2.7/angular-debug" ], function(require) {
+    var angular = require("angular/angularjs/1.2.7/angular-debug");
     (function(window, angular, undefined) {
         "use strict";
         var $resourceMinErr = angular.$$minErr("$resource");
@@ -20259,8 +20259,8 @@ define("angular/angularjs/1.2.7/angular-resource-debug", [ "angularjs" ], functi
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
-define("angular/angularjs/1.2.7/angular-route-debug", [ "angularjs" ], function(require) {
-    var angular = require("angularjs");
+define("angular/angularjs/1.2.7/angular-route-debug", [ "angular/angularjs/1.2.7/angular-debug" ], function(require) {
+    var angular = require("angular/angularjs/1.2.7/angular-debug");
     (function(window, angular, undefined) {
         "use strict";
         /**
@@ -21086,8 +21086,8 @@ define("angular/angularjs/1.2.7/angular-route-debug", [ "angularjs" ], function(
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
-define("angular/angularjs/1.2.7/angular-sanitize-debug", [ "angularjs" ], function(require) {
-    var angular = require("angularjs");
+define("angular/angularjs/1.2.7/angular-sanitize-debug", [ "angular/angularjs/1.2.7/angular-debug" ], function(require) {
+    var angular = require("angular/angularjs/1.2.7/angular-debug");
     (function(window, angular, undefined) {
         "use strict";
         var $sanitizeMinErr = angular.$$minErr("$sanitize");
