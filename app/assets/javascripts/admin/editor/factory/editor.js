@@ -2,7 +2,7 @@
  * Markdown 编辑器
  */
 define(function (require, exports, module) {
-    var marked = require('gallery/marked/0.3.0/marked');
+    var marked = require('marked');
     var _ = require('_');
 
     marked.setOptions({

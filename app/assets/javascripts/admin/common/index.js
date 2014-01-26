@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
     var angular = require('angularjs');
-    var bootstrap = require('angular/bootstrap/0.0.1/index');
+    var bootstrap = require('bootstrap');
     var ajaxSpinner = require('./ajax-spinner');
     var validation = require('./validation');
 
