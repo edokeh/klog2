@@ -3,7 +3,7 @@
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
-define("angular/angularjs/1.2.7/angular-mock",["angularjs"],function(require){ var angular = require("angularjs");(function(window, angular, undefined) {
+define("angular/angularjs/1.2.7/angular-mock",["angular/angularjs/1.2.7/angular"],function(require){ var angular = require("angular/angularjs/1.2.7/angular");(function(window, angular, undefined) {
 
 'use strict';
 

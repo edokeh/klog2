@@ -3,7 +3,7 @@
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
-define("angular/angularjs/1.2.7/angular-animate-debug",["angularjs"],function(require){ var angular = require("angularjs");(function(window, angular, undefined) {'use strict';
+define("angular/angularjs/1.2.7/angular-animate-debug",["angular/angularjs/1.2.7/angular-debug"],function(require){ var angular = require("angular/angularjs/1.2.7/angular-debug");(function(window, angular, undefined) {'use strict';
 
 /* jshint maxlen: false */
 
