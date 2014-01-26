@@ -47,13 +47,14 @@ gem 'coderay', '~>1.1.0'
 gem 'truncate_html', '~> 0.9.2'
 gem 'kaminari', '~> 0.15.0'
 gem 'cells', '~> 3.9.1'
+gem 'seajs-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 gem 'unicorn'
-
+gem 'newrelic_rpm'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 

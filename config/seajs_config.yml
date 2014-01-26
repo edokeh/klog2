@@ -1,0 +1,20 @@
+seajs_path: seajs/seajs/2.1.1/sea.js
+family: klog2
+output:
+  relative:
+    - admin/app.js
+    - admin/blog/index.js
+    - admin/blog-form/index.js
+    - admin/comment/index.js
+    - admin/editor/index.js
+    - admin/page/index.js
+    - admin/setting/index.js
+  all: []
+alias:
+  angular-all: angular-all
+  angularjs: angularjs
+  _: _
+  selection: selection
+  seajs-lazy-angular: seajs-lazy-angular
+  marked: marked
+  bootstrap: bootstrap
