@@ -1,14 +1,26 @@
 seajs_path: seajs/seajs/2.1.1/sea.js
-family: klog2
+family: klog
 output:
   relative:
     - admin/app.js
-    - admin/blog/index.js
-    - admin/blog-form/index.js
-    - admin/comment/index.js
-    - admin/editor/index.js
-    - admin/page/index.js
-    - admin/setting/index.js
+    - admin/blog/index.js:
+      - admin/blog/index.js
+      - admin/blog/template/*.html
+    - admin/blog-form/index.js:
+      - admin/blog-form/index.js
+      - admin/blog-form/template/*.html
+    - admin/comment/index.js:
+      - admin/comment/index.js
+      - admin/comment/template/*.html
+    - admin/editor/index.js:
+      - admin/editor/index.js
+      - admin/editor/template/*.html
+    - admin/page/index.js:
+       - admin/page/index.js
+       - admin/page/template/*.html
+    - admin/setting/index.js:
+       - admin/setting/index.js
+       - admin/setting/template/*.html
   all: []
 alias:
   angular-all: angular-all

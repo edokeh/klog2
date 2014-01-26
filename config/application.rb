@@ -26,6 +26,7 @@ module Klog2
     config.autoload_paths += %w(#{config.root}/lib)
 
     config.assets.precompile += %w(admin.css public.css)
+    config.assets.precompile += %w(html5shiv.js respond.js xhr-shim.js)
 
     config.after_initialize do
       Setting.defaults = {
