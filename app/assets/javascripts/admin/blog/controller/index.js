@@ -28,10 +28,10 @@ define(function(require, exports, module) {
 
         // 显示某一篇 blog 详情
         $scope.showBlog = function(blog) {
+            $scope.currBlog = blog;
             if (!blog) {
                 return;
             }
-            $scope.currBlog = blog;
             blog.$get({detail: true});
         };
 
