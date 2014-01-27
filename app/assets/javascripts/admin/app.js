@@ -1,3 +1,4 @@
+/*global ADMIN_PATH: true, CSRF_TOKEN: true, alert: true */
 define(function(require, exports, module) {
     var angular = require('angularjs');
     var common = require('./common/index');
@@ -14,7 +15,7 @@ define(function(require, exports, module) {
 
     admin.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 
-        $httpProvider.defaults.headers.common['X-CSRF-Token'] = window.CSRF_TOKEN;
+        $httpProvider.defaults.headers.common['X-CSRF-Token'] = CSRF_TOKEN;
         $httpProvider.defaults.headers.common['X-REQUESTED-WITH'] = 'XMLHttpRequest';
         $httpProvider.interceptors.push(['$q', function($q) {
             return {
@@ -30,11 +31,11 @@ define(function(require, exports, module) {
             };
         }]);
 
-        var blog = SeajsLazyAngular.createLazyStub('/assets/admin/blog/index');
-        var blogForm = SeajsLazyAngular.createLazyStub('/assets/admin/blog-form/index');
-        var comment = SeajsLazyAngular.createLazyStub('/assets/admin/comment/index');
-        var page = SeajsLazyAngular.createLazyStub('/assets/admin/page/index');
-        var setting = SeajsLazyAngular.createLazyStub('/assets/admin/setting/index');
+        var blog = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/blog/index');
+        var blogForm = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/blog-form/index');
+        var comment = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/comment/index');
+        var page = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/page/index');
+        var setting = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/setting/index');
 
         $routeProvider
             .when('/blog', blog.createRoute('./controller/index'))

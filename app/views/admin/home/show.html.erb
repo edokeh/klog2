@@ -10,7 +10,7 @@
   <%= stylesheet_link_tag "admin", media: "all" %>
 
   <%= javascript_include_tag "xhr-shim.js" %>
-  <%= javascript_include_tag "sea-modules/seajs/seajs/2.1.1/sea" %>
+  <%= seajs_tag %>
 
   <script>
       seajs.config({
@@ -18,7 +18,7 @@
               'angularjs': 'angular/angularjs-all/1.2.7/index',
               '_': 'gallery/underscore/1.4.4/underscore',
               'selection': 'gallery/selection/0.9.0/selection',
-              'seajs-lazy-angular': 'angular/seajs-lazy-angular/src/seajs-lazy-angular',
+              'seajs-lazy-angular': 'angular/seajs-lazy-angular/0.0.1/seajs-lazy-angular',
               'marked': 'gallery/marked/0.3.0/marked',
               'bootstrap': 'angular/bootstrap/0.0.1/index'
           },
@@ -57,13 +57,10 @@
 <div class="main" ng-view>
 </div>
 <script>
-    seajs.on('exec', function(m) {
-        if (m.exports) {
-            m.exports.__moduleUri = m.uri;
-        }
-    });
     var CSRF_TOKEN = "<%= form_authenticity_token %>";
-    seajs.use('/assets/admin/app');
+    var ADMIN_PATH = <%= seajs_modules('admin') %>[0];
 </script>
+<%= seajs_use 'admin/app' %>
+
 </body>
 </html>

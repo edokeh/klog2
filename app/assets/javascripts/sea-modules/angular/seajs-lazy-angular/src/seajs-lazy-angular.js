@@ -5,11 +5,18 @@ define(function(require) {
     var lazyModules = {};
     var moduleFn = angular.module;
 
+    // patch seajs, 记录模块的 module uri
+    seajs.on('exec', function(m) {
+        if (m.exports) {
+            m.exports.__moduleUri = m.uri;
+        }
+    });
+
     var SeajsLazyAngular = {
 
         // 交给 app 模块的 config 方法，获取内部对象
-        cacheInternals: ["$provide", "$compileProvider", "$filterProvider", "$controllerProvider",
-            function($provide, $compileProvider, $filterProvider, $controllerProvider) {
+        cacheInternals: ['$provide', '$compileProvider', '$filterProvider', '$controllerProvider', '$templateCacheProvider',
+            function($provide, $compileProvider, $filterProvider, $controllerProvider, $templateCacheProvider) {
                 cachedInternals.$provide = $provide;
                 cachedInternals.$compileProvider = $compileProvider;
                 cachedInternals.$filterProvider = $filterProvider;
@@ -27,6 +34,22 @@ define(function(require) {
                         };
                     }
                 });
+
+                // patch $templateCache
+                $templateCacheProvider.$get = ['$cacheFactory', function($cacheFactory) {
+                    var $cache = $cacheFactory('templates');
+                    var oldGet = $cache.get;
+                    $cache.get = function(key) {
+                        var seajsModule = seajs.cache[key]
+                        if (seajsModule) {
+                            return seajsModule.exec();
+                        }
+                        else {
+                            return oldGet(key);
+                        }
+                    };
+                    return $cache;
+                }];
             }
         ],
 
@@ -35,7 +58,7 @@ define(function(require) {
             // 暂不支持 config 参数
             angular.module = function(name, requires) {
                 var module;
-                if (typeof(requires) === "undefined") {
+                if (typeof(requires) === 'undefined') {
                     if (lazyModules.hasOwnProperty(name)) {
                         module = lazyModules[name];
                     }
@@ -62,14 +85,14 @@ define(function(require) {
     };
 
     function LazyStub(url, resolveCallback) {
-        this.url = seajs.resolve(url);
+        this.url = url;
         this.resolveCallback = resolveCallback || angular.noop;
     }
 
     LazyStub.prototype.createRoute = function(controllerName, options) {
         var moduleUrl = this.url;
         var resolveCallback = this.resolveCallback;
-        var controllerUrl = seajs.resolve(controllerName, this.url);
+        var controllerUrl = seajs.resolve(controllerName, seajs.resolve(this.url));
 
         options = options || {};
         options.controller = controllerUrl;
@@ -178,19 +201,6 @@ define(function(require) {
             seajsController: function(controller) {
                 this.controller(controller.__moduleUri, controller);
             },
-            template: function(templates) {
-                this.run(['$templateCache', function($templateCache) {
-                    angular.forEach(templates, function(v, k) {
-                        $templateCache.put(k, v);
-                    });
-                }]);
-            },
-
-            template2: function(template) {
-                this.run(['$templateCache', function($templateCache) {
-                    $templateCache.put(template.uri, template.html);
-                }]);
-            },
 
             /**
              * 获取 Controller 的 Constructor
@@ -198,6 +208,14 @@ define(function(require) {
              */
             retrieveController: function(name) {
                 return this.__controllers.hasOwnProperty(name) ? this.__controllers[name] : null;
+            },
+
+            template: function(templates) {
+                this.run(['$templateCache', function($templateCache) {
+                    angular.forEach(templates, function(v, k) {
+                        $templateCache.put(k, v);
+                    });
+                }]);
             },
 
             /**

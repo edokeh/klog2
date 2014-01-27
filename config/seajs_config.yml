@@ -5,22 +5,22 @@ output:
     - admin/app.js
     - admin/blog/index.js:
       - admin/blog/index.js
-      - admin/blog/template/*.html
+      - admin/blog/template/*.html.js
     - admin/blog-form/index.js:
       - admin/blog-form/index.js
-      - admin/blog-form/template/*.html
+      - admin/blog-form/template/*.html.js
     - admin/comment/index.js:
       - admin/comment/index.js
-      - admin/comment/template/*.html
+      - admin/comment/template/*.html.js
     - admin/editor/index.js:
       - admin/editor/index.js
-      - admin/editor/template/*.html
+      - admin/editor/template/*.html.js
     - admin/page/index.js:
        - admin/page/index.js
-       - admin/page/template/*.html
+       - admin/page/template/*.html.js
     - admin/setting/index.js:
        - admin/setting/index.js
-       - admin/setting/template/*.html
+       - admin/setting/template/*.html.js
   all: []
 alias:
   angular-all: angular-all
