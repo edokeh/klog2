@@ -65,9 +65,11 @@ header {
   right: 0;
   margin: 0 auto;
 
-  img {
+  .img-wrap {
     border: 2px solid $main-color;
+    border-radius: 50%;
     padding: 2px;
+    display: inline-block;
   }
 
   h1 {

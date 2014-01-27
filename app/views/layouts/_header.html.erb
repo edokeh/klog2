@@ -1,6 +1,8 @@
 <header class="text-center">
   <% if Setting.website.avatar.present? %>
-  <img class="img-circle" src="<%= Setting.website.avatar %>?s=200&r=g">
+  <div class="img-wrap">
+    <img class="img-circle" src="<%= Setting.website.avatar %>">
+  </div>
   <% end %>
 
   <h1><%= Setting.website.title %></h1>
