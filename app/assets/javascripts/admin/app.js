@@ -36,6 +36,7 @@ define(function(require, exports, module) {
         var comment = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/comment/index');
         var page = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/page/index');
         var setting = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/setting/index');
+        var dashboard = SeajsLazyAngular.createLazyStub(ADMIN_PATH + '/dashboard/index');
 
         $routeProvider
             .when('/blog', blog.createRoute('./controller/index'))
@@ -52,6 +53,8 @@ define(function(require, exports, module) {
             .when('/setting/password', setting.createRoute('./controller/password'))
             .when('/setting/disqus', setting.createRoute('./controller/disqus'))
             .when('/setting/attach', setting.createRoute('./controller/attach', {reloadOnSearch: false}))
+
+            .when('/dashboard', dashboard.createRoute('./controller/index'))
             .otherwise({redirectTo: '/blog'});
     }]);
 

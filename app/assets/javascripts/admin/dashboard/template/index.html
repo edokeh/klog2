@@ -1,0 +1,54 @@
+<div class="row full-height">
+    <div class="col-md-4">
+        <div class="panel panel-blue">
+            <div class="panel-heading clearfix">
+                <h2>统计</h2>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        文章 <strong>{{ dashboard.blog.publish }}</strong> 篇，
+                        草稿 <strong>{{ dashboard.blog.draft }}</strong> 篇
+                    </li>
+                    <li>评论 <strong>{{ dashboard.comment }}</strong> 条</li>
+                    <li>分类 <strong>{{ dashboard.category }}</strong> 个</li>
+                    <li>附件 <strong>{{ dashboard.attach.count }}</strong> 个，占用 <strong>{{ dashboard.attach.size
+                        }}</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-blue">
+            <div class="panel-heading clearfix">
+                <h2>最热 Blog</h2>
+            </div>
+            <div>
+                <ul>
+                    <li ng-repeat="blog in hotBlogs">
+                        <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
+                        <span><i class="fa fa-comments"></i> {{ blog.comment_count}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="panel panel-blue">
+        <div class="panel-heading clearfix">
+            <h2>最热 Blog</h2>
+        </div>
+        <div>
+            <ul>
+                <li ng-repeat="blog in hotBlogs">
+                    <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
+                    <span><i class="fa fa-comments"></i> {{ blog.comment_count}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

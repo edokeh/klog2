@@ -22,6 +22,8 @@ Klog2::Application.routes.draw do
 
   namespace :admin do
     get '/' => 'home#show'
+    get '/dashboard' => 'dashboard#show'
+    get '/dashboard/hot_blogs' => 'dashboard#hot_blogs'
 
     resource :session
 
