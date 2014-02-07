@@ -3,8 +3,9 @@
  */
 define(function(require, exports, module) {
     var angular = require('angularjs');
+    var angularHighcharts = require('angular-highcharts');
 
-    var dashboard = angular.module('dashboard', []);
+    var dashboard = angular.module('dashboard', [angularHighcharts.name]);
 
     dashboard.seajsController(require('./controller/index'));
 

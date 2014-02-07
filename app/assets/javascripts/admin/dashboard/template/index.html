@@ -1,5 +1,22 @@
-<div class="row full-height">
-    <div class="col-md-4">
+<div class="row">
+    <div class="col-md-8 dashboard-widget">
+        <div class="panel panel-blue">
+            <div>
+                <div high-chart options="daily_visits" type="line" height="200"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 dashboard-widget">
+        <div class="panel panel-blue">
+            <div>
+                <strong class="hero">{{ total_visits }}</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 dashboard-widget">
         <div class="panel panel-blue">
             <div class="panel-heading clearfix">
                 <h2>统计</h2>
@@ -19,7 +36,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4 dashboard-widget">
         <div class="panel panel-blue">
             <div class="panel-heading clearfix">
                 <h2>最热 Blog</h2>
@@ -36,19 +53,20 @@
     </div>
 </div>
 
-<div class="col-md-4">
-    <div class="panel panel-blue">
-        <div class="panel-heading clearfix">
-            <h2>最热 Blog</h2>
-        </div>
-        <div>
-            <ul>
-                <li ng-repeat="blog in hotBlogs">
-                    <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
-                    <span><i class="fa fa-comments"></i> {{ blog.comment_count}}</span>
-                </li>
-            </ul>
+<div class="row">
+    <div class="col-md-4 dashboard-widget">
+        <div class="panel panel-blue">
+            <div class="panel-heading clearfix">
+                <h2>最热 Blog</h2>
+            </div>
+            <div>
+                <ul>
+                    <li ng-repeat="blog in hotBlogs">
+                        <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
+                        <span><i class="fa fa-comments"></i> {{ blog.comment_count}}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 </div>

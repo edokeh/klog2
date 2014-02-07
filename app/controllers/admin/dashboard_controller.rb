@@ -16,6 +16,22 @@ class Admin::DashboardController < Admin::ApplicationController
     }
   end
 
+  def daily_visits
+    visits = GaClient.get_daily_visits
+    visits = visits.map do |visit|
+      {:date => visit.date, :visits => visit.visits.to_i}
+    end
+    render :json => visits
+  end
+
+  def total_visits
+    render :json => GaClient.get_total_visits
+  end
+
+  def top_pages
+    render :json => GaClient.get_top_pages
+  end
+
   def hot_blogs
     @hot_blogs = Blog.select(:id, :title, :status, :slug, :comment_count).order('comment_count DESC').limit(5)
 
