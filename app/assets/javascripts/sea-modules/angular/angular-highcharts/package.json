@@ -1,0 +1,11 @@
+{
+    "family": "angular",
+    "name": "angular-highcharts",
+    "version": "3.0.7",
+    "spm": {
+        "output": ["angular-highcharts.js", "highcharts.js"],
+        "alias": {
+            "angularjs": "angularjs"
+        }
+    }
+}
