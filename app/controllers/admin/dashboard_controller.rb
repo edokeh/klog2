@@ -16,20 +16,28 @@ class Admin::DashboardController < Admin::ApplicationController
     }
   end
 
+  # 每日访问量
   def daily_visits
     visits = GaClient.get_daily_visits
     visits = visits.map do |visit|
-      {:date => visit.date, :visits => visit.visits.to_i}
+      [DateTime.parse(visit.date).to_i * 1000, visit.visits.to_i]
     end
     render :json => visits
   end
 
+  # 总访问量
   def total_visits
     render :json => GaClient.get_total_visits
   end
 
+  # 页面访问排行
   def top_pages
     render :json => GaClient.get_top_pages
+  end
+
+  def browser
+    results = GaClient.get_browser_with_version
+    render :json => results
   end
 
   def hot_blogs

@@ -8,7 +8,6 @@ class Admin::GaController < Admin::ApplicationController
 
   def update
     @ga = Ga.find
-    binding.pry
 
     if @ga.update_attributes(ga_params)
       # 更新附件的归属
