@@ -4,7 +4,7 @@ class AttachUploader < CarrierWave::Uploader::Base
 
   # 扩展名限制
   IMAGE_EXTENSIONS = %w(jpg jpeg gif png)
-  DOCUMENT_EXTENSIONS = %w(pdf ppt pptx rar zip txt)
+  DOCUMENT_EXTENSIONS = %w(pdf ppt pptx rar zip txt p12)
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper

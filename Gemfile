@@ -48,6 +48,11 @@ gem 'kaminari', '~> 0.15.0'
 gem 'cells', '~> 3.9.1'
 gem 'seajs-rails'
 
+# GA
+gem 'google-api-client', '~> 0.7.1'
+gem 'oauth2', '~> 0.9.3'
+gem 'legato', '~> 0.3.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

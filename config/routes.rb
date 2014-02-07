@@ -23,7 +23,7 @@ Klog2::Application.routes.draw do
   namespace :admin do
     get '/' => 'home#show'
     get '/dashboard' => 'dashboard#show'
-    get '/dashboard/hot_blogs' => 'dashboard#hot_blogs'
+    get '/dashboard/:action' => 'dashboard'
 
     resource :session
 
@@ -43,6 +43,7 @@ Klog2::Application.routes.draw do
     end
     resource :website
     resource :password
+    resource :ga
     resource :disqus do
       put 'enable'
     end

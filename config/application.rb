@@ -35,7 +35,8 @@ module Klog2
               :sub_title => "一点点简介写在这里",
               :author => "蛇精病"
           ),
-          "disqus" => OpenStruct.new(:enable => false)
+          "disqus" => OpenStruct.new(:enable => false),
+          "ga" => OpenStruct.new(:chart_enable => false)
       }
 
       RestClient.log = Rails.logger
