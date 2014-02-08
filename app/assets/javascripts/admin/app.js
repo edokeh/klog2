@@ -56,7 +56,7 @@ define(function(require, exports, module) {
             .when('/setting/attach', setting.createRoute('./controller/attach', {reloadOnSearch: false}))
 
             .when('/dashboard', dashboard.createRoute('./controller/index'))
-            .otherwise({redirectTo: '/blog'});
+            .otherwise({redirectTo: '/dashboard'});
     }]);
 
     angular.bootstrap(window.document, ['admin']);

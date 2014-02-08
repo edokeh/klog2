@@ -1,78 +1,63 @@
-<div class="row">
-    <div class="col-md-8 dashboard-widget">
-        <div class="panel panel-blue">
-            <div>
-                <div high-chart options="daily_visits" type="line" height="240"></div>
-            </div>
-        </div>
-    </div>
+<div class="row" style="margin: 0 15px;">
     <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue">
-            <div>
-                <div high-chart options="browser" type="pie" height="240"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue">
-            <div>
-                <strong class="hero">{{ total_visits }}</strong>
+        <div class="panel panel-blue statistics" ng-class="{'panel-loading': !dashboard}">
+            <div ng-show="dashboard">
+                <div class="total-visits" ng-show="dashboard.total_visits > -1">
+                    <strong>{{ dashboard.total_visits }} </strong>
+                    <small>访问次数</small>
+                </div>
+                <div class="stat-count">
+                    <span><strong>{{ dashboard.blog.publish }}</strong> <small>已发布</small></span>
+                    <span><strong>{{ dashboard.blog.draft }}</strong> <small>草稿</small></span>
+                    <span><strong>{{ dashboard.comment }}</strong> <small ng-click="showSync()">评论</small></span>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue">
-            <div class="panel-heading clearfix">
-                <h2>统计</h2>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        文章 <strong>{{ dashboard.blog.publish }}</strong> 篇，
-                        草稿 <strong>{{ dashboard.blog.draft }}</strong> 篇
-                    </li>
-                    <li>评论 <strong>{{ dashboard.comment }}</strong> 条</li>
-                    <li>分类 <strong>{{ dashboard.category }}</strong> 个</li>
-                    <li>附件 <strong>{{ dashboard.attach.count }}</strong> 个，占用 <strong>{{ dashboard.attach.size
-                        }}</strong></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue">
-            <div class="panel-heading clearfix">
-                <h2>最热 Blog</h2>
-            </div>
-            <div>
-                <ul>
-                    <li ng-repeat="blog in hotBlogs">
+        <div class="panel panel-blue" ng-class="{'panel-loading': !hotBlogs}">
+            <h2>评论最多的 Blog</h2>
+            <table class="table table-hover">
+                <tr ng-repeat="blog in hotBlogs">
+                    <td>
                         <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
-                        <span><i class="fa fa-comments"></i> {{ blog.comment_count}}</span>
-                    </li>
-                </ul>
+                    </td>
+                    <td>
+                        <small><i class="fa fa-comments"></i> {{ blog.comment_count}}</small>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4 dashboard-widget">
+        <div class="panel panel-blue" ng-class="{'panel-loading': !topPages}">
+            <h2>访问最多的 URL</h2>
+            <table class="table table-hover">
+                <tr ng-repeat="page in topPages">
+                    <td>
+                        <a ng-href="{{page.pagePath}}" target="_blank">{{ page.pagePath }}</a>
+                    </td>
+                    <td>
+                        <small><i class="fa fa-eye"></i> {{ page.pageviews}}</small>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-8 dashboard-widget" style="height: 420px;">
+        <div class="panel panel-blue" ng-class="{'panel-loading': !dashboard}">
+            <div>
+                <div high-chart options="daily_visits" type="line" height="390"></div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue">
-            <div class="panel-heading clearfix">
-                <h2>最热 Blog</h2>
-            </div>
+    <div class="col-md-4 dashboard-widget" style="height: 420px;">
+        <div class="panel panel-blue" ng-class="{'panel-loading': !dashboard}">
             <div>
-                <ul>
-                    <li ng-repeat="blog in hotBlogs">
-                        <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
-                        <span><i class="fa fa-comments"></i> {{ blog.comment_count}}</span>
-                    </li>
-                </ul>
+                <div high-chart options="browser" type="pie" height="390"></div>
             </div>
         </div>
     </div>

@@ -8,11 +8,14 @@ class Admin::DashboardController < Admin::ApplicationController
     @attach_count = Attach.count
     @attach_size = Attach.sum('file_size')
 
+    @total_visits = GaClient.get_total_visits if Setting.ga.chart_enable
+
     render :json => {
         :blog => {:publish => @blog_publish_count, :draft => @blog_draft_count},
         :comment => @comment_count,
         :category => @category_count,
         :attach => {:count => @attach_count, :size => view_context.number_to_human_size(@attach_size)},
+        :total_visits => @total_visits
     }
   end
 
@@ -25,18 +28,16 @@ class Admin::DashboardController < Admin::ApplicationController
     render :json => visits
   end
 
-  # 总访问量
-  def total_visits
-    render :json => GaClient.get_total_visits
-  end
-
   # 页面访问排行
   def top_pages
-    render :json => GaClient.get_top_pages
+    results = GaClient.get_top_pages
+    results = results.map(&:marshal_dump)
+    render :json => results
   end
 
   def browser
     results = GaClient.get_browser_with_version
+    results = results.map(&:marshal_dump)
     render :json => results
   end
 

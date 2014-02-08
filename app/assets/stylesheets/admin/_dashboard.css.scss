@@ -1,9 +1,61 @@
 .dashboard-widget {
   height: 250px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
-  h2 {
-    margin: 5px 0 5px 20px;
-    font-size: 18px;
+  .panel {
+    padding: 10px 20px;
+
+    h2 {
+      margin: 5px 0 20px 0;
+      font-size: 20px;
+    }
+
+    small {
+      color: $gray-light;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    ul {
+      padding-left: 0;
+      margin: 10px 20px;
+      list-style: none;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 5px;
+      a {
+        min-width: 60%;
+      }
+    }
+  }
+  
+  .panel-loading {
+    background: asset-url("coffee.gif") white no-repeat center;
+  }
+
+  .statistics {
+    padding-top: 20px;
+
+    .total-visits {
+      text-align: center;
+
+      strong {
+        font-size: 80px;
+      }
+    }
+
+    .stat-count {
+      text-align: center;
+
+      span {
+        margin-right: 20px;
+      }
+
+      strong {
+        font-size: 50px;
+      }
+    }
   }
 }

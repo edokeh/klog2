@@ -20,13 +20,6 @@ class GaClient
   end
 
   # 浏览器
-  class Browser
-    extend Legato::Model
-
-    metrics :visits
-    dimensions :browser
-  end
-
   class BrowserVersion
     extend Legato::Model
 
@@ -74,30 +67,35 @@ class GaClient
     results
   end
 
-  def self.get_browser
-    results = Browser.results(service_account_user.profiles.first, :start_date => 1.years.ago, :end_date => 1.day.ago, :sort => "-visits", :limit => 30)
-    # 合并 Chrome 与 FF
-    #tmp = results.group_by { |r| r.browser }
-    #combined_result = []
-    #combined_result << OpenStruct.new(:browser => 'Chrome', :visits => tmp["Chrome"].map(&:visits).map(&:to_i).reduce(&:+))
-    #combined_result << OpenStruct.new(:browser => 'Firefox', :visits => tmp["Firefox"].map(&:visits).map(&:to_i).reduce(&:+))
-    #
-    ## 其余的处理为带版本号的
-    #tmp.except("Chrome", "Firefox").each do |k, v|
-    #  binding.pry
-    #  combined_result += v.map { |r| OpenStruct.new(:browser => r.browser + ' ' + r.browserVersion, :visits => r.visits) }
-    #end
-
-    results
-  end
-
   def self.get_browser_with_version
-    results = BrowserVersion.results(service_account_user.profiles.first, :start_date => 1.years.ago, :end_date => 1.day.ago, :sort => "-visits", :limit => 30)
-    results
+    results = BrowserVersion.results(service_account_user.profiles.first, :start_date => 1.month.ago, :end_date => 1.day.ago, :sort => "-visits", :limit => 30)
+
+    # 合并 Chrome 与 FF 的小版本号
+    results = results.map do |r|
+      r.browser = 'IE' if r.browser == 'Internet Explorer'
+      r.browserVersion = r.browserVersion.split('.')[0..1].join('.') if %w[Chrome Firefox].include? r.browser
+      r.visits = r.visits.to_i
+      r
+    end
+    combined_result = []
+    results.each do |r|
+      if %w[Chrome Firefox].include? r.browser
+        exist_cr = combined_result.find { |cr| cr.browserVersion == r.browserVersion }
+        if exist_cr
+          exist_cr.visits += r.visits
+        else
+          combined_result << r
+        end
+      else
+        combined_result << r
+      end
+    end
+
+    combined_result
   end
 
   def self.get_top_pages
-    results = TopPage.results(service_account_user.profiles.first, :start_date => 1.months.ago, :end_date => 1.day.ago, :sort => "-pageviews", :limit => 10)
+    results = TopPage.results(service_account_user.profiles.first, :start_date => 1.months.ago, :end_date => 1.day.ago, :sort => "-pageviews", :limit => 5)
     results
   end
 end
