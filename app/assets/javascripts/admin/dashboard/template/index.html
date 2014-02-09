@@ -2,9 +2,13 @@
     <div class="col-md-4 dashboard-widget">
         <div class="panel panel-blue statistics" ng-class="{'panel-loading': !dashboard}">
             <div ng-show="dashboard">
-                <div class="total-visits" ng-show="dashboard.total_visits > -1">
+                <div class="total-visits" ng-show="enable_chart">
                     <strong>{{ dashboard.total_visits }} </strong>
                     <small>访问次数</small>
+                </div>
+                <div class="total-visits" ng-show="!enable_chart">
+                    <strong>{{ now }}</strong>
+                    <small></small>
                 </div>
                 <div class="stat-count">
                     <span><strong>{{ dashboard.blog.publish }}</strong> <small>已发布</small></span>
@@ -31,7 +35,7 @@
         </div>
     </div>
 
-    <div class="col-md-4 dashboard-widget">
+    <div class="col-md-4 dashboard-widget" ng-if="enable_chart">
         <div class="panel panel-blue" ng-class="{'panel-loading': !topPages}">
             <h2>访问最多的 URL</h2>
             <table class="table table-hover">
@@ -47,14 +51,14 @@
         </div>
     </div>
 
-    <div class="col-md-8 dashboard-widget" style="height: 420px;">
+    <div class="col-md-8 dashboard-widget" style="height: 420px;" ng-if="enable_chart">
         <div class="panel panel-blue" ng-class="{'panel-loading': !dashboard}">
             <div>
                 <div high-chart options="daily_visits" type="line" height="390"></div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 dashboard-widget" style="height: 420px;">
+    <div class="col-md-4 dashboard-widget" style="height: 420px;" ng-if="enable_chart">
         <div class="panel panel-blue" ng-class="{'panel-loading': !dashboard}">
             <div>
                 <div high-chart options="browser" type="pie" height="390"></div>
