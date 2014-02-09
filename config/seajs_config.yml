@@ -21,6 +21,9 @@ output:
     - admin/setting/index.js:
        - admin/setting/index.js
        - admin/setting/template/*.html.js
+    - admin/dashboard/index.js:
+       - admin/dashboard/index.js
+       - admin/dashboard/template/*.html.js
   all: []
 alias:
   angular-all: angular-all
