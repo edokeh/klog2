@@ -168,24 +168,26 @@ textarea {
 // 导航栏
 .navbar-admin {
   border: 0;
+  padding: 0 30px;
+  z-index: 10;
 
   // 标题
   .navbar-brand {
-    color: $red;
-    font-weight: bolder;
-    font-size: 32px;
+//    color: $red;
+//    font-weight: bolder;
+//    font-size: 32px;
     line-height: 50px;
-    margin: 0 20px;
+//    margin-right: 20px;
     padding: 0;
 
     &:hover {
-      color: $blue
+//      color: $blue
     }
   }
 
   // 最右扳手
   .navbar-right {
-    margin-right: 15px !important;
+    margin-right: 0px !important;
 
     .dropdown > a {
       padding: 0 15px;
@@ -207,21 +209,18 @@ textarea {
 // ajax 指示器
 .ajax-spinner {
   position: absolute;
-  top: 18px;
+  top: 12px;
   left: 50%;
   width: 300px;
   margin-left: -150px;
   border-radius: 0 0 5px 5px;
   color: #c09853;
   text-align: center;
-  padding: 5px 0;
+  padding: 8px 0;
   background: #FCF6CF;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  z-index: -1;
-
-  //-webkit-transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  z-index: 1;
   @include transition(all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s);
-  clip: auto;
 
   .icon-spin {
     -webkit-animation: spin 0.7s infinite linear;
@@ -235,10 +234,10 @@ textarea {
 
 .main {
   position: absolute;
-  top: 90px;
+  top: 80px;
   bottom: 10px;
-  left: 15px;
-  right: 15px;
+  left: 30px;
+  right: 30px;
 }
 
 .full-height {
