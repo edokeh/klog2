@@ -1,8 +1,8 @@
-<% if Setting.website.ga and !@preview %>
+<% if Setting.ga.account and !@preview %>
     <% if ga == :head %>
         <script>
             var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '<%= Setting.website.ga %>']);
+            _gaq.push(['_setAccount', '<%= Setting.ga.account %>']);
             (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
