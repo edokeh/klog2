@@ -1,3 +1,4 @@
+# google analytic 的设置
 class Ga
   include ActiveModel::Model
 
@@ -9,6 +10,7 @@ class Ga
   with_options :if => :chart_enable do |ga|
     ga.validates :secret_file_id, :presence => true
     ga.validates :api_email, :presence => true
+    ga.validate :validate_legality
   end
 
   # 获取实例
@@ -44,5 +46,18 @@ class Ga
 
   def fill_secret_file
     self.secret_file = Attach.find(secret_file_id) if secret_file_id.present?
+  end
+
+  # 校验合法性，发起请求来验证
+  def validate_legality
+    return if !chart_enable or secret_file.nil? or api_email.blank?
+    begin
+      GaClient.clear_service_account_user
+      GaClient.service_account_user(self)
+      GaClient.get_daily_visits
+    rescue
+      GaClient.clear_service_account_user
+      errors.add(:api_email, 'GA API 身份校验失败！')
+    end
   end
 end

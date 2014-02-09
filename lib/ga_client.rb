@@ -36,15 +36,14 @@ class GaClient
   end
 
   # 获取 GA 权限
-  def self.service_account_user(scope="https://www.googleapis.com/auth/analytics.readonly")
+  def self.service_account_user(ga_setting = Ga.find)
     if @service_account_user.nil?
       client = ::Google::APIClient.new(
           :application_name => "SOME_STRING",
           :application_version => "SOME_NUMBER"
       )
-      ga = Ga.find
-      key = Google::APIClient::PKCS12.load_key(ga.secret_file.file.path, "notasecret")
-      service_account = Google::APIClient::JWTAsserter.new(ga.api_email, scope, key)
+      key = Google::APIClient::PKCS12.load_key(ga_setting.secret_file.file.path, "notasecret")
+      service_account = Google::APIClient::JWTAsserter.new(ga_setting.api_email, "https://www.googleapis.com/auth/analytics.readonly", key)
       client.authorization = service_account.authorize
       oauth_client = OAuth2::Client.new("", "", {
           :authorize_url => 'https://accounts.google.com/o/oauth2/auth',
@@ -55,6 +54,11 @@ class GaClient
     end
 
     @service_account_user
+  end
+
+  # 清除 service_account_user 的缓存
+  def self.clear_service_account_user
+    @service_account_user = nil
   end
 
   def self.get_total_visits

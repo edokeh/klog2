@@ -16,7 +16,7 @@
                             target="_blank">Legato:Server Account</a>
                     </p>
                 </div>
-                <form class="form-horizontal" name="form" ng-submit="save()" validation="password">
+                <form class="form-horizontal ga-form" name="form" ng-submit="save()" validation="ga">
                     <div class="form-group">
                         <label class="col-md-1 control-label">GA Account</label>
 
@@ -42,9 +42,13 @@
 
                         <div class="col-md-5">
                             <div>{{ ga.secret_file.file_name }}</div>
-                            <button file-input="upload(files)" accept=".p12" ng-disabled="!ga.chart_enable" type="button" class="btn btn-default btn-sm">上传文件</button>
+                            <button file-input="upload(files)" accept=".p12" ng-disabled="!ga.chart_enable"
+                                    type="button" class="btn btn-default btn-sm">上传文件
+                            </button>
+                            <input type="hidden" ng-required="ga.chart_enable" ng-model="ga.secret_file.id"
+                                   name="secret_file"/>
 
-                            <div error-for="form.new_pw"></div>
+                            <div error-for="form.secret_file"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -52,7 +56,7 @@
 
                         <div class="col-md-5">
                             <input type="email" class="form-control" ng-disabled="!ga.chart_enable" name="api_email"
-                                   ng-model="ga.api_email" />
+                                   ng-model="ga.api_email" ng-required="ga.chart_enable" server-valid="serverError"/>
 
                             <div error-for="form.api_email"></div>
                         </div>
@@ -64,8 +68,9 @@
                             <button type="submit" class="btn btn-primary btn-lg" loading-btn
                                     loading-cancel="saveSuccess || serverError">保 存
                             </button>
-                            <span class="save-success" ng-show="saveSuccess"><i
-                                    class="fa fa-check-circle"></i> 保存成功</span>
+                            <span class="save-success" ng-show="saveSuccess">
+                                <i class="fa fa-check-circle"></i> 保存成功
+                            </span>
                         </div>
                     </div>
                 </form>
