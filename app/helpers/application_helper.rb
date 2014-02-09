@@ -1,7 +1,8 @@
 module ApplicationHelper
   # 获取操作系统
+  # os.mac?
   def os
-    os = case request.user_agent.downcase
+    os = case (request.user_agent || "").downcase
            when /iphone|ipad|itouch/
              "ios"
            when /android/
@@ -10,8 +11,10 @@ module ApplicationHelper
              "mac"
            when /windows/
              "win"
+           else
+             "unknown"
          end
-    return ActiveSupport::StringInquirer.new(os)
+    ActiveSupport::StringInquirer.new(os)
   end
 
   # 导航项是否高亮，手工设置 @curr_nav 变量来实现
