@@ -4,9 +4,18 @@
 define(function(require, exports, module) {
     var _ = require('_');
 
-    var IndexController = ['$scope', 'Comment', 'Confirm', function($scope, Comment, Confirm) {
-
+    var IndexController = ['$scope', 'Comment', 'Confirm', '$http', function($scope, Comment, Confirm, $http) {
         var getOnce;
+
+        // comment 统计信息
+        $scope.getCommentStat = function() {
+            $http.get('/admin/dashboard/comment').then(function(resp) {
+                $scope.commentStat = resp.data;
+                if ($scope.commentStat.disqus_enable) {
+                    $scope.getComments();
+                }
+            });
+        };
 
         // 获取评论列表
         $scope.getComments = function(cursor) {
@@ -85,8 +94,9 @@ define(function(require, exports, module) {
             }
         });
 
+        // 初始化
         $scope.comments = [];
-        $scope.getComments();
+        $scope.getCommentStat();
     }];
 
     IndexController.title = '评论列表';

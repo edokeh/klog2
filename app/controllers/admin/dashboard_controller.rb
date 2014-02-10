@@ -17,6 +17,17 @@ class Admin::DashboardController < Admin::ApplicationController
     }
   end
 
+  # 评论的统计
+  def comment
+    @comment_count = Blog.sum(:comment_count)
+    @disqus_enable = Setting.disqus.enable
+
+    render :json => {
+        :total => @comment_count,
+        :disqus_enable => Setting.disqus.enable
+    }
+  end
+
   # 每日访问量
   def daily_visits
     visits = GaClient.get_daily_visits
