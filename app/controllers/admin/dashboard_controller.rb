@@ -10,6 +10,7 @@ class Admin::DashboardController < Admin::ApplicationController
         :blog => {:publish => @blog_publish_count, :draft => @blog_draft_count},
         :comment => @comment_count,
         :disqus_enable => Setting.disqus.enable,
+        :ga_enable => Setting.ga.chart_enable,
         :total_visits => @total_visits
     }
   end

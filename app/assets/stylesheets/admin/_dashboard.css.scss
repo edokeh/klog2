@@ -6,7 +6,7 @@
     padding: 10px 20px;
 
     h2 {
-      margin: 5px 0 20px 0;
+      margin: 5px 0;
       font-size: 20px;
     }
 
@@ -14,27 +14,32 @@
       color: $gray-light;
       font-size: 14px;
       margin-left: 5px;
-    }
 
-    ul {
-      padding-left: 0;
-      margin: 10px 20px;
-      list-style: none;
-      margin: 0;
-    }
-
-    li {
-      margin-bottom: 5px;
       a {
-        min-width: 60%;
+        color: $gray-light;
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
       }
     }
+
+    // 其他说明
+    .others {
+      font-size: 12px;
+      color: $gray-light;
+      position: absolute;
+      bottom: 5px;
+      right: 20px;
+    }
   }
-  
+
   .panel-loading {
     background: asset-url("coffee.gif") white no-repeat center;
   }
 
+  // 第一个统计面板
   .statistics {
     padding-top: 20px;
 
@@ -51,11 +56,25 @@
 
       span {
         margin-right: 20px;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
       }
 
       strong {
         font-size: 50px;
       }
     }
+  }
+}
+
+// 同步日志
+.sync-modal {
+  width: 400px;
+
+  ul {
+    padding-left: 0;
+    list-style: none;
   }
 }
