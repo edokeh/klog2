@@ -38,7 +38,7 @@ class Comment
       latest_log[:status] = "failed"
     ensure
       sync_logs = Setting.sync_comment_logs || []
-      sync_logs = sync_logs.push(latest_log).slice(-5..-1)
+      sync_logs = sync_logs.push(latest_log).last(5)
       Setting.sync_comment_logs = sync_logs
     end
   end
