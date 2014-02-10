@@ -69,6 +69,7 @@ class Setting < ActiveRecord::Base
   # 使用 JSON 保存值
   def value=(new_value)
     new_value = new_value.marshal_dump if new_value.is_a? OpenStruct
+    new_value.map! { |o| (o.is_a? OpenStruct) ? o.marshal_dump : o } if new_value.is_a? Array
     self[:value] = new_value.to_json
   end
 end

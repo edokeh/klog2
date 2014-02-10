@@ -16,13 +16,14 @@ Klog2::Application.routes.draw do
   get 'categories/:id/page/:page' => 'categories#show'
   get 'tags/:id/page/:page' => 'tags#show'
 
-  get '/feed' => 'feed#show', :format => :rss, :as => :feed
+  get '/feed' => 'feed#show', :as => :feed, :defaults => {:format => 'rss'}
   get '/archive.html' => 'archive#show', :as => :archive
   get '/page/:id.html' => 'pages#show', :as => :page
 
   namespace :admin do
     get '/' => 'home#show'
     get '/dashboard' => 'dashboard#show'
+    post '/dashboard/sync_comment' => 'dashboard#sync_comment'
     get '/dashboard/:action' => 'dashboard'
 
     resource :session

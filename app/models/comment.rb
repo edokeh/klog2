@@ -24,9 +24,22 @@ class Comment
 
   # 从 disqus api 同步 BLOG 评论数
   def self.sync_count
-    DisqusClient.all_thread.each do |th|
-      blog = Blog.where(:id => th["identifiers"][0]).first
-      blog.update_columns(:comment_count => th["posts"]) if blog
+    return unless Disqus.find.enable?
+    latest_log = {:at => Time.now}
+
+    begin
+      DisqusClient.all_thread.each do |th|
+        blog = Blog.where(:id => th["identifiers"][0]).first
+        blog.update_columns(:comment_count => th["posts"]) if blog
+      end
+      latest_log[:status] = "success"
+    rescue Exception => e
+      latest_log[:error] = e.message
+      latest_log[:status] = "failed"
+    ensure
+      sync_logs = Setting.sync_comment_logs || []
+      sync_logs = sync_logs.push(latest_log).slice(-5..-1)
+      Setting.sync_comment_logs = sync_logs
     end
   end
 
