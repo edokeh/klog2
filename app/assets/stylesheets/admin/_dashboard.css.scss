@@ -35,16 +35,48 @@
     }
   }
 
-  .panel-loading {
+  // 载入中
+  .panel-pending {
     background: asset-url("coffee.gif") white no-repeat center;
+  }
+
+  // 载入失败
+  .panel-failed {
+    .panel-error {
+      display: table;
+    }
+  }
+
+  .panel-error {
+    display: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+
+    .panel-error-inner {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  // 载入成功
+  .panel-success {
+    .panel-body {
+      display: block;
+    }
+  }
+
+  .panel-body {
+    display: none;
+    padding: 0;
   }
 
   // 第一个统计面板
   .statistics {
-    padding-top: 20px;
+    text-align: center;
 
     .total-visits {
-      text-align: center;
+      margin-top: 10px;
 
       strong {
         font-size: 80px;
@@ -52,8 +84,6 @@
     }
 
     .stat-count {
-      text-align: center;
-
       span {
         margin-right: 20px;
 

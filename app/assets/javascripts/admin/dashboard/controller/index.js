@@ -7,29 +7,34 @@ define(function(require, exports, module) {
     var COLORS = Highcharts.getOptions().colors;
 
     var IndexController = ['$scope', '$http', '$modal', function($scope, $http, $modal) {
-        $http.get('/admin/dashboard').then(function(resp) {
-            $scope.dashboard = resp.data;
 
-            // 如果启用了 ga chart
-            if ($scope.dashboard.ga_enable) {
-                $scope.getTopPage();
-                $scope.getDailyVisit();
-                $scope.getBrowser();
-            }
-            else {
-                $scope.nowDate = Highcharts.dateFormat('%m月%d日', new Date().getTime());
-            }
-        });
+        // 获取总体统计数据
+        $scope.getDashboard = function() {
+            $scope.dashboardXHR = httpGet('/admin/dashboard', function(data) {
+                $scope.dashboard = data;
+
+                // 如果启用了 ga chart
+                if ($scope.dashboard.ga_enable) {
+                    $scope.getTopPages();
+                    $scope.getDailyVisit();
+                    $scope.getBrowser();
+                }
+                else {
+                    $scope.nowDate = Highcharts.dateFormat('%m月%d日', new Date().getTime());
+                }
+            });
+        };
 
         // 获取评论最多的 blog
-        $http.get('/admin/dashboard/hot_blogs').then(function(resp) {
-            $scope.hotBlogs = resp.data;
-        });
+        $scope.getHotBlogs = function() {
+            $scope.hotBlogsXHR = httpGet('/admin/dashboard/hot_blogs', function(data) {
+                $scope.hotBlogs = data;
+            });
+        };
 
         // 获取浏览器份额
         $scope.getBrowser = function() {
-            $http.get('/admin/dashboard/browser').then(function(resp) {
-                var data = resp.data;
+            $scope.browserXHR = httpGet('/admin/dashboard/browser', function(data) {
                 // 将数据处理为两层
                 var totalVisits = _.reduce(data, function(memo, i) {
                     return memo + i.visits;
@@ -104,8 +109,7 @@ define(function(require, exports, module) {
 
         // 获取每日的访问量
         $scope.getDailyVisit = function() {
-            $http.get('/admin/dashboard/daily_visits').then(function(resp) {
-
+            $scope.dailyVisitXHR = httpGet('/admin/dashboard/daily_visits', function(data) {
                 $scope.daily_visits = {
                     title: chartTitle('每日访问次数'),
                     xAxis: {
@@ -129,7 +133,7 @@ define(function(require, exports, module) {
                     series: [
                         {
                             name: "访问次数",
-                            data: resp.data
+                            data: data
                         }
                     ]
                 };
@@ -137,9 +141,9 @@ define(function(require, exports, module) {
         };
 
         // 获取访问最多的页面
-        $scope.getTopPage = function() {
-            $http.get('/admin/dashboard/top_pages').then(function(resp) {
-                $scope.topPages = resp.data;
+        $scope.getTopPages = function() {
+            $scope.topPagesXHR = httpGet('/admin/dashboard/top_pages', function(data) {
+                $scope.topPages = data;
             });
         };
 
@@ -170,24 +174,40 @@ define(function(require, exports, module) {
             return modal.result;
         };
 
-        // 保留一位小数的百分率
-        function toPercent(v, total) {
-            return parseFloat((v / total * 100).toFixed(1));
+        // 封装的 http 方法，返回一个 promise 对象，并有 $status 属性(pending, success, failed)
+        function httpGet(url, success) {
+            var $q = $http.get(url).then(function(resp) {
+                $q.$status = 'success';
+                success(resp.data);
+            }, function() {
+                $q.$status = 'failed';
+            });
+            $q.$status = 'pending';
+            return $q;
         }
 
-        // Chart 标题生成
-        function chartTitle(title) {
-            return {
-                text: title,
-                margin: 25,
-                style: {
-                    'font-weight': 'bolder',
-                    'font-family': '微软雅黑',
-                    'font-size': '20px'
-                }
-            };
-        }
+        // 初始化
+        $scope.getDashboard();
+        $scope.getHotBlogs();
     }];
+
+    // 保留一位小数的百分率
+    function toPercent(v, total) {
+        return parseFloat((v / total * 100).toFixed(1));
+    }
+
+    // Chart 标题生成
+    function chartTitle(title) {
+        return {
+            text: title,
+            margin: 25,
+            style: {
+                'font-weight': 'bolder',
+                'font-family': '微软雅黑',
+                'font-size': '20px'
+            }
+        };
+    }
 
     IndexController.title = 'Dashboard';
 

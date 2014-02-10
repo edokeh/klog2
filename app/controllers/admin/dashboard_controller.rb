@@ -1,5 +1,7 @@
 # 统计
 class Admin::DashboardController < Admin::ApplicationController
+  rescue_from Faraday::ClientError, OAuth2::Error, :with => :ga_request_error
+
   def show
     @blog_publish_count = Blog.with_status(:publish).count
     @blog_draft_count = Blog.with_status(:draft).count
@@ -68,5 +70,17 @@ class Admin::DashboardController < Admin::ApplicationController
     render :text => '', :status => 404 and return if request.get?
     Comment.sync_count
     head :no_content
+  end
+
+  private
+  # GA api 请求中发生错误的处理，错误原因如 timeout 等
+  def ga_request_error(e)
+    render :text => e.message, :status => e.try(:code) || 408 # timeout code default
+    GaClient.clear_service_account_user
+
+    # log error
+    message = "\n#{e.class} (#{e.message}):\n"
+    message << "  " << Rails.backtrace_cleaner.clean(e.backtrace).join("\n  ")
+    logger.fatal("#{message}\n\n")
   end
 end

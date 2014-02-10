@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue statistics" ng-class="{'panel-loading': !dashboard}">
-            <div ng-show="dashboard">
+        <div class="panel panel-blue statistics" ng-class="'panel-' + dashboardXHR.$status">
+            <div class="panel-body">
                 <div class="total-visits" ng-show="dashboard.ga_enable">
                     <strong>{{ dashboard.total_visits }} </strong>
                     <small>访问次数</small>
                 </div>
                 <div class="total-visits" ng-show="!dashboard.ga_enable">
-                    <h2 style="margin-bottom: 0"><strong>{{ nowDate }} </strong></h2><br/>
+                    <h2><strong>{{ nowDate }} </strong></h2><br/>
                 </div>
                 <div class="stat-count">
                     <span><strong>{{ dashboard.blog.publish }}</strong> <small>已发布</small></span>
@@ -25,55 +25,84 @@
                     <a href="#/setting/ga" ng-if="!dashboard.ga_enable">GA 统计报表</a>
                 </div>
             </div>
+            <div class="panel-error">
+                <div class="panel-error-inner">
+                    载入失败，请<a href="" ng-click="getDashboard()">重试</a>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="col-md-4 dashboard-widget">
-        <div class="panel panel-blue" ng-class="{'panel-loading': !hotBlogs}">
-            <h2>评论最多的 Blog</h2>
-            <table class="table table-hover">
-                <tr ng-repeat="blog in hotBlogs">
-                    <td>
-                        <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
-                    </td>
-                    <td class="text-right">
-                        <small><i class="fa fa-comments"></i> {{ blog.comment_count}}</small>
-                    </td>
-                </tr>
-            </table>
+        <div class="panel panel-blue" ng-class="'panel-' + hotBlogsXHR.$status">
+            <div class="panel-body">
+                <h2>评论最多的 Blog</h2>
+                <table class="table table-hover">
+                    <tr ng-repeat="blog in hotBlogs">
+                        <td>
+                            <a ng-href="/blog/{{blog.slug}}.html" target="_blank">{{ blog.title }}</a>
+                        </td>
+                        <td class="text-right">
+                            <small><i class="fa fa-comments"></i> {{ blog.comment_count}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-error">
+                <div class="panel-error-inner">
+                    载入失败，请<a href="" ng-click="getHotBlogs()">重试</a>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="col-md-4 dashboard-widget" ng-if="dashboard.ga_enable">
-        <div class="panel panel-blue" ng-class="{'panel-loading': !topPages}">
-            <h2>访问最多的 URL</h2>
-            <table class="table table-hover">
-                <tr ng-repeat="page in topPages">
-                    <td>
-                        <a ng-href="{{page.pagePath}}" target="_blank">{{ page.pagePath }}</a>
-                    </td>
-                    <td class="text-right">
-                        <small><i class="fa fa-eye"></i> {{ page.pageviews}}</small>
-                    </td>
-                </tr>
-            </table>
-            <div class="others">
-                最近 1 个月统计数据
+        <div class="panel panel-blue" ng-class="'panel-' + topPagesXHR.$status">
+            <div class="panel-body">
+                <h2>访问最多的 URL</h2>
+                <table class="table table-hover">
+                    <tr ng-repeat="page in topPages">
+                        <td>
+                            <a ng-href="{{page.pagePath}}" target="_blank">{{ page.pagePath }}</a>
+                        </td>
+                        <td class="text-right">
+                            <small><i class="fa fa-eye"></i> {{ page.pageviews}}</small>
+                        </td>
+                    </tr>
+                </table>
+                <div class="others">
+                    最近 1 个月统计数据
+                </div>
+            </div>
+            <div class="panel-error">
+                <div class="panel-error-inner">
+                    载入失败，请<a href="" ng-click="getTopPages()">重试</a>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-md-8 dashboard-widget" style="height: 420px;" ng-if="dashboard.ga_enable">
-        <div class="panel panel-blue" ng-class="{'panel-loading': !dashboard}">
-            <div>
+        <div class="panel panel-blue" ng-class="'panel-' + dailyVisitXHR.$status">
+            <div class="panel-body">
                 <div high-chart options="daily_visits" type="line" height="390"></div>
+            </div>
+            <div class="panel-error">
+                <div class="panel-error-inner">
+                    载入失败，请<a href="" ng-click="getDailyVisit()">重试</a>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-4 dashboard-widget" style="height: 420px;" ng-if="dashboard.ga_enable">
-        <div class="panel panel-blue" ng-class="{'panel-loading': !dashboard}">
-            <div>
+        <div class="panel panel-blue" ng-class="'panel-' + browserXHR.$status">
+            <div class="panel-body">
                 <div high-chart options="browser" type="pie" height="390"></div>
+            </div>
+            <div class="panel-error">
+                <div class="panel-error-inner">
+                    载入失败，请<a href="" ng-click="getBrowser()">重试</a>
+                </div>
             </div>
         </div>
     </div>
