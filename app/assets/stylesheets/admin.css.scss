@@ -91,6 +91,7 @@ textarea {
   margin-left: 10px;
 }
 
+// 导航栏
 .nav-tabs.nav-stacked {
   border-bottom: 0;
 }
@@ -171,38 +172,55 @@ textarea {
   padding: 0 30px;
   z-index: 10;
 
-  // 标题
-  .navbar-brand {
-//    color: $red;
-//    font-weight: bolder;
-//    font-size: 32px;
-    line-height: 50px;
-//    margin-right: 20px;
-    padding: 0;
-    width: 110px;
-
-    &:hover {
-//      color: $blue
-    }
+  .navbar-header {
+    width: 140px;
+    height: 1px;
   }
 
-  // 最右扳手
-  .navbar-right {
-    margin-right: 0px !important;
+  // logo
+  .navbar-brand {
+    background: asset-url('logo.png') no-repeat 0 center;
+    position: absolute;
+    width: 140px;
+    height: 70px;
 
-    .dropdown > a {
-      padding: 0 15px;
-      font-size: 1.5em;
-      line-height: 50px;
+    &:hover {
+      background-position: -140px center;
     }
 
-    .dropdown-menu li {
-      height: 30px;
-      line-height: 30px;
+  }
 
-      i {
-        width: 18px;
-      }
+  // 标题
+  //  .navbar-brand {
+  //    color: $red;
+  //    font-weight: bolder;
+  //    font-size: 32px;
+  //    line-height: 50px;
+  //    margin-right: 20px;
+  //    padding: 0;
+  //    width: 110px;
+
+  //    &:hover {
+  //      color: $blue
+  //    }
+}
+
+// 最右扳手
+.navbar-right {
+  margin-right: 0px !important;
+
+  .dropdown > a {
+    padding: 0 15px;
+    font-size: 1.5em;
+    line-height: 50px;
+  }
+
+  .dropdown-menu li {
+    height: 30px;
+    line-height: 30px;
+
+    i {
+      width: 18px;
     }
   }
 }
