@@ -86,7 +86,7 @@ class Admin::DashboardController < Admin::ApplicationController
   private
   # GA api 请求中发生错误的处理，错误原因如 timeout 等
   def ga_request_error(e)
-    render :text => e.message, :status => e.try(:code) || 408 # timeout code default
+    render :text => e.message, :status => e.try(:response).try(:status) || 408 # timeout code default
     GaClient.clear_service_account_user
 
     # log error
