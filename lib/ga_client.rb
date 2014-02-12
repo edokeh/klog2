@@ -37,7 +37,7 @@ class GaClient
 
   # 获取 GA 权限
   def self.service_account_user(ga_setting = Ga.find)
-    if @service_account_user.nil?
+    if @service_account_user.nil? or @service_account_user.access_token.expired?
       client = ::Google::APIClient.new(
           :application_name => "SOME_STRING",
           :application_version => "SOME_NUMBER"
@@ -49,7 +49,7 @@ class GaClient
           :authorize_url => 'https://accounts.google.com/o/oauth2/auth',
           :token_url => 'https://accounts.google.com/o/oauth2/token'
       })
-      token = OAuth2::AccessToken.new(oauth_client, client.authorization.access_token)
+      token = OAuth2::AccessToken.new(oauth_client, client.authorization.access_token, :expires_in => 5 * 60)
       @service_account_user = Legato::User.new(token)
     end
 

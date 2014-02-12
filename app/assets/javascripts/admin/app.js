@@ -22,11 +22,8 @@ define(function(require, exports, module) {
                 'responseError': function(responseError) {
                     if (responseError.status >= 500) {
                         alert('出错啦！刷新一下吧！');
-                        return $q.reject(responseError);
                     }
-                    else {
-                        return responseError;
-                    }
+                    return $q.reject(responseError);
                 }
             };
         }]);
