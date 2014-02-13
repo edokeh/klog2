@@ -39,3 +39,7 @@ Klog2 使用了以下技术：
 演示版地址 http://klog-test.tk/admin
 
 演示版密码 password
+
+## 安装
+
+参考 [How to install](https://github.com/edokeh/klog2/wiki/How-to-install)
